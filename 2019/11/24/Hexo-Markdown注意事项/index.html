@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 文章标题目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo Markdown 注意事项">
+<meta property="og:url" content="https://ShotoZheng.github.io/2019/11/24/Hexo-Markdown注意事项/index.html">
+<meta property="og:site_name" content="鱼肚白不是鱼">
+<meta property="og:description" content="1. 文章标题目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E9%94%99%E8%AF%AF.jpg">
+<meta property="og:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/1574582056125.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/文章目录错误.jpg">
+<meta property="og:updated_time" content="2021-05-04T03:32:30.411Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo Markdown 注意事项">
+<meta name="twitter:description" content="1. 文章标题目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
+<meta name="twitter:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E9%94%99%E8%AF%AF.jpg">
+  <link rel="canonical" href="https://ShotoZheng.github.io/2019/11/24/Hexo-Markdown注意事项/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Hexo Markdown 注意事项 | 鱼肚白不是鱼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--音乐播放器-->
+  <link rel="stylesheet" href="/dist/APlayer.min.css">
+  <div id="aplayer"></div>
+  <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+  <script type="text/javascript" src="/dist/music.js"></script>
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鱼肚白不是鱼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">笨鸟先飞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-网站">
+      
+    
+
+    <a href="/网站/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>网站</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2019/11/24/Hexo-Markdown注意事项/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="郑松涛">
+      <meta itemprop="description" content="积跬步，至千里">
+      <meta itemprop="image" content="/images/kanieki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鱼肚白不是鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Hexo Markdown 注意事项
+
+          
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-11-24 12:07:04" itemprop="dateCreated datePublished" datetime="2019-11-24T12:07:04+08:00">2019-11-24</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-04 11:32:30" itemprop="dateModified" datetime="2021-05-04T11:32:30+08:00">2021-05-04</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Hexo/" itemprop="url" rel="index"><span itemprop="name">Hexo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/11/24/Hexo-Markdown注意事项/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/11/24/Hexo-Markdown注意事项/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>3.8k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>3 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-文章标题"><a href="#1-文章标题" class="headerlink" title="1. 文章标题"></a>1. 文章标题</h2><p>目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p>简单地说就是文章标题建议使用由大号标题到小号标题过渡而不要出现跨级的标题结构，比如下面的标题结构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">### 三级标题</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>因为这样可能会出现如下的错误显示，所以只要遵循这种标题格式即可。</p>
+<p><img src="/2019/11/24/Hexo-Markdown注意事项/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E9%94%99%E8%AF%AF.jpg" alt="文章目录错误"></p>
+<h2 id="2-文章头格式"><a href="#2-文章头格式" class="headerlink" title="2. 文章头格式"></a>2. 文章头格式</h2><p><code>front-matter</code> 的基本格式示例如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章标题</span><br><span class="line">top: false 是否文章置顶</span><br><span class="line">mathjax: false 是否开启数学公式支持 </span><br><span class="line">date: 日期时间</span><br><span class="line">author: 作者名</span><br><span class="line">password: 文章阅读密码，前提是在主题的 config.yml 中激活了 verifyPassword 选项</span><br><span class="line">summary: 文章摘要，自定义的文章摘要内容</span><br><span class="line">tags: 表示文章标签，格式：[标签1, 标签2, ]</span><br><span class="line">categories: 表示文章分类，格式：[分类1, 分类2, ]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，上述的<code>title: 文章标题</code> 之间必须使用空格隔开，其他的也一样，否则 Hexo 运行时会报错。</p>
+<h2 id="3-显示阅读全文"><a href="#3-显示阅读全文" class="headerlink" title="3. 显示阅读全文"></a>3. 显示阅读全文</h2><p>Hexo 首页默认是会显示每篇文章的全部内容的，为了更为合理的浏览首页的内容，我们无需显示整篇文章，而是增添一个<code>阅读全文</code>的按钮，并只在首页显示文章指定的部分内容，若要查看该篇文章则只需点击阅读全文即可。</p>
+<p>因此我们可以在文章的某个位置增加如下语句，那么位于该语句之前的文章内容则会显示在首页，而不是简单地显示全文。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>添加后的显示如下所示：</p>
+<p><img src="/2019/11/24/Hexo-Markdown注意事项/1574582056125.png" alt="阅读全文"></p>
+<h2 id="4-文本高亮"><a href="#4-文本高亮" class="headerlink" title="4. 文本高亮"></a>4. 文本高亮</h2><p>本人的 Hexo 系统并支持如下的文本高亮的 Markdown 语法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;&apos;高亮文本&apos;&apos;&apos;</span><br><span class="line">==高亮文本==</span><br></pre></td></tr></table></figure>
+
+<p>其中三个单引号`的高亮语法会导致显示格式错误，而两个等号=的高亮语法则无高亮效果。目前支持的高亮语法则是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`高亮文本`</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Latex-公式"><a href="#5-Latex-公式" class="headerlink" title="5. Latex 公式"></a>5. Latex 公式</h2><p>数学公式的默认定界符是<code>$...$</code>（对于行内公式），以及<code>$$...$$</code>(对于块级公式）。例如，质能守恒方程如下所示：</p>
+<p>行内公式： $E = mc^2$ </p>
+<p>块内公式： $$E = mc^2$$</p>
+<p>例如如下块级公式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\Delta_A(\lambda)=\det(\lambda I-A)$$</span><br></pre></td></tr></table></figure>
+
+<p>$$\Delta_A(\lambda)=\det(\lambda I-A)$$</p>
+<h2 id="6-文字增加背景色块"><a href="#6-文字增加背景色块" class="headerlink" title="6. 文字增加背景色块"></a>6. 文字增加背景色块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=&quot;inline-blue&quot;&gt; 站点配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-purple&quot;&gt; 主题配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-yellow&quot;&gt; 站点配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-green&quot;&gt; 主题配置文件 &lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下所示：<br><span id="inline-blue"> 站点配置文件 </span><br><span id="inline-purple"> 主题配置文件 </span><br><span id="inline-yellow"> 站点配置文件 </span><br><span id="inline-green"> 主题配置文件 </span></p>
+<h2 id="7-在文档中增加图标-Font-Awesome-提供图标"><a href="#7-在文档中增加图标-Font-Awesome-提供图标" class="headerlink" title="7. 在文档中增加图标, Font Awesome 提供图标"></a>7. 在文档中增加图标, <a href="https://link.zhihu.com/?target=http%3A//fontawesome.dashgame.com/" target="_blank" rel="noopener">Font Awesome</a> 提供图标</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class=&quot;fa fa-pencil&quot;&gt;郑松涛&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+
+<p>显示效果：<i class="fa fa-pencil">郑松涛</i></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;list-group&quot;&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-home fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Home&lt;/a&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-book fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Library&lt;/a&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-pencil fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Applications&lt;/a&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-cog fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Settings&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<div class="list-group">
+<a class="list-group-item" href="#"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
+<a class="list-group-item" href="#"><i class="fa fa-book fa-fw"></i>&nbsp; Library</a>
+<a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Applications</a>
+<a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
+</div>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class=&quot;fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-circle-o-notch fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-refresh fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-cog fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-spinner fa-pulse&quot;&gt;&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+
+<p>显示效果：</p>
+<p><i class="fa fa-spinner fa-spin">旋转</i><br><i class="fa fa-circle-o-notch fa-spin">旋转</i><br><i class="fa fa-refresh fa-spin">旋转</i><br><i class="fa fa-cog fa-spin">旋转</i><br><i class="fa fa-spinner fa-pulse">旋转</i></p>
+<h2 id="8-mermaid-支持"><a href="#8-mermaid-支持" class="headerlink" title="8. mermaid 支持"></a>8. mermaid 支持</h2><p>使用 mermaid 该插件可以画甘特图和时序图等图标，但是使用语法并非标准的 Markdown 语法，并不友好。Hexo 支持的命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid %&#125; ... &#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
+
+<p>效果图如下所示：</p>
+<pre class="mermaid" style="text-align: center;">
+            
+             
+    gantt
+    dateFormat  YYYY-MM-DD
+    title 软件开发甘特图
+    section 设计
+    需求                      :done,    des1, 2014-01-06,2014-01-08
+    原型                      :active,  des2, 2014-01-09, 3d
+    UI设计                     :         des3, after des2, 5d
+未来任务                     :         des4, after des3, 5d
+    section 开发
+    学习准备理解需求                      :crit, done, 2014-01-06,24h
+    设计框架                             :crit, done, after des2, 2d
+    开发                                 :crit, active, 3d
+    未来任务                              :crit, 5d
+    耍                                   :2d
+    section 测试
+    功能测试                              :active, a1, after des3, 3d
+    压力测试                               :after a1  , 20h
+    测试报告                               : 48h
+          </pre>
+
+<pre class="mermaid" style="text-align: center;">
+            
+             
+graph TB
+start(开始)-->inputA[输入用户名密码]
+inputA-->opA{数据库查询子类}
+opA-->conditionA{是否有此用户}
+conditionA--yes-->conditionB{密码是否正确}
+conditionA--no-->inputA
+conditionB--yes-->opB[读入用户信息]
+conditionB--no-->inputA
+opB-->en(登录)
+          </pre>
+
+<h2 id="9-自定义图片样式"><a href="#9-自定义图片样式" class="headerlink" title="9. 自定义图片样式"></a>9. 自定义图片样式</h2><div>
+    <img src="/2019/11/24/Hexo-Markdown注意事项/文章目录错误.jpg" style="margin-left: 20px; width: 200px; height: 300px">
+</div>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"2019-11-24-Hexo-Markdown注意事项/文章目录错误.jpg"</span> <span class="attr">style</span>=<span class="string">"margin-left: 20px; width: 200px; height: 300px"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">------ 本文结束------</div>
+    
+</div>
+
+    
+    </div>
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Hexo/" rel="tag"><i class="fa fa-tag"></i> Hexo</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/09/15/2019-9-15-Morris-遍历/" rel="next" title="Morris 遍历">
+                  <i class="fa fa-chevron-left"></i> Morris 遍历
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/11/25/（一）SpringBoot-HelloWorld/" rel="prev" title="(一) SpringBoot-HelloWorld">
+                  (一) SpringBoot-HelloWorld <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-文章标题"><span class="nav-text">1. 文章标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文章头格式"><span class="nav-text">2. 文章头格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-显示阅读全文"><span class="nav-text">3. 显示阅读全文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文本高亮"><span class="nav-text">4. 文本高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Latex-公式"><span class="nav-text">5. Latex 公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-文字增加背景色块"><span class="nav-text">6. 文字增加背景色块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-在文档中增加图标-Font-Awesome-提供图标"><span class="nav-text">7. 在文档中增加图标, Font Awesome 提供图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-mermaid-支持"><span class="nav-text">8. mermaid 支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-自定义图片样式"><span class="nav-text">9. 自定义图片样式</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/kanieki.png"
+      alt="郑松涛">
+  <p class="site-author-name" itemprop="name">郑松涛</p>
+  <div class="site-description" itemprop="description">积跬步，至千里</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/ShotoZheng" title="GitHub &rarr; https://github.com/ShotoZheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:shotozheng@163.com" title="E-Mail &rarr; mailto:shotozheng@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郑松涛</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">810k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:17</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'd6TU9yIpopEhNQKUras2D3Nr-gzGzoHsz',
+    appKey: 'CJpUierMSXBHmTo6mJ8G1KO1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!--看板娘-->
+<script src="/live2d-widget/autoload.js"></script>

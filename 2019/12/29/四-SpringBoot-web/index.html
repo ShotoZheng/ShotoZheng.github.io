@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 静态资源默认情况下，SpringBoot 支持映射获取当前项目下的任何静态资源，其中静态资源需要放在特定的静态资源文件夹下，如所示： 1234&amp;quot;classpath:/META-INF/resources/&amp;quot;, &amp;quot;classpath:/resources/&amp;quot;,&amp;quot;classpath:/static/&amp;quot;, &amp;quot;classpath:">
+<meta name="keywords" content="SpringBoot,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="(四) SpringBoot-web">
+<meta property="og:url" content="https://ShotoZheng.github.io/2019/12/29/四-SpringBoot-web/index.html">
+<meta property="og:site_name" content="鱼肚白不是鱼">
+<meta property="og:description" content="1. 静态资源默认情况下，SpringBoot 支持映射获取当前项目下的任何静态资源，其中静态资源需要放在特定的静态资源文件夹下，如所示： 1234&amp;quot;classpath:/META-INF/resources/&amp;quot;, &amp;quot;classpath:/resources/&amp;quot;,&amp;quot;classpath:/static/&amp;quot;, &amp;quot;classpath:">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575202320474.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575204002346.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575257109887.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575443211470.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575859867469.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575972078583.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575972392691.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575972510875.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1579587179589.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1579592581505.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1579593804258.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1579594639211.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1582708126544.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1582708935401.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1582709251343.png">
+<meta property="og:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1582709605061.png">
+<meta property="og:updated_time" content="2020-02-26T09:59:39.022Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="(四) SpringBoot-web">
+<meta name="twitter:description" content="1. 静态资源默认情况下，SpringBoot 支持映射获取当前项目下的任何静态资源，其中静态资源需要放在特定的静态资源文件夹下，如所示： 1234&amp;quot;classpath:/META-INF/resources/&amp;quot;, &amp;quot;classpath:/resources/&amp;quot;,&amp;quot;classpath:/static/&amp;quot;, &amp;quot;classpath:">
+<meta name="twitter:image" content="https://shotozheng.github.io/2019/12/29/四-SpringBoot-web/1575202320474.png">
+  <link rel="canonical" href="https://ShotoZheng.github.io/2019/12/29/四-SpringBoot-web/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>(四) SpringBoot-web | 鱼肚白不是鱼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--音乐播放器-->
+  <link rel="stylesheet" href="/dist/APlayer.min.css">
+  <div id="aplayer"></div>
+  <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+  <script type="text/javascript" src="/dist/music.js"></script>
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鱼肚白不是鱼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">笨鸟先飞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-网站">
+      
+    
+
+    <a href="/网站/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>网站</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2019/12/29/四-SpringBoot-web/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="郑松涛">
+      <meta itemprop="description" content="积跬步，至千里">
+      <meta itemprop="image" content="/images/kanieki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鱼肚白不是鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">(四) SpringBoot-web
+
+          
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2019-12-29 19:31:48" itemprop="dateCreated datePublished" datetime="2019-12-29T19:31:48+08:00">2019-12-29</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-26 17:59:39" itemprop="dateModified" datetime="2020-02-26T17:59:39+08:00">2020-02-26</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/SpringBoot/" itemprop="url" rel="index"><span itemprop="name">SpringBoot</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2019/12/29/四-SpringBoot-web/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2019/12/29/四-SpringBoot-web/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>18k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>16 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-静态资源"><a href="#1-静态资源" class="headerlink" title="1. 静态资源"></a>1. 静态资源</h2><p>默认情况下，SpringBoot 支持映射获取当前项目下的任何静态资源，其中静态资源需要放在特定的静态资源文件夹下，如所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;classpath:/META-INF/resources/&quot;, </span><br><span class="line">&quot;classpath:/resources/&quot;,</span><br><span class="line">&quot;classpath:/static/&quot;, </span><br><span class="line">&quot;classpath:/public/&quot;</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<p><img src="/2019/12/29/四-SpringBoot-web/1575202320474.png" alt="静态资源文件夹"></p>
+<p>这些静态资源文件夹的定义在 <code>org.springframework.boot.autoconfigure.web.ResourceProperties</code> 中便有体现，具体如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(</span><br><span class="line">    prefix = <span class="string">"spring.resources"</span>,</span><br><span class="line">    ignoreUnknownFields = <span class="keyword">false</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] CLASSPATH_RESOURCE_LOCATIONS = <span class="keyword">new</span> String[]&#123;<span class="string">"classpath:/META-INF/resources/"</span>, <span class="string">"classpath:/resources/"</span>, <span class="string">"classpath:/static/"</span>, <span class="string">"classpath:/public/"</span>&#125;;</span><br><span class="line">    <span class="keyword">private</span> String[] staticLocations;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们要访问 jar 中的静态资源（webjars 中的资源），那么我们需要去对应 jar 中的 <code>classpath:/META-INF/resources/webjars/</code> 路径下找资源。我们以访问 <code>jquery/3.3.1/jquery.js</code> 为例。</p>
+<p>首先我们需要导入 JQuery 的依赖，具体如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.webjars<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jquery<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.3.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2019/12/29/四-SpringBoot-web/1575204002346.png" alt="具体目录结构"></p>
+<p>在访问 jar 包中的资源的时候我们只需要写 webjars 下面资源的名称即可，例如访问路径为 <code>localhost:8080/webjars/jquery/3.3.1/jquery.js</code> ，浏览器上便可以显示 jquery.js 的数据。</p>
+<h2 id="2-欢迎页面"><a href="#2-欢迎页面" class="headerlink" title="2. 欢迎页面"></a>2. 欢迎页面</h2><p>SpringBoot 支持自动识别<code>静态资源文件夹</code>下的<code>欢迎页面 index.html</code>。当我们请求路径为 <code>localhost:8080/</code>的时候，在存在 index.html 的情况下会显示该页面。</p>
+<h2 id="3-网站图标"><a href="#3-网站图标" class="headerlink" title="3. 网站图标"></a>3. 网站图标</h2><p>与其他静态资源一样，Spring Boot 在已配置的静态文件夹中查找 favicon.ico。如果存在这样的文件，它将自动用作应用程序的图标。</p>
+<h2 id="4-模板引擎"><a href="#4-模板引擎" class="headerlink" title="4. 模板引擎"></a>4. 模板引擎</h2><p>Thymeleaf 是一款用于渲染 XML/XHTML/HTML5 内容的模板引擎。类似 JSP，Velocity，FreeMaker 等，它也可以轻易的与 Spring MVC 等Web 框架进行集成作为 Web 应用的模板引擎。与其它模板引擎相比，Thymeleaf 最大的特点是能够直接在浏览器中打开并正确显示模板页面，而不需要启动整个 Web 应用（按 ctrl + F9 重新编译页面）。</p>
+<p>Spring Boot 推荐使用 <a href="https://www.thymeleaf.org/" target="_blank" rel="noopener">Thymeleaf</a>、<a href="https://freemarker.apache.org/docs/" target="_blank" rel="noopener">Freemarker</a> 等后现代的模板引擎技术；一但导入相关依赖，会自动配置ThymeleafAutoConfiguration、FreeMarkerAutoConfiguration 等自动配置类。</p>
+<p>下图描述了模板引擎的工作原理，模板引擎通过将静态页面和 Model 中的数据结合渲染输出我们需要的页面。如下图所示：</p>
+<p> <img src="/2019/12/29/四-SpringBoot-web/1575257109887.png" alt="模板引擎工作原理"></p>
+<p>下面我们介绍一个 SpringBoot 中如何使用 Thymeleaf 吧。</p>
+<h3 id="4-1-引入-Thymeleaf"><a href="#4-1-引入-Thymeleaf" class="headerlink" title="4.1 引入 Thymeleaf"></a>4.1 引入 Thymeleaf</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">&lt;!--导入模板引擎--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-thymeleaf<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-使用-Thymeleaf"><a href="#4-2-使用-Thymeleaf" class="headerlink" title="4.2 使用 Thymeleaf"></a>4.2 使用 Thymeleaf</h3><p>我们查看自动配置包中关于模板引擎 Thymeleaf 的自动配置绑定文件类，以下是相关的内容：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(</span><br><span class="line">    prefix = <span class="string">"spring.thymeleaf"</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThymeleafProperties</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Charset DEFAULT_ENCODING;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_PREFIX = <span class="string">"classpath:/templates/"</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String DEFAULT_SUFFIX = <span class="string">".html"</span>;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从代码中我们也可以知道 Thymeleaf 模板是存放在 templates 文件夹中的 html 文件，这样 Thymeleaf 就能自动渲染页面。</p>
+<p>下面我们来简单的演示一下 Thymeleaf 的使用，首先我们编写如下控制器类 IndexController，具体内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/index"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">(Model model)</span> </span>&#123;</span><br><span class="line">        model.addAttribute(<span class="string">"hello"</span>, <span class="string">"Hello Thymeleaf!"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"home"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着在编写模板文件 home.html，具体内容如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Test Thymeleaf<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>成功！<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--th:text 将span里面的文本内容设置为$&#123;hello&#125;的内容 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">th:text</span>=<span class="string">"$&#123;hello&#125;"</span>&gt;</span>这段文本将会被替代掉<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，我们需要导入 Thymeleaf 的名称空间，即<code>&lt;html lang=&quot;en&quot; xmlns:th=&quot;http://www.thymeleaf.org&quot;&gt;</code>。关于该模板引擎的具体使用如语法规则之类的我们可以查看其<a href="https://www.thymeleaf.org/documentation.html" target="_blank" rel="noopener">官方文档</a>。</p>
+<h2 id="5-定制web扩展配置"><a href="#5-定制web扩展配置" class="headerlink" title="5. 定制web扩展配置"></a>5. 定制web扩展配置</h2><h3 id="5-1-定制-SpringMVC-配置"><a href="#5-1-定制-SpringMVC-配置" class="headerlink" title="5.1 定制 SpringMVC 配置"></a>5.1 定制 SpringMVC 配置</h3><p>SpringBoot 自动配置好了 SpringMVC。以下是 SpringBoot 对 SpringMVC 的一些默认配置，除此之外，我们还介绍了如何自定义 SpringMVC 的一些配置。关于 SpringBoot 对 SpringMVC 自动配置的详细信息，我们可以在自动配置包中的 WebMvcAutoConfiguration 类中找到其中的源码定义。</p>
+<h4 id="5-1-1-定制视图解析器"><a href="#5-1-1-定制视图解析器" class="headerlink" title="5.1.1 定制视图解析器"></a>5.1.1 定制视图解析器</h4><p>SpringBoot 自动配置了多种视图解析器，包括组合所有的视图解析器的 <code>ContentNegotiatingViewResolver</code>以及解析各种 Bean 的<code>BeanNameViewResolver</code> 。</p>
+<p>我们可以自己给容器中添加一个视图解析器，SpringBoot 会自动的将其组合进来。<span id="inline-green">自定义视图解析器</span>的方法很简单。首先我们需要编写自己的视图解析器类，该类需要实现 <code>ViewResolver</code> 接口，然后重写 resolveViewName 方法。具体如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 郑松涛</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> 自定义视图解析器</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/12/4 10:55</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyViewResolver</span> <span class="keyword">implements</span> <span class="title">ViewResolver</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">resolveViewName</span><span class="params">(String s, Locale locale)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着在配置类中编写一个方法，并将该方法返回的自定义视图解析器对象 MyViewResolver 加入到 IoC 容器中即可。至此，自定义视图解析的添加边完成了。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> 郑松涛</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@version</span> 1.0</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@description</span> 配置类</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2019/12/4 10:56</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ViewResolver <span class="title">myViewReolver</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyViewResolver();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们可以在 DispatchServlet 类的 都 doDispatch 方法上打上断点进行测试，其中我们自定义的视图解析器是有起作用的，如下图所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1575443211470.png" alt="自定义视图解析器"></p>
+<h4 id="5-1-2-定制转换器和格式化器"><a href="#5-1-2-定制转换器和格式化器" class="headerlink" title="5.1.2 定制转换器和格式化器"></a>5.1.2 定制转换器和格式化器</h4><p>SpringBoot 自动注册了 <code>Converter</code>，<code>GenericConverter</code>，<code>Formatter</code>等组件，其中 <code>Converter</code>即为转换器，比如请求时可以将表单内容自动封装转换为一个类；<code>Formatter</code>即为格式化器，如对时间的进行格式化等。与自定义视图解析器一样，我们也可以通过同样的方式来自定义转换器和格式化器等。</p>
+<p>另外，SpringBoot 还支持 <code>HttpMessageConverters</code>，其是 SpringMVC 用来转换 Http 请求和响应的，比如将 User 转换为 Json 格式。假如我们需要自己给容器中添加 <code>HttpMessageConverter</code>，只需要类似前面自定义视图解析器一样的方法将自己的组件注册容器中即可。示例如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>(proxyBeanMethods = <span class="keyword">false</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建并自定义自己的HttpMessageConverters</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> HttpMessageConverters <span class="title">customConverters</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HttpMessageConverter&lt;?&gt; additional = ...</span><br><span class="line">        HttpMessageConverter&lt;?&gt; another = ...</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HttpMessageConverters(additional, another);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>总结：前面 5.1.1 和 5.1.2 使用的方法都是一样的，都是在配置类中将自定义的类作为组件加入到容器中，这样 SpringBoot 在自动配置很多组件的时候，会先看容器中有没有用户自己配置的（@Bean、@Component）组件。<strong>如果有就用用户配置的，如果没有，才自动配置；</strong>如果有些组件可以有多个（ViewResolver）则会将用户配置的和自己默认的组合起来。</p>
+<h4 id="5-1-3-定制拦截器"><a href="#5-1-3-定制拦截器" class="headerlink" title="5.1.3 定制拦截器"></a>5.1.3 定制拦截器</h4><p>与前面使用普通的配置类配置自定义组件不同的是，下面我们使用 <code>WebMvcConfigurer</code> 类型的配置类来实现添加自定义的拦截器。使用这种方法，可以避免用户自定义组件替代 SpringBoot 自动配置组件的情况。相反的，用户自定义配置的组件会和 SpringBoot 自动配置的组件一起其作用。下面我们就以定义拦截器为例演示一下该功能的使用。</p>
+<p>首先我们自然需要先编写一个自定义的拦截器类，其需要实现 HandlerInteceptor 接口，并实现需要的方法，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    Logger logger = LoggerFactory.getLogger(IndexInterceptor.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"拦截器的 preHandle 方法运行了。。。"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>接着我们需要编写 <code>WebMvcConfigurer</code> 类型的配置类来注册该拦截器，具体如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebMvcConfig</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 注册自定义的拦截器，</span></span><br><span class="line"><span class="comment">     * addPathPatterns("/**")表明所有请求都要经过该拦截器</span></span><br><span class="line"><span class="comment">     * .excludePathPatterns("/index.html", "/", "/usr/login"); 用于排除这三个请求路径会经过拦截器的拦截</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> registry</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(<span class="keyword">new</span> LoginInterceptor()).addPathPatterns(<span class="string">"/**"</span>)</span><br><span class="line">                        .excludePathPatterns(<span class="string">"/index.html"</span>, <span class="string">"/"</span>, <span class="string">"/usr/login"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行之后，我们可以在控制台上发现<code>拦截器的 preHandle 方法运行了。。。</code>的信息被输出了，说明我们拦截器添加成功了。</p>
+<p><strong>原理</strong>：</p>
+<p>我们查看 MVC 的自动配置类 WebMvcAutoConfiguration ，该类中的静态内部类 EnableWebMvcConfiguration 的父类 DelegatingWebMvcConfiguration 存在如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span>(</span><br><span class="line">    proxyBeanMethods = <span class="keyword">false</span></span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> WebMvcConfigurerComposite configurers = <span class="keyword">new</span> WebMvcConfigurerComposite();</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Autowired</span>(</span><br><span class="line">        required = <span class="keyword">false</span></span><br><span class="line">    )</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setConfigurers</span><span class="params">(List&lt;WebMvcConfigurer&gt; configurers)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!CollectionUtils.isEmpty(configurers)) &#123;</span><br><span class="line">            <span class="keyword">this</span>.configurers.addWebMvcConfigurers(configurers);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们观察 setConfigurers 方法，该方法会从容器中获取所有的 WebMvcConfigurer（含有我们自定义的 WebMvcConfig），并添加到 WebMvcConfigurerComposite 中。最后，我们配置类 WebMvcConfig 中拦截器也会一并被调用执行。</p>
+<h3 id="5-2-全面接管-SpringMVC"><a href="#5-2-全面接管-SpringMVC" class="headerlink" title="5.2 全面接管 SpringMVC"></a>5.2 全面接管 SpringMVC</h3><p>假如我们不需要 SpringBoot 对 SpringMVC 的自动配置，也就是所有的 SpringMVC 的配置都要我们自己手动配置，我们只需要在配置类中添加 @EnableWebMvc 即可。</p>
+<p><strong>原理</strong>：</p>
+<p>为什么 @EnableWebMvc 会使 SpringMVC 的自动配置实效，我们来查看一下其源码，具体如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="meta">@Target</span>(&#123;ElementType.TYPE&#125;)</span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@Import</span>(&#123;DelegatingWebMvcConfiguration.class&#125;)</span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> EnableWebMvc &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们发现 @EnableWebMvc 本身需要导入 DelegatingWebMvcConfiguration 该类，而 DelegatingWebMvcConfiguration 是 WebMvcConfigurationSupport 的子类。如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DelegatingWebMvcConfiguration</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurationSupport</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> WebMvcConfigurerComposite configurers = <span class="keyword">new</span> WebMvcConfigurerComposite();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DelegatingWebMvcConfiguration</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>另外，MVC 自动配置类中定义了 <code>@ConditionalOnMissingBean({WebMvcConfigurationSupport.class})</code>。它表明Spring 容器中缺少 WebMvcConfigurationSupport 类时，该自动配置类才会生效。由于前面我们在自定义的配置类中使用了 @EnableWebMvc 注解，该注解会导入 WebMvcConfigurationSupport 该类，所以我们才能全面接管 SpringMVC 的配置。</p>
+<h2 id="6-国际化"><a href="#6-国际化" class="headerlink" title="6. 国际化"></a>6. 国际化</h2><p>步骤：</p>
+<p>1）、编写国际化配置文件，抽取页面需要显示的国际化消息</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1575859867469.png" alt="国际化配置文件"></p>
+<p>2）、SpringBoot 自动配置好了管理国际化资源文件的组件 ResourceBundleMessageSource，所以这一步我们不需要自己配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ConfigurationProperties</span>(prefix = <span class="string">"spring.messages"</span>)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageSourceAutoConfiguration</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> String basename = <span class="string">"messages"</span>;  </span><br><span class="line">    <span class="comment">//我们的配置文件可以直接放在类路径下叫messages.properties；</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> MessageSource <span class="title">messageSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        ResourceBundleMessageSource messageSource = <span class="keyword">new</span> ResourceBundleMessageSource();</span><br><span class="line">        <span class="keyword">if</span> (StringUtils.hasText(<span class="keyword">this</span>.basename)) &#123;</span><br><span class="line">            <span class="comment">//设置国际化资源文件的基础名（去掉语言国家代码的）</span></span><br><span class="line">            messageSource.setBasenames(StringUtils.commaDelimitedListToStringArray(</span><br><span class="line">                    StringUtils.trimAllWhitespace(<span class="keyword">this</span>.basename)));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.encoding != <span class="keyword">null</span>) &#123;</span><br><span class="line">            messageSource.setDefaultEncoding(<span class="keyword">this</span>.encoding.name());</span><br><span class="line">        &#125;</span><br><span class="line">        messageSource.setFallbackToSystemLocale(<span class="keyword">this</span>.fallbackToSystemLocale);</span><br><span class="line">        messageSource.setCacheSeconds(<span class="keyword">this</span>.cacheSeconds);</span><br><span class="line">        messageSource.setAlwaysUseMessageFormat(<span class="keyword">this</span>.alwaysUseMessageFormat);</span><br><span class="line">        <span class="keyword">return</span> messageSource;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>3）、页面获取国际化的值，具体代码如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>测试国际化<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">th:text</span>=<span class="string">"#&#123;login.username&#125;"</span>&gt;</span>用户名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>4）、在 SpringBoot 的配置文件中配置国际化的命名空间，具体如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 配置命名空间，用于指明国际化文件的位置</span><br><span class="line">spring.messages.basename=i18n.login</span><br></pre></td></tr></table></figure>
+
+<p>最后的效果就是会根据浏览器语言设置的信息切换了国际化。</p>
+<h2 id="7-错误处理机制"><a href="#7-错误处理机制" class="headerlink" title="7. 错误处理机制"></a>7. 错误处理机制</h2><h3 id="7-1-默认错误处理机制"><a href="#7-1-默认错误处理机制" class="headerlink" title="7.1 默认错误处理机制"></a>7.1 默认错误处理机制</h3><p>当我们向 SpringBoot 应用发送一个不存在的请求地址的时候，在浏览器中则会显示服务端响应返回一个默认的错误页面，如下所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1575972078583.png" alt="浏览器错误响应页面"></p>
+<p>不过当我们使用其他客户端向 SpringBoot 应用发送一个不存在的请求地址的时候，比如使用 Postman 发送。此时则会显示服务端发送回来的 Json 数据，例如：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"timestamp"</span>: <span class="string">"2019-01-21T14:36:48.573+0000"</span>,</span><br><span class="line">    <span class="attr">"status"</span>: <span class="number">404</span>,</span><br><span class="line">    <span class="attr">"error"</span>: <span class="string">"Not Found"</span>,</span><br><span class="line">    <span class="attr">"message"</span>: <span class="string">"No message available"</span>,</span><br><span class="line">    <span class="attr">"path"</span>: <span class="string">"/index.html"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们从各自的发送请求中得到这种差异的原因，比如浏览器的请求头表明其想要接收的数据是 <code>text/html</code>的数据，如下：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1575972392691.png" alt="浏览器的请求头"></p>
+<p>相反地，我们使用 Postman 发送的请求的请求头则不是要求接收 <code>text/html</code>类型的数据，具体如下所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1575972510875.png" alt="Postman的请求头"></p>
+<p>当然这种差异的具体原因我们可以在源码中找到，我们可以参照 ErrorMvcAutoConfiguration 自动配置类的具体内容，该类主要是用于错误处理的自动配置类。这里不再详述。</p>
+<h3 id="7-2-自定义错误响应"><a href="#7-2-自定义错误响应" class="headerlink" title="7.2 自定义错误响应"></a>7.2 自定义错误响应</h3><h4 id="7-2-1-定制错误页面"><a href="#7-2-1-定制错误页面" class="headerlink" title="7.2.1 定制错误页面"></a>7.2.1 定制错误页面</h4><p><strong>1）、</strong>在有配置模板引擎的情况下，如果发生指定状态类型的错误时，Springboot 会将模板文件夹里面的 error 文件夹下命名为对应状态码的 <code>错误状态码.html</code>的文件作为自定义的错误页面。比如请求时发生404错误，那么就会将对应的名为<code>404.html</code>文件作为自定义错误页面。</p>
+<p>另外，我们也可以使用名为<code>4xx.html</code>或<code>5xx.html</code>作为自定义错误页面来匹配这种类型的所有错误，但是如果发生指定状态类型的错误时，会优先寻找名为对应状态码的自定义错误页面。</p>
+<p><strong>2）</strong>、在没有配置模板引擎或者模板文件夹下没有需要的错误页面的情况下，那么就会在静态资源文件夹下找。</p>
+<p><strong>3）、</strong>以上的情况下都没有找到需要的错误页面是，就会默认来到 SpringBoot 默认的错误提示页面。</p>
+<p>需要说明的是，我们在页面能获取的信息有：</p>
+<ul>
+<li>timestamp：时间戳</li>
+<li>status：状态码</li>
+<li>errors：错误提示</li>
+<li>exception：异常对象</li>
+<li>message：异常消息</li>
+<li>errors：JSR303数据校验的错误都在这里</li>
+</ul>
+<p>假如我在 Controller 的 index 方法中故意导致服务器除零异常，具体代码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IndexController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/index.html"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 模拟除〇异常</span></span><br><span class="line">        <span class="keyword">int</span> i =<span class="number">1</span> / <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用模板引擎 Thymeleaf 的页面编写示例如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span> <span class="attr">xmlns:th</span>=<span class="string">"http://www.thymeleaf.org"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>错误响应页面<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>错误消息：<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;timestamp&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;status&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;error&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;exception&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;message&#125;"</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">th:text</span>=<span class="string">"$&#123;errors&#125;"</span>&gt;</span>JSR303数据校验错误<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>运行测试之后，浏览器页面上的异常信息显示具体如下图所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1579587179589.png" alt="1579587179589"></p>
+<h4 id="7-2-2-自定义错误响应数据"><a href="#7-2-2-自定义错误响应数据" class="headerlink" title="7.2.2 自定义错误响应数据"></a>7.2.2 自定义错误响应数据</h4><p>当出现错误的时候，框架底层会进行 /error 请求，然后被 BasicErrorController 处理，其中异常响应出去的数据是由 getErrorAttributes 得到的。该方法是 AbstractErrorController 或 ErrorController 规定的方法：</p>
+<ol>
+<li><p>完全自己编写一个 ErrorController 的实现类（或编写 AbstractErrorController 的子类），并加入到 IoC 容器中；</p>
+</li>
+<li><p>页面上显示的异常响应数据，或者是 Json 返回的异常响应数据都是通过 ErrorAttributes.getErrorAttributes 方法得到的。</p>
+</li>
+</ol>
+<p>下面，我们自定义 ErrorAttributes 类，具体如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyErrorAttributes</span> <span class="keyword">extends</span> <span class="title">DefaultErrorAttributes</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Map&lt;String, Object&gt; <span class="title">getErrorAttributes</span><span class="params">(RequestAttributes requestAttributes, <span class="keyword">boolean</span> includeStackTrace)</span> </span>&#123;</span><br><span class="line">        Map&lt;String, Object&gt; map = <span class="keyword">super</span>.getErrorAttributes(requestAttributes, includeStackTrace);</span><br><span class="line">        map.put(<span class="string">"shoto"</span>, <span class="string">"郑松涛自定义异常信息！"</span>);</span><br><span class="line">        <span class="keyword">return</span> map;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的，当 Controller 的 index 方法发生除零异常的时候，页面会显示自定义异常响应信息，如下图所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1579592581505.png" alt="1579592581505"></p>
+<h2 id="8-配置嵌入式Servlet容器"><a href="#8-配置嵌入式Servlet容器" class="headerlink" title="8. 配置嵌入式Servlet容器"></a>8. 配置嵌入式Servlet容器</h2><p>SpringBoot 默认使用 Tomcat 作为嵌入式的 Servlet 容，如下图所示。开发时，我们可以根据自身需要更改 Tomcat 的 Servlet 容器配置。</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1579593804258.png" alt="1579593804258"></p>
+<h3 id="8-1-定制或配置-Servlet-容器"><a href="#8-1-定制或配置-Servlet-容器" class="headerlink" title="8.1 定制或配置 Servlet 容器"></a>8.1 定制或配置 Servlet 容器</h3><ol>
+<li><p>修改和 server 有关的配置，其中 application.propertise 中可以配置的内容我们可以从 ServerProperties 类中找到。具体配置的实现可以从 EmbeddedServletContainerCustomizer 接口的之类找到。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 通用的Servlet容器设置</span><br><span class="line"># server.xxx</span><br><span class="line"># Tomcat的设置</span><br><span class="line"># server.tomcat.xxx</span><br><span class="line">server.port=8080</span><br><span class="line">server.tomcat.uri-encoding=UTF-8</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写一个 <strong>EmbeddedServletContainerCustomizer</strong>，即 SpringBoot 提供的一个嵌入式的 Servlet 容器定制器，同样也是用来修改 Servlet 容器的配置。具体代码如下所示：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> EmbeddedServletContainerCustomizer <span class="title">embeddedServletContainerCustomizer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> EmbeddedServletContainerCustomizer() &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">/**</span></span><br><span class="line"><span class="comment">             * 定制嵌入式的Servlet容器相关的规则，比如设置端口号</span></span><br><span class="line"><span class="comment">             * <span class="doctag">@param</span> container</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">customize</span><span class="params">(ConfigurableEmbeddedServletContainer container)</span> </span>&#123;</span><br><span class="line">                <span class="comment">// 设置访问端口</span></span><br><span class="line">                container.setPort(<span class="number">8081</span>);</span><br><span class="line">                <span class="comment">// 设置访问路径</span></span><br><span class="line">                container.setContextPath(<span class="string">"/shoto"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试结果如下所示</p>
+<p> <img src="/2019/12/29/四-SpringBoot-web/1579594639211.png" alt="1579594639211"></p>
+</li>
+</ol>
+<h3 id="8-2-注册-Servlet、Filter、Listener"><a href="#8-2-注册-Servlet、Filter、Listener" class="headerlink" title="8.2 注册 Servlet、Filter、Listener"></a>8.2 注册 Servlet、Filter、Listener</h3><p>由于 SpringBoot 默认是以 jar 包的方式启动嵌入式的 Servlet 容器来启动 SpringBoot 的 web 应用，因此没有 web.xml 文件，我们便也就数不能在 web.xml 文件中注册 Servlet、Filter 和 Listener。下面讲一下 SpringBoot 是如何进行这三大组件的注册的。</p>
+<h4 id="8-2-1-注册Servlet"><a href="#8-2-1-注册Servlet" class="headerlink" title="8.2.1 注册Servlet"></a>8.2.1 注册Servlet</h4><ol>
+<li>首先编写一个自定义的 Servlet，部分代码如下所示：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServlet</span> <span class="keyword">implements</span> <span class="title">Servlet</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(MyServlet.class);</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(ServletConfig servletConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line">        logger.info(<span class="string">"MyServlet 初始化啦...."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>然后在配置类中编写如下代码，这里使用到了FilterRegistrationBean 类，具体代码如下所示：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ServletRegistrationBean <span class="title">myServlet</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ServletRegistrationBean registrationBean = <span class="keyword">new</span> ServletRegistrationBean(<span class="keyword">new</span> MyServlet(),<span class="string">"/myServlet"</span>);</span><br><span class="line">    <span class="keyword">return</span> registrationBean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>接着在浏览器中访问<code>http:/localhost:8080/MyServlet</code>，此时 MyServlet 会开始进行初始化，也就是 MyServlet 中的 init 方法会开始执行。</li>
+</ol>
+<h4 id="8-2-2-注册-Filter"><a href="#8-2-2-注册-Filter" class="headerlink" title="8.2.2 注册 Filter"></a>8.2.2 注册 Filter</h4><ol>
+<li><p>首先编写一个 Filter。</p>
+</li>
+<li><p>然后在配置类中编写如下代码，这里使用到了FilterRegistrationBean 类，具体代码如下所示：</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> FilterRegistrationBean <span class="title">myFilter</span><span class="params">()</span></span>&#123;</span><br><span class="line">    FilterRegistrationBean registrationBean = <span class="keyword">new</span> FilterRegistrationBean();</span><br><span class="line">    registrationBean.setFilter(<span class="keyword">new</span> MyFilter());</span><br><span class="line">    registrationBean.setUrlPatterns(Arrays.asList(<span class="string">"/hello"</span>,<span class="string">"/myServlet"</span>));</span><br><span class="line">    <span class="keyword">return</span> registrationBean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-2-4-注册-Listener"><a href="#8-2-4-注册-Listener" class="headerlink" title="8.2.4 注册 Listener"></a>8.2.4 注册 Listener</h4><p>使用 ServletListenerRegistrationBean 类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> ServletListenerRegistrationBean <span class="title">myListener</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ServletListenerRegistrationBean&lt;MyListener&gt; registrationBean = <span class="keyword">new</span> ServletListenerRegistrationBean&lt;&gt;(<span class="keyword">new</span> MyListener());</span><br><span class="line">    <span class="keyword">return</span> registrationBean;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>SpringBoot 帮我们自动装载 SpringMVC 的时候，自动的注册 SpringMVC 的前端控制器，即 DIspatcherServlet。</p>
+<p>DispatcherServletAutoConfiguration中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span>(name = DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME)</span><br><span class="line"><span class="meta">@ConditionalOnBean</span>(value = DispatcherServlet.class, name = DEFAULT_DISPATCHER_SERVLET_BEAN_NAME)</span><br><span class="line"><span class="function"><span class="keyword">public</span> ServletRegistrationBean <span class="title">dispatcherServletRegistration</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">      DispatcherServlet dispatcherServlet)</span> </span>&#123;</span><br><span class="line">   ServletRegistrationBean registration = <span class="keyword">new</span> ServletRegistrationBean(</span><br><span class="line">         dispatcherServlet, <span class="keyword">this</span>.serverProperties.getServletMapping());</span><br><span class="line">    <span class="comment">//默认拦截： /  所有请求；包静态资源，但是不拦截jsp请求；   /*会拦截jsp</span></span><br><span class="line">    <span class="comment">//可以通过server.servletPath来修改SpringMVC前端控制器默认拦截的请求路径</span></span><br><span class="line">    </span><br><span class="line">   registration.setName(DEFAULT_DISPATCHER_SERVLET_BEAN_NAME);</span><br><span class="line">   registration.setLoadOnStartup(</span><br><span class="line">         <span class="keyword">this</span>.webMvcProperties.getServlet().getLoadOnStartup());</span><br><span class="line">   <span class="keyword">if</span> (<span class="keyword">this</span>.multipartConfig != <span class="keyword">null</span>) &#123;</span><br><span class="line">      registration.setMultipartConfig(<span class="keyword">this</span>.multipartConfig);</span><br><span class="line">   &#125;</span><br><span class="line">   <span class="keyword">return</span> registration;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-使用外置的Servlet容器"><a href="#9-使用外置的Servlet容器" class="headerlink" title="9. 使用外置的Servlet容器"></a>9. 使用外置的Servlet容器</h2><p>SpringBoot 默认支持的是嵌入式 Servlet 容器，因此应用打成可执行的 Jar。这样的优点是简单和便携。但是缺点就是默认不支持 JSP，而且优化定制也比较复杂。</p>
+<p>下面我们来为 SpringBoot 配置外置的 Servlet 容器，以使 SpringBoot 能够兼容 JSP 且支持 SpringBoot 应用以 war 包的方式进行打包。</p>
+<p>1.首先是先创建一个war项目，并创建好目录结构，需要注意的关键步骤如下所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1582708126544.png" alt="1582708126544"></p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1582708935401.png" alt="1582708935401"></p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1582709251343.png" alt="1582709251343"></p>
+<p>2.IDEA 中配置 Tomcat 启动容器，配置后的结果如下所示：</p>
+<p><img src="/2019/12/29/四-SpringBoot-web/1582709605061.png" alt="1582709605061"></p>
+<p>3.接着需要确保 POM.xml 文件中进行了如下依赖的配置，具体如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-tomcat<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">scope</span>&gt;</span>provided<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>4.然后需要注意的是 SpringBootApplication 主程序所在的包下是否生成 ServletInitializer 类，该类是一个核心类，具体内容如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServletInitializer</span> <span class="keyword">extends</span> <span class="title">SpringBootServletInitializer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> SpringApplicationBuilder <span class="title">configure</span><span class="params">(SpringApplicationBuilder application)</span> </span>&#123;</span><br><span class="line">        <span class="comment">//传入SpringBoot应用的主程序</span></span><br><span class="line">        <span class="keyword">return</span> application.sources(Springboot04WebJspApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>5.最后我们可以在 webapp 目录下编写如下两个 jsp 文件，分别是 hello.jsp 和 success.jsp，具体内容如下：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;Hello JSP&lt;/h1&gt;</span><br><span class="line">    &lt;a href="abc"&gt;点击&lt;/a&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">"text/html;charset=UTF-8"</span> language=<span class="string">"java"</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;SUCCESS&lt;/h1&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>6.然后编写一个 HelloController 类，具体内容如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloContoller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/abc"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 跳转到 success.jsp 页面</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7.最后一步是在 application.properties 配置文件中进行配置，即配置 jsp 文件的前缀和后缀，具体如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.mvc.view.prefix=/WEB-INF/</span><br><span class="line">spring.mvc.view.suffix=.jsp</span><br></pre></td></tr></table></figure>
+
+<p>如此 SpringBoot 便可以兼容 JSP 页面了，SpringBoot 使用外置的 Servlet 容器便完成了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">------ 本文结束------</div>
+    
+</div>
+
+    
+    </div>
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i> SpringBoot</a>
+            
+              <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/11/30/三-SpringBoot-日志/" rel="next" title="(三) SpringBoot-日志">
+                  <i class="fa fa-chevron-left"></i> (三) SpringBoot-日志
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/01/01/IDEA中Git的使用/" rel="prev" title="IDEA中Git的使用">
+                  IDEA中Git的使用 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-静态资源"><span class="nav-text">1. 静态资源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-欢迎页面"><span class="nav-text">2. 欢迎页面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-网站图标"><span class="nav-text">3. 网站图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-模板引擎"><span class="nav-text">4. 模板引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-引入-Thymeleaf"><span class="nav-text">4.1 引入 Thymeleaf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-使用-Thymeleaf"><span class="nav-text">4.2 使用 Thymeleaf</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-定制web扩展配置"><span class="nav-text">5. 定制web扩展配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-定制-SpringMVC-配置"><span class="nav-text">5.1 定制 SpringMVC 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-1-定制视图解析器"><span class="nav-text">5.1.1 定制视图解析器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-2-定制转换器和格式化器"><span class="nav-text">5.1.2 定制转换器和格式化器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-3-定制拦截器"><span class="nav-text">5.1.3 定制拦截器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-全面接管-SpringMVC"><span class="nav-text">5.2 全面接管 SpringMVC</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-国际化"><span class="nav-text">6. 国际化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-错误处理机制"><span class="nav-text">7. 错误处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#7-1-默认错误处理机制"><span class="nav-text">7.1 默认错误处理机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-2-自定义错误响应"><span class="nav-text">7.2 自定义错误响应</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-1-定制错误页面"><span class="nav-text">7.2.1 定制错误页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-2-2-自定义错误响应数据"><span class="nav-text">7.2.2 自定义错误响应数据</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-配置嵌入式Servlet容器"><span class="nav-text">8. 配置嵌入式Servlet容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#8-1-定制或配置-Servlet-容器"><span class="nav-text">8.1 定制或配置 Servlet 容器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-2-注册-Servlet、Filter、Listener"><span class="nav-text">8.2 注册 Servlet、Filter、Listener</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-1-注册Servlet"><span class="nav-text">8.2.1 注册Servlet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-2-注册-Filter"><span class="nav-text">8.2.2 注册 Filter</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-2-4-注册-Listener"><span class="nav-text">8.2.4 注册 Listener</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-使用外置的Servlet容器"><span class="nav-text">9. 使用外置的Servlet容器</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/kanieki.png"
+      alt="郑松涛">
+  <p class="site-author-name" itemprop="name">郑松涛</p>
+  <div class="site-description" itemprop="description">积跬步，至千里</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/ShotoZheng" title="GitHub &rarr; https://github.com/ShotoZheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:shotozheng@163.com" title="E-Mail &rarr; mailto:shotozheng@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郑松涛</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">810k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:17</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'd6TU9yIpopEhNQKUras2D3Nr-gzGzoHsz',
+    appKey: 'CJpUierMSXBHmTo6mJ8G1KO1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!--看板娘-->
+<script src="/live2d-widget/autoload.js"></script>

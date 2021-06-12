@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 前言Java里有一个叫做Stack的类，却没有叫做Queue的类（它是个接口名字）。当需要使用栈时，Java已不推荐使用Stack，而是推荐使用更高效的ArrayDeque；既然Queue只是一个接口，当需要使用队列时也就首选ArrayDeque了（次选是LinkedList）。">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="（五）Java集合框架内幕-Stack and Queue">
+<meta property="og:url" content="https://ShotoZheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/index.html">
+<meta property="og:site_name" content="鱼肚白不是鱼">
+<meta property="og:description" content="1. 前言Java里有一个叫做Stack的类，却没有叫做Queue的类（它是个接口名字）。当需要使用栈时，Java已不推荐使用Stack，而是推荐使用更高效的ArrayDeque；既然Queue只是一个接口，当需要使用队列时也就首选ArrayDeque了（次选是LinkedList）。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144447803.png">
+<meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144512947.png">
+<meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144543371.png">
+<meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144738982.png">
+<meta property="og:updated_time" content="2020-01-05T00:46:27.059Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="（五）Java集合框架内幕-Stack and Queue">
+<meta name="twitter:description" content="1. 前言Java里有一个叫做Stack的类，却没有叫做Queue的类（它是个接口名字）。当需要使用栈时，Java已不推荐使用Stack，而是推荐使用更高效的ArrayDeque；既然Queue只是一个接口，当需要使用队列时也就首选ArrayDeque了（次选是LinkedList）。">
+<meta name="twitter:image" content="https://shotozheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144447803.png">
+  <link rel="canonical" href="https://ShotoZheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>（五）Java集合框架内幕-Stack and Queue | 鱼肚白不是鱼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--音乐播放器-->
+  <link rel="stylesheet" href="/dist/APlayer.min.css">
+  <div id="aplayer"></div>
+  <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+  <script type="text/javascript" src="/dist/music.js"></script>
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鱼肚白不是鱼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">笨鸟先飞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-网站">
+      
+    
+
+    <a href="/网站/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>网站</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="郑松涛">
+      <meta itemprop="description" content="积跬步，至千里">
+      <meta itemprop="image" content="/images/kanieki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鱼肚白不是鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">（五）Java集合框架内幕-Stack and Queue
+
+          
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2020-01-05 08:45:11 / 修改时间：08:46:27" itemprop="dateCreated datePublished" datetime="2020-01-05T08:45:11+08:00">2020-01-05</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/" itemprop="url" rel="index"><span itemprop="name">Java</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Java/集合/" itemprop="url" rel="index"><span itemprop="name">集合</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>4.2k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>4 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Java里有一个叫做<em>Stack</em>的类，却没有叫做<em>Queue</em>的类（它是个接口名字）。当需要使用栈时，Java已不推荐使用<em>Stack</em>，而是推荐使用更高效的<em>ArrayDeque</em>；既然<em>Queue</em>只是一个接口，当需要使用队列时也就首选<em>ArrayDeque</em>了（次选是<em>LinkedList</em>）。</p>
+<a id="more"></a>
+
+<h1 id="2-总体介绍"><a href="#2-总体介绍" class="headerlink" title="2. 总体介绍"></a>2. 总体介绍</h1><p>要讲栈和队列，首先要讲<em>Deque</em>接口。<em>Deque</em>的含义是“double ended queue”，即双端队列，它既可以当作栈使用，也可以当作队列使用。下表列出了<em>Deque</em>与<em>Queue</em>相对应的接口：</p>
+<table>
+<thead>
+<tr>
+<th>Queue Method</th>
+<th>Equivalent Deque Method</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>add(e)</code></td>
+<td><code>addLast(e)</code></td>
+<td>向队尾插入元素，失败则抛出异常</td>
+</tr>
+<tr>
+<td><code>offer(e)</code></td>
+<td><code>offerLast(e)</code></td>
+<td>向队尾插入元素，失败则返回<code>false</code></td>
+</tr>
+<tr>
+<td><code>remove()</code></td>
+<td><code>removeFirst()</code></td>
+<td>获取并删除队首元素，失败则抛出异常</td>
+</tr>
+<tr>
+<td><code>poll()</code></td>
+<td><code>pollFirst()</code></td>
+<td>获取并删除队首元素，失败则返回<code>null</code></td>
+</tr>
+<tr>
+<td><code>element()</code></td>
+<td><code>getFirst()</code></td>
+<td>获取但不删除队首元素，失败则抛出异常</td>
+</tr>
+<tr>
+<td><code>peek()</code></td>
+<td><code>peekFirst()</code></td>
+<td>获取但不删除队首元素，失败则返回<code>null</code></td>
+</tr>
+</tbody></table>
+<p>下表列出了<em>Deque</em>与<em>Stack</em>对应的接口：</p>
+<table>
+<thead>
+<tr>
+<th>Stack Method</th>
+<th>Equivalent Deque Method</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>push(e)</code></td>
+<td><code>addFirst(e)</code></td>
+<td>向栈顶插入元素，失败则抛出异常</td>
+</tr>
+<tr>
+<td>无</td>
+<td><code>offerFirst(e)</code></td>
+<td>向栈顶插入元素，失败则返回<code>false</code></td>
+</tr>
+<tr>
+<td><code>pop()</code></td>
+<td><code>removeFirst()</code></td>
+<td>获取并删除栈顶元素，失败则抛出异常</td>
+</tr>
+<tr>
+<td>无</td>
+<td><code>pollFirst()</code></td>
+<td>获取并删除栈顶元素，失败则返回<code>null</code></td>
+</tr>
+<tr>
+<td><code>peek()</code></td>
+<td><code>peekFirst()</code></td>
+<td>获取但不删除栈顶元素，失败则抛出异常</td>
+</tr>
+<tr>
+<td>无</td>
+<td><code>peekFirst()</code></td>
+<td>获取但不删除栈顶元素，失败则返回<code>null</code></td>
+</tr>
+</tbody></table>
+<p>上面两个表共定义了<em>Deque</em>的12个接口。添加，删除，取值都有两套接口，它们功能相同，区别是对失败情况的处理不同。<strong>一套接口遇到失败就会抛出异常，另一套遇到失败会返回特殊值（<code>false</code>或<code>null</code>）</strong>。除非某种实现对容量有限制，大多数情况下，添加操作是不会失败的。<strong>虽然<em>Deque</em>的接口有12个之多，但无非就是对容器的两端进行操作，或添加，或删除，或查看</strong>。明白了这一点讲解起来就会非常简单。</p>
+<p><em>ArrayDeque</em>和<em>LinkedList</em>是<em>Deque</em>的两个通用实现，由于官方更推荐使用<em>AarryDeque</em>用作栈和队列，加之上一篇已经讲解过<em>LinkedList</em>，本文将着重讲解<em>ArrayDeque</em>的具体实现。</p>
+<p>从名字可以看出<em>ArrayDeque</em>底层通过数组实现，为了满足可以同时在数组两端插入或删除元素的需求，该数组还必须是循环的，即<strong>循环数组（circular array）</strong>，也就是说数组的任何一点都可能被看作起点或者终点。<em>ArrayDeque</em>是非线程安全的（not thread-safe），当多个线程同时使用的时候，需要程序员手动同步；另外，该容器不允许放入<code>null</code>元素。</p>
+<p><img src="/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144447803.png" alt="在这里插入图片描述"></p>
+<p>上图中我们看到，<strong><code>head</code>指向首端第一个有效元素，<code>tail</code>指向尾端第一个可以插入元素的空位</strong>。因为是循环数组，所以<code>head</code>不一定总等于0，<code>tail</code>也不一定总是比<code>head</code>大。</p>
+<h1 id="3-方法剖析"><a href="#3-方法剖析" class="headerlink" title="3. 方法剖析"></a>3. 方法剖析</h1><h2 id="3-1-addFirst"><a href="#3-1-addFirst" class="headerlink" title="3.1 addFirst()"></a>3.1 addFirst()</h2><p><code>addFirst(E e)</code>的作用是在<em>Deque</em>的首端插入元素，也就是在<code>head</code>的前面插入元素，在空间足够且下标没有越界的情况下，只需要将<code>elements[--head] = e</code>即可。</p>
+<p><img src="/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144512947.png" alt="在这里插入图片描述"></p>
+<p>实际需要考虑：1.空间是否够用，以及2.下标是否越界的问题。上图中，如果<code>head</code>为<code>0</code>之后接着调用<code>addFirst()</code>，虽然空余空间还够用，但<code>head</code>为<code>-1</code>，下标越界了。下列代码很好的解决了这两个问题。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//addFirst(E e)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addFirst</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>)<span class="comment">//不允许放入null</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    elements[head = (head - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)] = e;<span class="comment">//2.下标是否越界</span></span><br><span class="line">    <span class="keyword">if</span> (head == tail)<span class="comment">//1.空间是否够用</span></span><br><span class="line">        doubleCapacity();<span class="comment">//扩容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述代码我们看到，<strong>空间问题是在插入之后解决的</strong>，因为<code>tail</code>总是指向下一个可插入的空位，也就意味着<code>elements</code>数组至少有一个空位，所以插入元素的时候不用考虑空间问题。</p>
+<p>下标越界的处理解决起来非常简单，<code>head = (head - 1) &amp; (elements.length - 1)</code>就可以了，<strong>这段代码相当于取余，同时解决了<code>head</code>为负值的情况</strong>。因为<code>elements.length</code>必需是<code>2</code>的指数倍，<code>elements - 1</code>就是二进制低位全<code>1</code>，跟<code>head - 1</code>相与之后就起到了取模的作用，如果<code>head - 1</code>为负数（其实只可能是-1），则相当于对其取相对于<code>elements.length</code>的补码。</p>
+<p>下面再说说扩容函数<code>doubleCapacity()</code>，其逻辑是申请一个更大的数组（原数组的两倍），然后将原数组复制过去。过程如下图所示：</p>
+<p><img src="/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144543371.png" alt="在这里插入图片描述"></p>
+<p>图中我们看到，复制分两次进行，第一次复制<code>head</code>右边的元素，第二次复制<code>head</code>左边的元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//doubleCapacity()</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">doubleCapacity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">assert</span> head == tail;</span><br><span class="line">    <span class="keyword">int</span> p = head;</span><br><span class="line">    <span class="keyword">int</span> n = elements.length;</span><br><span class="line">    <span class="keyword">int</span> r = n - p; <span class="comment">// head右边元素的个数</span></span><br><span class="line">    <span class="keyword">int</span> newCapacity = n &lt;&lt; <span class="number">1</span>;<span class="comment">//原空间的2倍</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"Sorry, deque too big"</span>);</span><br><span class="line">    Object[] a = <span class="keyword">new</span> Object[newCapacity];</span><br><span class="line">    System.arraycopy(elements, p, a, <span class="number">0</span>, r);<span class="comment">//复制右半部分，对应上图中绿色部分</span></span><br><span class="line">    System.arraycopy(elements, <span class="number">0</span>, a, r, p);<span class="comment">//复制左半部分，对应上图中灰色部分</span></span><br><span class="line">    elements = (E[])a;</span><br><span class="line">    head = <span class="number">0</span>;</span><br><span class="line">    tail = n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-2-addLast"><a href="#3-2-addLast" class="headerlink" title="3.2 addLast()"></a>3.2 addLast()</h2><p><code>addLast(E e)</code>的作用是在<em>Deque</em>的尾端插入元素，也就是在<code>tail</code>的位置插入元素，由于<code>tail</code>总是指向下一个可以插入的空位，因此只需要<code>elements[tail] = e;</code>即可。插入完成后再检查空间，如果空间已经用光，则调用<code>doubleCapacity()</code>进行扩容。</p>
+<p><img src="/2020/01/05/（五）Java集合框架内幕-Stack-and-Queue/20190115144738982.png" alt="在这里插入图片描述"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addLast</span><span class="params">(E e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (e == <span class="keyword">null</span>)<span class="comment">//不允许放入null</span></span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</span><br><span class="line">    elements[tail] = e;<span class="comment">//赋值</span></span><br><span class="line">    <span class="keyword">if</span> ( (tail = (tail + <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)) == head)<span class="comment">//下标越界处理</span></span><br><span class="line">        doubleCapacity();<span class="comment">//扩容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下标越界处理方式<code>addFirt()</code>中已经讲过，不再赘述。</p>
+<h2 id="3-3-pollFirst"><a href="#3-3-pollFirst" class="headerlink" title="3.3 pollFirst()"></a>3.3 pollFirst()</h2><p><code>pollFirst()</code>的作用是删除并返回<em>Deque</em>首端元素，也即是<code>head</code>位置处的元素。如果容器不空，只需要直接返回<code>elements[head]</code>即可，当然还需要处理下标的问题。由于<code>ArrayDeque</code>中不允许放入<code>null</code>，当<code>elements[head] == null</code>时，意味着容器为空。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">pollFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    E result = elements[head];</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>)<span class="comment">//null值意味着deque为空</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    elements[h] = <span class="keyword">null</span>;<span class="comment">//let GC work</span></span><br><span class="line">    head = (head + <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>);<span class="comment">//下标越界处理</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-4-pollLast"><a href="#3-4-pollLast" class="headerlink" title="3.4 pollLast()"></a>3.4 pollLast()</h2><p><code>pollLast()</code>的作用是删除并返回<em>Deque</em>尾端元素，也即是<code>tail</code>位置前面的那个元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">pollLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t = (tail - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>);<span class="comment">//tail的上一个位置是最后一个元素</span></span><br><span class="line">    E result = elements[t];</span><br><span class="line">    <span class="keyword">if</span> (result == <span class="keyword">null</span>)<span class="comment">//null值意味着deque为空</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    elements[t] = <span class="keyword">null</span>;<span class="comment">//let GC work</span></span><br><span class="line">    tail = t;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-5-peekFirst"><a href="#3-5-peekFirst" class="headerlink" title="3.5 peekFirst()"></a>3.5 peekFirst()</h2><p><code>peekFirst()</code>的作用是返回但不删除<em>Deque</em>首端元素，也即是<code>head</code>位置处的元素，直接返回<code>elements[head]</code>即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">peekFirst</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> elements[head]; <span class="comment">// elements[head] is null if deque empty</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-6-peekLast"><a href="#3-6-peekLast" class="headerlink" title="3.6 peekLast()"></a>3.6 peekLast()</h2><p><code>peekLast()</code>的作用是返回但不删除<em>Deque</em>尾端元素，也即是<code>tail</code>位置前面的那个元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">peekLast</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> elements[(tail - <span class="number">1</span>) &amp; (elements.length - <span class="number">1</span>)];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://github.com/CarpenterLee/JCFInternals" target="_blank" rel="noopener">原文地址</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">------ 本文结束------</div>
+    
+</div>
+
+    
+    </div>
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Java/" rel="tag"><i class="fa fa-tag"></i> Java</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2020/01/05/（四）Java集合框架内幕-LinkedList/" rel="next" title="（四）Java集合框架内幕-LinkedList">
+                  <i class="fa fa-chevron-left"></i> （四）Java集合框架内幕-LinkedList
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2020/01/05/（六）Java集合框架内幕-TreeSet-and-TreeMap/" rel="prev" title="（六）Java集合框架内幕-TreeSet and TreeMap">
+                  （六）Java集合框架内幕-TreeSet and TreeMap <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-前言"><span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-总体介绍"><span class="nav-text">2. 总体介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-方法剖析"><span class="nav-text">3. 方法剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-addFirst"><span class="nav-text">3.1 addFirst()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-addLast"><span class="nav-text">3.2 addLast()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-pollFirst"><span class="nav-text">3.3 pollFirst()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-pollLast"><span class="nav-text">3.4 pollLast()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-5-peekFirst"><span class="nav-text">3.5 peekFirst()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-6-peekLast"><span class="nav-text">3.6 peekLast()</span></a></li></ol></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/kanieki.png"
+      alt="郑松涛">
+  <p class="site-author-name" itemprop="name">郑松涛</p>
+  <div class="site-description" itemprop="description">积跬步，至千里</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">144</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">45</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">27</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/ShotoZheng" title="GitHub &rarr; https://github.com/ShotoZheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:shotozheng@163.com" title="E-Mail &rarr; mailto:shotozheng@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郑松涛</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">810k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">12:17</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'd6TU9yIpopEhNQKUras2D3Nr-gzGzoHsz',
+    appKey: 'CJpUierMSXBHmTo6mJ8G1KO1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!--看板娘-->
+<script src="/live2d-widget/autoload.js"></script>
