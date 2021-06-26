@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="1. 介绍跨域：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。 同源策略：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：">
+  <meta name="description" content="¶ 1. 介绍 跨域：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。 同源策略：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：">
 <meta name="keywords" content="SpringBoot,Java,项目">
 <meta property="og:type" content="article">
 <meta property="og:title" content="cors 跨域问题处理">
 <meta property="og:url" content="https://ShotoZheng.github.io/2021/05/30/解决-cors-跨域问题/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="1. 介绍跨域：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。 同源策略：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：">
+<meta property="og:description" content="¶ 1. 介绍 跨域：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。 同源策略：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2021/05/30/解决-cors-跨域问题/image-20210530155150910.png">
 <meta property="og:image" content="https://shotozheng.github.io/2021/05/30/解决-cors-跨域问题/image-20210530155453524.png">
@@ -72,7 +72,7 @@
 <meta property="og:updated_time" content="2021-06-06T00:59:28.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cors 跨域问题处理">
-<meta name="twitter:description" content="1. 介绍跨域：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。 同源策略：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：">
+<meta name="twitter:description" content="¶ 1. 介绍 跨域：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。 同源策略：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：">
 <meta name="twitter:image" content="https://shotozheng.github.io/2021/05/30/解决-cors-跨域问题/image-20210530155150910.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2021/05/30/解决-cors-跨域问题/">
 
@@ -403,24 +403,28 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p><strong>跨域</strong>：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。</p>
+        <h2 id="1. 介绍"><a class="header-anchor" href="#1. 介绍" aria-hidden="true">¶</a> 1. 介绍</h2>
+<p><strong>跨域</strong>：指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器对 Javascript 施加的安全限制。</p>
 <p><strong>同源策略</strong>：是指协议，域名，端口都要相同，其中有一个不同都会产生跨域。具体场景如下所示：</p>
 <a id="more"></a>
-
 <p><img src="/2021/05/30/解决-cors-跨域问题/image-20210530155150910.png" alt></p>
 <p>跨域前端产生的报错如下所示，即从 <code>http://localhost:8001</code> 访问 <code>http://localhost:88/api/sys/login</code> 时被 CORS 策略阻止。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Access to XMLHttpRequest at <span class="string">'http://localhost:88/api/sys/login'</span> <span class="keyword">from</span> origin <span class="string">'http://localhost:8001'</span> has been blocked by CORS policy: Response to preflight request doesn<span class="string">'t pass access control check: No '</span>Access-Control-Allow-Origin<span class="string">' header is present on the requested resource.</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="2-跨域流程"><a href="#2-跨域流程" class="headerlink" title="2. 跨域流程"></a>2. 跨域流程</h2><p>如下图是跨域的流程，具体关于非简单请求概念和其他跨域相关内容，可访问官网：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS" target="_blank" rel="noopener">跨源资源共享（CORS） - HTTP | MDN (mozilla.org)</a></p>
+<h2 id="2. 跨域流程"><a class="header-anchor" href="#2. 跨域流程" aria-hidden="true">¶</a> 2. 跨域流程</h2>
+<p>如下图是跨域的流程，具体关于非简单请求概念和其他跨域相关内容，可访问官网：<a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/CORS" target="_blank" rel="noopener">跨源资源共享（CORS） - HTTP | MDN (mozilla.org)</a></p>
 <p><img src="/2021/05/30/解决-cors-跨域问题/image-20210530155453524.png" alt="跨域流程"></p>
-<h2 id="3-解决跨域方案"><a href="#3-解决跨域方案" class="headerlink" title="3. 解决跨域方案"></a>3. 解决跨域方案</h2><h3 id="3-1-nginx-配置同源"><a href="#3-1-nginx-配置同源" class="headerlink" title="3.1 nginx 配置同源"></a>3.1 nginx 配置同源</h3><p>根据产生跨域的原因，我们可以使用 nginx 对不同的请求配置成相同的地址和端口，然后在使用 nginx 内部进行请求转发，例如下图所示，这样可以有效解决跨域问题。</p>
+<h2 id="3. 解决跨域方案"><a class="header-anchor" href="#3. 解决跨域方案" aria-hidden="true">¶</a> 3. 解决跨域方案</h2>
+<h3 id="3.1 nginx 配置同源"><a class="header-anchor" href="#3.1 nginx 配置同源" aria-hidden="true">¶</a> 3.1 nginx 配置同源</h3>
+<p>根据产生跨域的原因，我们可以使用 nginx 对不同的请求配置成相同的地址和端口，然后在使用 nginx 内部进行请求转发，例如下图所示，这样可以有效解决跨域问题。</p>
 <p><img src="/2021/05/30/解决-cors-跨域问题/image-20210530155852430.png" alt></p>
-<h3 id="3-2-请求全局过滤"><a href="#3-2-请求全局过滤" class="headerlink" title="3.2 请求全局过滤"></a>3.2 请求全局过滤</h3><p>根据跨域流程我们知道浏览器首先会发送预检请求给服务器，然后根据服务器的响应是否允许实现跨域请求。因此我们只需要让服务器对指定的请求响应允许跨域请求即可，具体实现则是配置对应的响应头。常用的响应头如下所示：</p>
+<h3 id="3.2 请求全局过滤"><a class="header-anchor" href="#3.2 请求全局过滤" aria-hidden="true">¶</a> 3.2 请求全局过滤</h3>
+<p>根据跨域流程我们知道浏览器首先会发送预检请求给服务器，然后根据服务器的响应是否允许实现跨域请求。因此我们只需要让服务器对指定的请求响应允许跨域请求即可，具体实现则是配置对应的响应头。常用的响应头如下所示：</p>
 <ul>
 <li>Access-Control-Allow-Origin：支持哪些来源的请求跨域</li>
 <li>Access-Control-Allow-Methods：支持哪些方法跨域</li>
 <li>Access-Control-Allow-Credentials：跨域请求默认不包含 cookie，设置为 true 可以包含 cookie</li>
-<li>Access-Control-Expose-Headers：跨域请求暴露的字段<ul>
+<li>Access-Control-Expose-Headers：跨域请求暴露的字段
+<ul>
 <li>CORS请求时，XMLHttpRequest 对象的 getResponseHeader() 方法只能拿到6个基本字段： Cache-Control、Content-Language、Content-Type、Expires、Last-Modified、Pragma。如果想拿到其他字段，就必须在Access-Control-Expose-Headers里面指定。</li>
 </ul>
 </li>
@@ -428,8 +432,7 @@
 </ul>
 <p>下面以 SpringBoot 为示例，通过过滤器实现对请求进行跨域处理，具体代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 跨域处理配置</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zhengst</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GulimallCorsConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> CorsWebFilter <span class="title">corsWebFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        UrlBasedCorsConfigurationSource source = <span class="keyword">new</span> UrlBasedCorsConfigurationSource();</span><br><span class="line">        CorsConfiguration configuration = <span class="keyword">new</span> CorsConfiguration();</span><br><span class="line">        <span class="comment">// 允许暴露所有请求头</span></span><br><span class="line">        configuration.addAllowedHeader(<span class="string">"*"</span>);</span><br><span class="line">        <span class="comment">// 允许暴露所有请求方法</span></span><br><span class="line">        configuration.addAllowedMethod(<span class="string">"*"</span>);</span><br><span class="line">        <span class="comment">// 允许暴露所有请求来源</span></span><br><span class="line">        configuration.addAllowedOrigin(<span class="string">"*"</span>);</span><br><span class="line">        <span class="comment">// 支持请求包含 cookie</span></span><br><span class="line">        configuration.setAllowCredentials(<span class="keyword">true</span>);</span><br><span class="line">        source.registerCorsConfiguration(<span class="string">"/**"</span>, configuration);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> CorsWebFilter(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -533,7 +536,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-介绍"><span class="nav-text">1. 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-跨域流程"><span class="nav-text">2. 跨域流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-解决跨域方案"><span class="nav-text">3. 解决跨域方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-nginx-配置同源"><span class="nav-text">3.1 nginx 配置同源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-请求全局过滤"><span class="nav-text">3.2 请求全局过滤</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1. 介绍"><span class="nav-text">¶ 1. 介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2. 跨域流程"><span class="nav-text">¶ 2. 跨域流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3. 解决跨域方案"><span class="nav-text">¶ 3. 解决跨域方案</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3.1 nginx 配置同源"><span class="nav-text">¶ 3.1 nginx 配置同源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3.2 请求全局过滤"><span class="nav-text">¶ 3.2 请求全局过滤</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -631,12 +634,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

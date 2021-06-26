@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="1. System类System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 1.1 成员变量System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。">
+  <meta name="description" content="¶ 1. System类 System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 ¶ 1.1 成员变量 System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="System类与Runtime类">
 <meta property="og:url" content="https://ShotoZheng.github.io/2020/01/05/System类与Runtime类/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="1. System类System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 1.1 成员变量System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。">
+<meta property="og:description" content="¶ 1. System类 System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 ¶ 1.1 成员变量 System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2020/01/05/System类与Runtime类/20190112103715878.png">
 <meta property="og:image" content="https://shotozheng.github.io/2020/01/05/System类与Runtime类/20190112103815666.png">
@@ -72,7 +72,7 @@
 <meta property="og:updated_time" content="2020-01-05T02:02:04.078Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="System类与Runtime类">
-<meta name="twitter:description" content="1. System类System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 1.1 成员变量System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。">
+<meta name="twitter:description" content="¶ 1. System类 System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。 ¶ 1.1 成员变量 System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。">
 <meta name="twitter:image" content="https://shotozheng.github.io/2020/01/05/System类与Runtime类/20190112103715878.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2020/01/05/System类与Runtime类/">
 
@@ -395,63 +395,93 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-System类"><a href="#1-System类" class="headerlink" title="1. System类"></a>1. System类</h2><p>System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。</p>
-<h3 id="1-1-成员变量"><a href="#1-1-成员变量" class="headerlink" title="1.1 成员变量"></a>1.1 成员变量</h3><p>System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。</p>
+        <h2 id="1. System类"><a class="header-anchor" href="#1. System类" aria-hidden="true">¶</a> 1. System类</h2>
+<p>System类代表系统，系统级的很多属性和控制方法都放置在该类的内部。</p>
+<h3 id="1.1 成员变量"><a class="header-anchor" href="#1.1 成员变量" aria-hidden="true">¶</a> 1.1 成员变量</h3>
+<p>System类内部包含in、out和err三个成员变量，分别代表标准输入流(键盘输入)，标准输出流(显示器)和标准错误输出流(显示器)。</p>
 <a id="more"></a>
-
-<h4 id="1-1-1-out与err的区别"><a href="#1-1-1-out与err的区别" class="headerlink" title="1.1.1 out与err的区别"></a>1.1.1 out与err的区别</h4><ul>
-<li><p>System.out在JVM和操作系统都具有缓存功能，就是输出的数据不一定实时输出，有时候会积攒到一定数量才会输出；System.err会实时输出。</p>
+<h4 id="1.1.1 out与err的区别"><a class="header-anchor" href="#1.1.1 out与err的区别" aria-hidden="true">¶</a> 1.1.1 out与err的区别</h4>
+<ul>
+<li>
+<p>System.out在JVM和操作系统都具有缓存功能，就是输出的数据不一定实时输出，有时候会积攒到一定数量才会输出；System.err会实时输出。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">System.out.println(<span class="string">"out输出Java"</span>);</span><br><span class="line">System.err.println(<span class="string">"err输出Python"</span>);</span><br><span class="line">System.out.println(<span class="string">"out输出C++"</span>);</span><br></pre></td></tr></table></figure>
-
-<p>输出结果1：<br><img src="/2020/01/05/System类与Runtime类/20190112103715878.png" alt="在这里插入图片描述"><br>输出结果2：<br><img src="/2020/01/05/System类与Runtime类/20190112103815666.png" alt="在这里插入图片描述"><br>由于System.out不是实时输出的，所以直观地造成System.err输出位置的不确定性。</p>
+<p>输出结果1：<br>
+<img src="/2020/01/05/System类与Runtime类/20190112103715878.png" alt="在这里插入图片描述"><br>
+输出结果2：<br>
+<img src="/2020/01/05/System类与Runtime类/20190112103815666.png" alt="在这里插入图片描述"><br>
+由于System.out不是实时输出的，所以直观地造成System.err输出位置的不确定性。</p>
 </li>
-<li><p>如果使用了log4j的日志记录，System.err会被记入日志，System.out不会。</p>
+<li>
+<p>如果使用了log4j的日志记录，System.err会被记入日志，System.out不会。</p>
 </li>
-<li><p>System.out是<strong>通常输出信息的方式</strong>，System.err是用在显示错误信息或者system.out被重定向以后，需要立即让用户注意到的信息的输出</p>
+<li>
+<p>System.out是<strong>通常输出信息的方式</strong>，System.err是用在显示错误信息或者system.out被重定向以后，需要立即让用户注意到的信息的输出</p>
 </li>
 </ul>
-<h3 id="1-2-成员方法"><a href="#1-2-成员方法" class="headerlink" title="1.2 成员方法"></a>1.2 成员方法</h3><ol>
-<li><p><strong>static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</strong><br> 该方法的作用是数组拷贝，src为被拷贝的数组，srcPos为src要拷贝的初始位置，dest为目的数组，目的数组dest放置拷贝数据的初始位置，length为从src拷贝到的数据长度。</p>
+<h3 id="1.2 成员方法"><a class="header-anchor" href="#1.2 成员方法" aria-hidden="true">¶</a> 1.2 成员方法</h3>
+<ol>
+<li><strong>static void arraycopy(Object src, int srcPos, Object dest, int destPos, int length)</strong><br>
+该方法的作用是数组拷贝，src为被拷贝的数组，srcPos为src要拷贝的初始位置，dest为目的数组，目的数组dest放置拷贝数据的初始位置，length为从src拷贝到的数据长度。</li>
+</ol>
 <p>代码示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] srcArr = &#123;<span class="number">20</span>, <span class="number">23</span>, <span class="number">45</span>, <span class="number">12</span>, <span class="number">17</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] destArr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">System.arraycopy(srcArr, <span class="number">1</span>, destArr, <span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(Arrays.toString(srcArr));	<span class="comment">//[20, 23, 45, 12, 17, 8]</span></span><br><span class="line">System.out.println(Arrays.toString(destArr));	<span class="comment">//[0, 0, 23, 45, 0]</span></span><br></pre></td></tr></table></figure>
-
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span>[] srcArr = &#123;<span class="number">20</span>, <span class="number">23</span>, <span class="number">45</span>, <span class="number">12</span>, <span class="number">17</span>, <span class="number">8</span>&#125;;</span><br><span class="line"><span class="keyword">int</span>[] destArr = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line">System.arraycopy(srcArr, <span class="number">1</span>, destArr, <span class="number">2</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(Arrays.toString(srcArr));	<span class="comment">//[20, 23, 45, 12, 17, 8]</span></span><br><span class="line">System.out.println(Arrays.toString(destArr));	<span class="comment">//[0, 0, 23, 45, 0]</span></span><br></pre></td></tr></table></figure>
 <p>注意：执行拷贝之后，源数组不发生变化，而目的数组发生变化。</p>
+<ol start="2">
+<li>
+<p><strong>static long currentTimeMillis()</strong><br>
+该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数。</p>
 </li>
-<li><p><strong>static long currentTimeMillis()</strong><br> 该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数。</p>
+<li>
+<p><strong>static void exit(int status)</strong><br>
+该方法的作用是退出程序。其中status的值为<strong>0代表正常退出</strong>，<strong>非零代表异常退出</strong>。使用该方法可以在<strong>图形界面编程</strong>中实现程序的退出功能等。</p>
 </li>
-<li><p><strong>static void exit(int status)</strong><br> 该方法的作用是退出程序。其中status的值为<strong>0代表正常退出</strong>，<strong>非零代表异常退出</strong>。使用该方法可以在<strong>图形界面编程</strong>中实现程序的退出功能等。</p>
+<li>
+<p><strong>static void gc()</strong><br>
+请求系统进行垃圾回收。至于系统是否立刻回收，则取决于系统中垃圾回收算法的实现以及系统执行时的情况。</p>
 </li>
-<li><p><strong>static void gc()</strong><br> 请求系统进行垃圾回收。至于系统是否立刻回收，则取决于系统中垃圾回收算法的实现以及系统执行时的情况。</p>
+<li>
+<p><strong>static Properties getProperties()</strong><br>
+获取系统的属性信息，并存储到Properties集合中。Properties集合中存储的都是String类型的键值对。</p>
 </li>
-<li><p><strong>static Properties getProperties()</strong><br> 获取系统的属性信息，并存储到Properties集合中。Properties集合中存储的都是String类型的键值对。</p>
-</li>
-<li><p><strong>static String getProperty(String key)</strong><br> 获得系统中属性名为key的属性对应的值。系统中常见的属性名以及属性的作用如下表所示：<br> <img src="/2020/01/05/System类与Runtime类/2019011211032895.png" alt="在这里插入图片描述"><br> 代码示例</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取操作系统名称</span></span><br><span class="line">String osName = System.getProperty(<span class="string">"os.name"</span>);</span><br><span class="line"><span class="comment">//获取操作系统版本</span></span><br><span class="line">String osVersion = System.getenv(<span class="string">"os.version"</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"操作系统名："</span> + osName);	<span class="comment">//Windows 10</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"操作系统版本："</span> + osVersion);	<span class="comment">//null</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>static String setProperty(String key, String value)</strong><br> 给系统设置一些属性信息，这些信息是全局的，其他程序都可以使用</p>
+<li>
+<p><strong>static String getProperty(String key)</strong><br>
+获得系统中属性名为key的属性对应的值。系统中常见的属性名以及属性的作用如下表所示：<br>
+<img src="/2020/01/05/System类与Runtime类/2019011211032895.png" alt="在这里插入图片描述"><br>
+代码示例</p>
 </li>
 </ol>
-<h2 id="2-Runtime类"><a href="#2-Runtime类" class="headerlink" title="2. Runtime类"></a>2. Runtime类</h2><p>Runtime类封装了运行时的环境。每个 Java 应用程序都有一个 Runtime 类实例，使应用程序能够与其运行的环境相连接。另外该类无法创建对象。</p>
-<h3 id="2-1-常用方法"><a href="#2-1-常用方法" class="headerlink" title="2.1 常用方法"></a>2.1 常用方法</h3><ol>
-<li><strong>static Runtime getRuntime()</strong><br> 返回一个Runtime实例</li>
-<li><strong>Process exec(String command)</strong><br> 指定某个exe文件并返回该程序进程，参数command为本地exe文件路径。</li>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//获取操作系统名称</span></span><br><span class="line">String osName = System.getProperty(<span class="string">"os.name"</span>);</span><br><span class="line"><span class="comment">//获取操作系统版本</span></span><br><span class="line">String osVersion = System.getenv(<span class="string">"os.version"</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"操作系统名："</span> + osName);	<span class="comment">//Windows 10</span></span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"操作系统版本："</span> + osVersion);	<span class="comment">//null</span></span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li><strong>static String setProperty(String key, String value)</strong><br>
+给系统设置一些属性信息，这些信息是全局的，其他程序都可以使用</li>
+</ol>
+<h2 id="2. Runtime类"><a class="header-anchor" href="#2. Runtime类" aria-hidden="true">¶</a> 2. Runtime类</h2>
+<p>Runtime类封装了运行时的环境。每个 Java 应用程序都有一个 Runtime 类实例，使应用程序能够与其运行的环境相连接。另外该类无法创建对象。</p>
+<h3 id="2.1 常用方法"><a class="header-anchor" href="#2.1 常用方法" aria-hidden="true">¶</a> 2.1 常用方法</h3>
+<ol>
+<li><strong>static Runtime getRuntime()</strong><br>
+返回一个Runtime实例</li>
+<li><strong>Process exec(String command)</strong><br>
+指定某个exe文件并返回该程序进程，参数command为本地exe文件路径。</li>
 </ol>
 <p>代码示例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runtime runtime = Runtime.getRuntime();</span><br><span class="line">Process notepadProcess = runtime.exec(<span class="string">"C:\\\\Windows\\\\notepad.exe"</span>);<span class="comment">//打开记事本程序</span></span><br><span class="line"><span class="comment">//三秒后关闭该记事本进程</span></span><br><span class="line">Thread.sleep(<span class="number">3000</span>);</span><br><span class="line">notepadProcess.destroy();</span><br></pre></td></tr></table></figure>
-
 <ol start="3">
-<li><strong>long freeMemory()</strong><br> 返回Java虚拟机中的空闲内存量，以字节为单位</li>
-<li><strong>long maxMemory()</strong><br> 返回Java虚拟机试图使用的最大内存量</li>
-<li><strong>long totalMemory()</strong><br> 返回Java虚拟机中的内存总量</li>
+<li><strong>long freeMemory()</strong><br>
+返回Java虚拟机中的空闲内存量，以字节为单位</li>
+<li><strong>long maxMemory()</strong><br>
+返回Java虚拟机试图使用的最大内存量</li>
+<li><strong>long totalMemory()</strong><br>
+返回Java虚拟机中的内存总量</li>
 </ol>
 <p>代码示例</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Runtime runtime = Runtime.getRuntime();</span><br><span class="line"><span class="keyword">long</span> freeMemory = runtime.freeMemory();</span><br><span class="line"><span class="keyword">long</span> totalMemory = runtime.totalMemory();</span><br><span class="line"><span class="keyword">long</span> maxMemory = runtime.maxMemory();</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="string">"虚拟机空闲内存量："</span> + freeMemory);</span><br><span class="line">System.out.println(<span class="string">"虚拟机内存总量："</span> + totalMemory);</span><br><span class="line">System.out.println(<span class="string">"虚拟机试图使用的最大内存量："</span> + maxMemory);</span><br></pre></td></tr></table></figure>
-
 <p>运行结果</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">虚拟机空闲内存量：126930080</span><br><span class="line">虚拟机内存总量：128974848</span><br><span class="line">虚拟机试图使用的最大内存量：1890582528</span><br></pre></td></tr></table></figure>
-
-<p>参考文章：<br><a href="https://www.cnblogs.com/xuhuan/articles/1522212.html" target="_blank" rel="noopener">https://www.cnblogs.com/xuhuan/articles/1522212.html</a><br><a href="https://blog.csdn.net/zhuwei1035838807/article/details/79464603" target="_blank" rel="noopener">https://blog.csdn.net/zhuwei1035838807/article/details/79464603</a></p>
-
+<p>参考文章：<br>
+<a href="https://www.cnblogs.com/xuhuan/articles/1522212.html" target="_blank" rel="noopener">https://www.cnblogs.com/xuhuan/articles/1522212.html</a><br>
+<a href="https://blog.csdn.net/zhuwei1035838807/article/details/79464603" target="_blank" rel="noopener">https://blog.csdn.net/zhuwei1035838807/article/details/79464603</a></p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -551,7 +581,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-System类"><span class="nav-text">1. System类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-成员变量"><span class="nav-text">1.1 成员变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-out与err的区别"><span class="nav-text">1.1.1 out与err的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-成员方法"><span class="nav-text">1.2 成员方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Runtime类"><span class="nav-text">2. Runtime类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-常用方法"><span class="nav-text">2.1 常用方法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1. System类"><span class="nav-text">¶ 1. System类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1.1 成员变量"><span class="nav-text">¶ 1.1 成员变量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1.1.1 out与err的区别"><span class="nav-text">¶ 1.1.1 out与err的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1.2 成员方法"><span class="nav-text">¶ 1.2 成员方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2. Runtime类"><span class="nav-text">¶ 2. Runtime类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2.1 常用方法"><span class="nav-text">¶ 2.1 常用方法</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -649,12 +679,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

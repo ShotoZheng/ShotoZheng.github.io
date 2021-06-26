@@ -374,7 +374,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h2><p><img src="/2020/01/05/（二）MyBatis学习笔记-HelloWorld/20190117152522817.png" alt="在这里插入图片描述"><br>创建项目MyBatis_01，然后创建源码包config用来存放项目所用到的配置文件并首先创建日志文件log4j.xml。创建lib文件夹用来存放所需用到的Jar。</p>
+          <h2 id="1. 环境搭建"><a class="header-anchor" href="#1. 环境搭建" aria-hidden="true">¶</a> 1. 环境搭建</h2>
+<p><img src="/2020/01/05/（二）MyBatis学习笔记-HelloWorld/20190117152522817.png" alt="在这里插入图片描述"><br>
+创建项目MyBatis_01，然后创建源码包config用来存放项目所用到的配置文件并首先创建日志文件log4j.xml。创建lib文件夹用来存放所需用到的Jar。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -509,8 +511,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><strong>全局配置文件的元素顺序：</strong><br>properties, settings, typeAliases, typeHandlers, objectFactory, objectWrapperFactory, reflectorFactory, plugins, environments, databaseIdProvider, mappers</p>
-<h2 id="1-properties属性"><a href="#1-properties属性" class="headerlink" title="1. properties属性"></a>1. properties属性</h2><p>properties属性可以给系统配置一些运行参数，可以放在XML文件或者properties文件中。</p>
+          <p><strong>全局配置文件的元素顺序：</strong><br>
+properties, settings, typeAliases, typeHandlers, objectFactory, objectWrapperFactory, reflectorFactory, plugins, environments, databaseIdProvider, mappers</p>
+<h2 id="1. properties属性"><a class="header-anchor" href="#1. properties属性" aria-hidden="true">¶</a> 1. properties属性</h2>
+<p>properties属性可以给系统配置一些运行参数，可以放在XML文件或者properties文件中。</p>
 <p>在上一次学习笔记中，我们是将MySQL数据库的一些信息直接写在全局配置文件中，下面我们将这些数据库的一些信息抽取出来。</p>
 <p>首先编写properties文件dbconfig.properties：</p>
           <!--noindex-->
@@ -647,7 +651,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>下面显示的是元素的一些属性：<br><img src="/2020/01/05/（四）MyBatis学习笔记-MyBatis映射器/20190118113710970.png" alt="在这里插入图片描述"></p>
+          <p>下面显示的是元素的一些属性：<br>
+<img src="/2020/01/05/（四）MyBatis学习笔记-MyBatis映射器/20190118113710970.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -777,7 +782,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>9 分钟</span>
+              <span>10 分钟</span>
             </span>
           
 
@@ -790,37 +795,40 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>如果使用JDBC或者类似于Hibernate的其他框架，很多时候要根据需要去拼装SQL。比如我要查询角色，可以根据角色名称或者备注等信息查新，但是当我们不输入名称时原本使用名称做查询条件的情况就不适用了。而MaBatis提供了对SQL语句动态的组装能力，MyBatis 采用功能强大的基于 <strong>OGNL 表达式</strong>来简化操作。</p>
+          <h2 id="1. 概述"><a class="header-anchor" href="#1. 概述" aria-hidden="true">¶</a> 1. 概述</h2>
+<p>如果使用JDBC或者类似于Hibernate的其他框架，很多时候要根据需要去拼装SQL。比如我要查询角色，可以根据角色名称或者备注等信息查新，但是当我们不输入名称时原本使用名称做查询条件的情况就不适用了。而MaBatis提供了对SQL语句动态的组装能力，MyBatis 采用功能强大的基于 <strong>OGNL 表达式</strong>来简化操作。</p>
 <p>MyBatis的动态SQL包括以下几种元素，如下所示：</p>
 <table>
 <thead>
 <tr>
-<th align="left">元素</th>
-<th align="left">作用</th>
-<th align="left">备注</th>
+<th style="text-align:left">元素</th>
+<th style="text-align:left">作用</th>
+<th style="text-align:left">备注</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="left">if</td>
-<td align="left">判断语句</td>
-<td align="left">单条件复分支判断</td>
+<tbody>
+<tr>
+<td style="text-align:left">if</td>
+<td style="text-align:left">判断语句</td>
+<td style="text-align:left">单条件复分支判断</td>
 </tr>
 <tr>
-<td align="left">choose( when, otherwise)</td>
-<td align="left">相当于Java中的switch和case语句</td>
-<td align="left">多条件分支判断</td>
+<td style="text-align:left">choose( when, otherwise)</td>
+<td style="text-align:left">相当于Java中的switch和case语句</td>
+<td style="text-align:left">多条件分支判断</td>
 </tr>
 <tr>
-<td align="left">tirm ( where, set)</td>
-<td align="left">辅助元素，用于处理特定的SQL拼装问题，比如去掉多余的and、or等</td>
-<td align="left">用于处理SQL拼装问题</td>
+<td style="text-align:left">tirm ( where, set)</td>
+<td style="text-align:left">辅助元素，用于处理特定的SQL拼装问题，比如去掉多余的and、or等</td>
+<td style="text-align:left">用于处理SQL拼装问题</td>
 </tr>
 <tr>
-<td align="left">foreach</td>
-<td align="left">循环语句</td>
-<td align="left">在in语句等列举条件常用</td>
+<td style="text-align:left">foreach</td>
+<td style="text-align:left">循环语句</td>
+<td style="text-align:left">在in语句等列举条件常用</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -963,7 +971,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>在MyBatis中允许使用缓存，缓存一般都放置在可高速读/写的存储器上，比如服务器的内存，它能够有效提高系统的性能。因为数据库大部分场景下是把存储在磁盘上的数据索引出来。从硬件的角度分析，索引磁盘是一个较为缓慢的过程，读取内存或者高速缓存在处理器上得速度要比读取磁盘快得多。<strong>缓存就是将那些常用的数据放在内存中，以便将来使用，以此提高系统性能。</strong></p>
+          <h2 id="1. 概述"><a class="header-anchor" href="#1. 概述" aria-hidden="true">¶</a> 1. 概述</h2>
+<p>在MyBatis中允许使用缓存，缓存一般都放置在可高速读/写的存储器上，比如服务器的内存，它能够有效提高系统的性能。因为数据库大部分场景下是把存储在磁盘上的数据索引出来。从硬件的角度分析，索引磁盘是一个较为缓慢的过程，读取内存或者高速缓存在处理器上得速度要比读取磁盘快得多。<strong>缓存就是将那些常用的数据放在内存中，以便将来使用，以此提高系统性能。</strong></p>
 <p>MyBatis系统中默认定义了<strong>一级缓存和二级缓存</strong>两级缓存。</p>
 <ul>
 <li>默认情况下，只有一级缓存（SqlSession级别的缓存，也称为本地缓存）开启。</li>
@@ -1104,10 +1113,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h2><p>MyBatis Generator：简称MBG，是一个专门为MyBatis框架使用者定制的代码生成器，<strong>可以快速的根据表生成对应的映射文件，接口，以及bean类。支持基本的增删改查，以及QBC风格的条件查询。</strong>  但是表连接、存储过程等这些复杂sql的定义需要我们手工编写。</p>
+          <h2 id="1. 简介"><a class="header-anchor" href="#1. 简介" aria-hidden="true">¶</a> 1. 简介</h2>
+<p>MyBatis Generator：简称MBG，是一个专门为MyBatis框架使用者定制的代码生成器，<strong>可以快速的根据表生成对应的映射文件，接口，以及bean类。支持基本的增删改查，以及QBC风格的条件查询。</strong>  但是表连接、存储过程等这些复杂sql的定义需要我们手工编写。</p>
 <ul>
-<li><a href="http://www.mybatis.org/generator/" target="_blank" rel="noopener">官方文档地址</a> </li>
-<li><a href="https://github.com/mybatis/generator/releases" target="_blank" rel="noopener">官方工程地址</a> </li>
+<li><a href="http://www.mybatis.org/generator/" target="_blank" rel="noopener">官方文档地址</a></li>
+<li><a href="https://github.com/mybatis/generator/releases" target="_blank" rel="noopener">官方工程地址</a></li>
 </ul>
 <p>可以到官方工程地址中下载需要的Jar包。</p>
           <!--noindex-->
@@ -1244,7 +1254,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p><em>掌握MyBatis运行原理是学习MyBatis插件技术的基础。*</em>学习MyBatis运行原理，我们可以使用Debug一步一步地去理解。***</p>
+          <p><em>掌握MyBatis运行原理是学习MyBatis插件技术的基础。<strong>学习MyBatis运行原理，我们可以使用Debug一步一步地去理解。</strong></em></p>
 <p>下面分析<a href="https://blog.csdn.net/weixin_40374341/article/details/86527843" target="_blank" rel="noopener">笔记二</a>的HelloWorld工程，分为如下步骤分析MyBatis的运行原理。</p>
 <ul>
 <li>获取sqlSessionFactory对象</li>
@@ -1386,7 +1396,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-插件原理"><a href="#1-插件原理" class="headerlink" title="1. 插件原理"></a>1. 插件原理</h2><p>MyBatis在四大对象的创建过程中，都会有插件进行介入。 <strong>插件可以利用动态代理机制一层层的包装目标对象，而实现在目标对象执行目标方法之前进行拦截的效果</strong> 。MyBatis 允许在已映射语句执行过程中的某一点进行拦截调用。</p>
+          <h2 id="1. 插件原理"><a class="header-anchor" href="#1. 插件原理" aria-hidden="true">¶</a> 1. 插件原理</h2>
+<p>MyBatis在四大对象的创建过程中，都会有插件进行介入。 <strong>插件可以利用动态代理机制一层层的包装目标对象，而实现在目标对象执行目标方法之前进行拦截的效果</strong> 。MyBatis 允许在已映射语句执行过程中的某一点进行拦截调用。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1521,7 +1532,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-PageHelper分页插件"><a href="#1-PageHelper分页插件" class="headerlink" title="1. PageHelper分页插件"></a>1. PageHelper分页插件</h2><p>PageHelper是Mybatis通用的分页插件，更加详细地用法参考<a href="https://github.com/pagehelper/Mybatis-PageHelper" target="_blank" rel="noopener">官方文档</a>。</p>
+          <h2 id="1. PageHelper分页插件"><a class="header-anchor" href="#1. PageHelper分页插件" aria-hidden="true">¶</a> 1. PageHelper分页插件</h2>
+<p>PageHelper是Mybatis通用的分页插件，更加详细地用法参考<a href="https://github.com/pagehelper/Mybatis-PageHelper" target="_blank" rel="noopener">官方文档</a>。</p>
 <p>下面演示一下该插件的一些功能的用法。</p>
           <!--noindex-->
           
@@ -1634,7 +1646,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>568</span>
+              <span>573</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1657,7 +1669,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-MyBatis简介"><a href="#1-MyBatis简介" class="headerlink" title="1. MyBatis简介"></a>1. MyBatis简介</h2><ul>
+          <h2 id="1. MyBatis简介"><a class="header-anchor" href="#1. MyBatis简介" aria-hidden="true">¶</a> 1. MyBatis简介</h2>
+<ul>
 <li>MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架。</li>
 <li>MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集</li>
 <li>MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口和Java的POJO（Plain Old JavaObjects，普通的Java对象）映射成数据库中的记录.</li>
@@ -1825,12 +1838,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

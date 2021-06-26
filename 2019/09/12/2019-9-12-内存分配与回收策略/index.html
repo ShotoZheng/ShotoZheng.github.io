@@ -58,18 +58,18 @@
   };
 </script>
 
-  <meta name="description" content="一、Full GC 与 Minor GC Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。  Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scanvenge">
+  <meta name="description" content="¶ 一、Full GC 与 Minor GC   Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。   Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scan">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="内存分配与回收策略">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/09/12/2019-9-12-内存分配与回收策略/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="一、Full GC 与 Minor GC Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。  Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scanvenge">
+<meta property="og:description" content="¶ 一、Full GC 与 Minor GC   Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。   Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scan">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-01-01T13:11:45.176Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="内存分配与回收策略">
-<meta name="twitter:description" content="一、Full GC 与 Minor GC Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。  Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scanvenge">
+<meta name="twitter:description" content="¶ 一、Full GC 与 Minor GC   Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。   Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scan">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/09/12/2019-9-12-内存分配与回收策略/">
 
 
@@ -392,18 +392,21 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="一、Full-GC-与-Minor-GC"><a href="#一、Full-GC-与-Minor-GC" class="headerlink" title="一、Full GC 与 Minor GC"></a>一、Full GC 与 Minor GC</h3><ul>
-<li><p>Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。</p>
+        <h3 id="一、Full GC 与 Minor GC"><a class="header-anchor" href="#一、Full GC 与 Minor GC" aria-hidden="true">¶</a> 一、Full GC 与 Minor GC</h3>
+<ul>
+<li>
+<p>Minor GC 表示新生代GC：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生熄灭的特性，所以Minor GC会比较频繁，一般速度也比较快。</p>
 </li>
-<li><p>Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scanvenge收集器的收集策略里就有直接进行Full GC的策略选择过程）。Full GC的速度一般会比Minor GC慢10倍以上。</p>
+<li>
+<p>Full GC(Full GC/Major GC) 表示老年代GC：指发生在老年代的GC，出现了Full GC经常会伴随至少一次的Minor GC（但非绝对的，在Parallel Scanvenge收集器的收集策略里就有直接进行Full GC的策略选择过程）。Full GC的速度一般会比Minor GC慢10倍以上。</p>
 </li>
 </ul>
 <p>Java虚拟机的内存分配主要遵循对象优先分配在Eden区，大对象和长期存活的对象分配在老年代、动态对象年龄判定以及空间分配担保策略。下面我们分别介绍这些策略。</p>
 <a id="more"></a>
-<h3 id="二、对象优先在Eden分配"><a href="#二、对象优先在Eden分配" class="headerlink" title="二、对象优先在Eden分配"></a>二、对象优先在Eden分配</h3><p>一般小对象的内存分配过程为先分配给新生代的Eden区，当Eden区不够存放时，则发生一次Minor GC，然后检查survivor区是否够存放一些小对象，能够则进行内存分配，不够则需在Minor GC时将一些对象分配到老年代中。</p>
+<h3 id="二、对象优先在Eden分配"><a class="header-anchor" href="#二、对象优先在Eden分配" aria-hidden="true">¶</a> 二、对象优先在Eden分配</h3>
+<p>一般小对象的内存分配过程为先分配给新生代的Eden区，当Eden区不够存放时，则发生一次Minor GC，然后检查survivor区是否够存放一些小对象，能够则进行内存分配，不够则需在Minor GC时将一些对象分配到老年代中。</p>
 <p>新生代的Minor GC 代码测试样例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment">     * -XX:SurvivorRatio=8 -XX:+UseSerialGC</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数解释：</span></span><br><span class="line"><span class="comment">     * -verbose:gc -XX:+PrintGCDetails 输出虚拟机中GC的详细信息</span></span><br><span class="line"><span class="comment">     * -Xms20M -Xmx20M 表示限制堆大小为20M, 且不能扩展</span></span><br><span class="line"><span class="comment">     * -Xmn10M 表示新生代占10M</span></span><br><span class="line"><span class="comment">     * -XX:SurvivorRatio=8 表示Eden区占新生代的80%，其他两个survivor各占10%</span></span><br><span class="line"><span class="comment">     * -XX:+UseSerialGC 表示虚拟机使用Serial收集器</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testAllocation</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] allocation1, allocation2, allocation3, allocation4;</span><br><span class="line">        allocation1 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span> * _1MB];</span><br><span class="line">        allocation2 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span> * _1MB];</span><br><span class="line">        allocation3 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">2</span> * _1MB];</span><br><span class="line">        allocation4 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _1MB];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        testAllocation();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果：</p>
 <pre><code>[GC (Allocation Failure) [DefNew: 7292K-&gt;562K(9216K), 0.0252599 secs] 7292K-&gt;6706K(19456K), 0.0844557 secs] [Times: user=0.00 sys=0.01, real=0.09 secs]
 Heap
@@ -414,12 +417,14 @@ Heap
  tenured generation   total 10240K, used 6144K [0x00000000ff600000, 0x0000000100000000, 0x0000000100000000)
    the space 10240K,  60% used [0x00000000ff600000, 0x00000000ffc00030, 0x00000000ffc00200, 0x0000000100000000)
  Metaspace       used 2714K, capacity 4486K, committed 4864K, reserved 1056768K
-  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K</code></pre><p>结果分析：</p>
+  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K
+</code></pre>
+<p>结果分析：</p>
 <p>Eden区的内存大小为8M，allocation1，allocation2，allocation3起初都分配在Eden区，共占6M。allocation4需要占用内存4M，因为Eden区不够存放allocation4且survivor区只有1M也不够存放其余三个对象。故老年代为allocation1，allocation2，allocation3这三个对象进行分配担保，也就是将它们分配到老年代中，然后Eden则存放4M的allocation4。所以最后我们可以发现Eden区大致占了50%的空间，老年代大致占了60%空间。</p>
-<h3 id="三、大对象直接进入老年代"><a href="#三、大对象直接进入老年代" class="headerlink" title="三、大对象直接进入老年代"></a>三、大对象直接进入老年代</h3><p>所谓的大对象是指需要大量连续的内存空间的Java对象，最典型的大对象就是那种很长的字符串以及数组，我们可以用运行参数-XX:PretenureSizeThreshold来具体指定多大的对象才是大对象。需要注意的是PretenureSizeThreshold参数只对Serial和ParNew两款收集器有效。</p>
+<h3 id="三、大对象直接进入老年代"><a class="header-anchor" href="#三、大对象直接进入老年代" aria-hidden="true">¶</a> 三、大对象直接进入老年代</h3>
+<p>所谓的大对象是指需要大量连续的内存空间的Java对象，最典型的大对象就是那种很长的字符串以及数组，我们可以用运行参数-XX:PretenureSizeThreshold来具体指定多大的对象才是大对象。需要注意的是PretenureSizeThreshold参数只对Serial和ParNew两款收集器有效。</p>
 <p>下面演示一下测试示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数：-verbose:gc -XX:+PrintGCDetails -Xms20M -Xmx20M -Xmn10M</span></span><br><span class="line"><span class="comment">     * -XX:SurvivorRatio=8 -XX:PretenureSizeThreshold=3M -XX:+UseSerialGC</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数解释：</span></span><br><span class="line"><span class="comment">     * -XX:PretenureSizeThreshold=3M 表示大于3M的对象为大对象，会直接存储在老年代中</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] allocation = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _1MB];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果</p>
 <pre><code>Heap
  def new generation   total 9216K, used 1311K [0x00000000fec00000, 0x00000000ff600000, 0x00000000ff600000)
@@ -429,12 +434,14 @@ Heap
  tenured generation   total 10240K, used 4096K [0x00000000ff600000, 0x0000000100000000, 0x0000000100000000)
    the space 10240K,  40% used [0x00000000ff600000, 0x00000000ffa00010, 0x00000000ffa00200, 0x0000000100000000)
  Metaspace       used 2716K, capacity 4486K, committed 4864K, reserved 1056768K
-  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K</code></pre><p>结果分析</p>
+  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K
+</code></pre>
+<p>结果分析</p>
 <p>运行参数中使用了-XX:PretenureSizeThreshold=3M  表示大于3M的大对象直接存储在老年代中，allocation的大小为4M故直接存储在老年代中，占老年代的40%的空间大小。</p>
-<h3 id="四、长期存活的对象进入老年代"><a href="#四、长期存活的对象进入老年代" class="headerlink" title="四、长期存活的对象进入老年代"></a>四、长期存活的对象进入老年代</h3><p>如果对象在Eden区出生并经历过第一次Minor GC 后仍然存活，并且能被Survivor容纳的话，那么将被移动到Survivor区中，并且对象年龄设为1。对象在Survivor区中每“熬过”一次Minor GC，年龄就增加1岁，当它的年龄增加到15岁（默认）时，就将会进入到老年代中。 对象进入老年代的阈值，可以通过参数-XX:MaxTenuringThreshold来设置。</p>
+<h3 id="四、长期存活的对象进入老年代"><a class="header-anchor" href="#四、长期存活的对象进入老年代" aria-hidden="true">¶</a> 四、长期存活的对象进入老年代</h3>
+<p>如果对象在Eden区出生并经历过第一次Minor GC 后仍然存活，并且能被Survivor容纳的话，那么将被移动到Survivor区中，并且对象年龄设为1。对象在Survivor区中每“熬过”一次Minor GC，年龄就增加1岁，当它的年龄增加到15岁（默认）时，就将会进入到老年代中。 对象进入老年代的阈值，可以通过参数-XX:MaxTenuringThreshold来设置。</p>
 <p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span>  <span class="keyword">final</span> <span class="keyword">int</span> _1MB = <span class="number">1024</span> * <span class="number">1024</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数：-verbose:gc -Xms20M -Xmx20M -Xmn10M -XX:+PrintGCDetails</span></span><br><span class="line"><span class="comment">     * -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=1 -XX:+UseSerialGC</span></span><br><span class="line"><span class="comment">     * -XX:+PrintTenuringDistribution</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数解释：</span></span><br><span class="line"><span class="comment">     * -XX:MaxTenuringThreshold=1 设置对象的最大年龄为1</span></span><br><span class="line"><span class="comment">     * -XX:+PrintTenuringDistribution 打印对象的年龄信息等</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testTenuringThreshold</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] allocation1, allocation2, allocation3, allocation4;</span><br><span class="line">        <span class="comment">//allocation1 首先进入Eden区，然后Minor GC后进入Survivor区年龄+1,</span></span><br><span class="line">        <span class="comment">//因为年龄最大为1，所以又从Survivor区进入老年代</span></span><br><span class="line">        allocation1 = <span class="keyword">new</span> <span class="keyword">byte</span>[_1MB / <span class="number">4</span>];</span><br><span class="line">        allocation2 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _1MB];    <span class="comment">//首先进入Eden区，Minor GC后从Eden区进入老年代</span></span><br><span class="line">        allocation3 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _1MB];    <span class="comment">//Minor GC后进入Eden区</span></span><br><span class="line">        allocation3 = <span class="keyword">null</span>;</span><br><span class="line">        allocation3 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _1MB];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        testTenuringThreshold();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>运行结果</p>
 <pre><code>[GC (Allocation Failure) [DefNew
 Desired survivor size 524288 bytes, new threshold 1 (max 1)
@@ -451,11 +458,13 @@ Heap
  tenured generation   total 10240K, used 4913K [0x00000000ff600000, 0x0000000100000000, 0x0000000100000000)
    the space 10240K,  47% used [0x00000000ff600000, 0x00000000ffacc570, 0x00000000ffacc600, 0x0000000100000000)
  Metaspace       used 2714K, capacity 4486K, committed 4864K, reserved 1056768K
-  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K</code></pre><p>由上面的结果可以发现，Eden区最终占了约50%的空间，也就是allocation3 对象所占空间的大小。另外也可以发现老年代最终占了47%的空间，这部分的空间主要是allocation1 和allocation2两个对象所占据的空间大小。</p>
-<h3 id="五、动态对象年龄判定"><a href="#五、动态对象年龄判定" class="headerlink" title="五、动态对象年龄判定"></a>五、动态对象年龄判定</h3><p>为了能更好的适应不同程序的内存状况，虚拟机并不是永远的要求对象的年龄达到了MaxTenuringThreshold才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小的总和大于等于Survivor空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄。</p>
+  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K
+</code></pre>
+<p>由上面的结果可以发现，Eden区最终占了约50%的空间，也就是allocation3 对象所占空间的大小。另外也可以发现老年代最终占了47%的空间，这部分的空间主要是allocation1 和allocation2两个对象所占据的空间大小。</p>
+<h3 id="五、动态对象年龄判定"><a class="header-anchor" href="#五、动态对象年龄判定" aria-hidden="true">¶</a> 五、动态对象年龄判定</h3>
+<p>为了能更好的适应不同程序的内存状况，虚拟机并不是永远的要求对象的年龄达到了MaxTenuringThreshold才能晋升老年代，如果在Survivor空间中相同年龄所有对象大小的总和大于等于Survivor空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无须等到MaxTenuringThreshold中要求的年龄。</p>
 <p>代码示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> _10MB = <span class="number">1024</span> * <span class="number">1024</span> * <span class="number">10</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * VM参数：-verbose:gc -Xms200M -Xmx200M -Xmn100M -XX:+PrintGCDetails -XX:SurvivorRatio=8 -XX:MaxTenuringThreshold=15</span></span><br><span class="line"><span class="comment">     * -XX:+PrintTenuringDistribution -XX:+UseSerialGC</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">testTenuringThreshold</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">byte</span>[] allocation1, allocation2, allocation3, allocation4;</span><br><span class="line">        allocation1 = <span class="keyword">new</span> <span class="keyword">byte</span>[_10MB / <span class="number">4</span>];   <span class="comment">// allocation1+allocation2大于等于survivo空间一半，且年龄相同</span></span><br><span class="line">        allocation2 = <span class="keyword">new</span> <span class="keyword">byte</span>[_10MB / <span class="number">4</span>];</span><br><span class="line">        allocation3 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _10MB];</span><br><span class="line">        allocation4 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _10MB];</span><br><span class="line">        allocation4 = <span class="keyword">null</span>;</span><br><span class="line">        allocation4 = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">4</span> * _10MB];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        testTenuringThreshold();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>代码分析：</p>
 <p>代码运行到allocation4的首次创建时由于新生代内存不够分配所以会发生一次Minor GC，此时会将对象allocation1，allocation2存放进Survivor中，将allocation3存放进老年代中。第二次创建allocation4时再次发生一次Minor GC，因为allocation1和allocation2为相同年龄且大小之和大于等于Survivor空间的一半，故将俩放进老年代中。</p>
 <p>下面是运行输出的结果：</p>
@@ -474,24 +483,32 @@ Heap
  tenured generation   total 102400K, used 46641K [0x00000000f9c00000, 0x0000000100000000, 0x0000000100000000)
    the space 102400K,  45% used [0x00000000f9c00000, 0x00000000fc98c580, 0x00000000fc98c600, 0x0000000100000000)
  Metaspace       used 2717K, capacity 4486K, committed 4864K, reserved 1056768K
-  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K</code></pre><p>由运行输出结果可以发现，Eden区所占的内存空间大小约占51%，也就是allocation4所占Eden空间大小的比例。老年代所占的空间大小为45%，也就是allocation1，allocation2和allocation3三个对象占总的老年代空间比例的大小。</p>
-<h3 id="六、空间分配担保"><a href="#六、空间分配担保" class="headerlink" title="六、空间分配担保"></a>六、空间分配担保</h3><p>在发生Minor GC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，因为进行空间分配担保时会将新生代的所有对象往老年代挪，那么就需要先确定老年代的空间是否足够存储这些对象。如果这个条件成立，那么Minor GC可以确保是安全的。如果不成立，则虚拟机会查看HandlePromotionFailure参数设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试着进行一次Minor GC，尽管这次Minor GC是有风险的；如果小于，或者HandlePromotionFailure参数设置不允许冒险，那这时就要改为进行一次Full GC。</p>
+  class space    used 302K, capacity 386K, committed 512K, reserved 1048576K
+</code></pre>
+<p>由运行输出结果可以发现，Eden区所占的内存空间大小约占51%，也就是allocation4所占Eden空间大小的比例。老年代所占的空间大小为45%，也就是allocation1，allocation2和allocation3三个对象占总的老年代空间比例的大小。</p>
+<h3 id="六、空间分配担保"><a class="header-anchor" href="#六、空间分配担保" aria-hidden="true">¶</a> 六、空间分配担保</h3>
+<p>在发生Minor GC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，因为进行空间分配担保时会将新生代的所有对象往老年代挪，那么就需要先确定老年代的空间是否足够存储这些对象。如果这个条件成立，那么Minor GC可以确保是安全的。如果不成立，则虚拟机会查看HandlePromotionFailure参数设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试着进行一次Minor GC，尽管这次Minor GC是有风险的；如果小于，或者HandlePromotionFailure参数设置不允许冒险，那这时就要改为进行一次Full GC。</p>
 <p>下面解释一下“冒险”是冒了什么风险，前面提到过，新生代使用复制收集算法，但为了内存利用率，只使用其中一个Survivor空间来作为轮换备份，因此当出现大量对象在Minor GC后仍然存活的情况（最极端的情况就是内存回收后新生代中所有对象都存活），就需要老年代进行分配担保，把Survivor无法容纳的对象直接进入老年代。与生活中的贷款担保类似，老年代要进行这样的担保，前提是老年代本身还有容纳这些对象的剩余空间。新生代在Minor GC后一共有多少对象会活下来在实际完成内存回收之前是无法明确知道的，所以只好取之前每一次回收晋升到老年代对象容量的平均大小值作为经验值，与老年代的剩余空间进行比较，决定是否进行Full GC来让老年代腾出更多空间。</p>
 <p>取平均值进行比较其实仍然是一种动态概率的手段，也就是说，如果某次Minor GC存活后的对象突增，远远高于平均值的话，依然会导致担保失败（Handle Promotion Failure）。如果出现了HandlePromotionFailure失败，那就只好在失败后重新发起一次Full GC。虽然担保失败时绕的圈子是最大的，但大部分情况下都还是会将HandlePromotionFailure开关打开，避免Full GC过于频繁。</p>
 <p>我们可以使用如下运行参数来设置HandlePromotionFailure开关：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-XX:-HandlePromotionFailure // 关闭</span><br><span class="line">-XX:+HandlePromotionFailure // 打开</span><br></pre></td></tr></table></figure>
-
 <p>其实我们在前面的事例中已经涉及到许多空间分配担保的例子，这里将不再赘述。</p>
-<h3 id="七、Full-GC-的触发条件"><a href="#七、Full-GC-的触发条件" class="headerlink" title="七、Full GC 的触发条件"></a>七、Full GC 的触发条件</h3><p>对于 Minor GC，其触发条件非常简单，当 Eden 空间满时，就将触发一次 Minor GC。而 Full GC 则相对复杂，有以下条件：</p>
-<h6 id="1-调用-System-gc"><a href="#1-调用-System-gc" class="headerlink" title="1. 调用 System.gc()"></a>1. 调用 System.gc()</h6><p>只是建议虚拟机执行 Full GC，但是虚拟机不一定真正去执行。不建议使用这种方式，而是让虚拟机管理内存。</p>
-<h6 id="2-老年代空间不足"><a href="#2-老年代空间不足" class="headerlink" title="2. 老年代空间不足"></a>2. 老年代空间不足</h6><p>老年代空间不足的常见场景为前文所讲的大对象直接进入老年代、长期存活的对象进入老年代等。</p>
+<h3 id="七、Full GC 的触发条件"><a class="header-anchor" href="#七、Full GC 的触发条件" aria-hidden="true">¶</a> 七、Full GC 的触发条件</h3>
+<p>对于 Minor GC，其触发条件非常简单，当 Eden 空间满时，就将触发一次 Minor GC。而 Full GC 则相对复杂，有以下条件：</p>
+<h6 id="1. 调用 System.gc()"><a class="header-anchor" href="#1. 调用 System.gc()" aria-hidden="true">¶</a> 1. 调用 System.gc()</h6>
+<p>只是建议虚拟机执行 Full GC，但是虚拟机不一定真正去执行。不建议使用这种方式，而是让虚拟机管理内存。</p>
+<h6 id="2. 老年代空间不足"><a class="header-anchor" href="#2. 老年代空间不足" aria-hidden="true">¶</a> 2. 老年代空间不足</h6>
+<p>老年代空间不足的常见场景为前文所讲的大对象直接进入老年代、长期存活的对象进入老年代等。</p>
 <p>为了避免以上原因引起的 Full GC，应当尽量不要创建过大的对象以及数组。除此之外，可以通过 -Xmn 虚拟机参数调大新生代的大小，让对象尽量在新生代被回收掉，不进入老年代。还可以通过 -XX:MaxTenuringThreshold 调大对象进入老年代的年龄，让对象在新生代多存活一段时间。</p>
-<h6 id="3-空间分配担保失败"><a href="#3-空间分配担保失败" class="headerlink" title="3. 空间分配担保失败"></a>3. 空间分配担保失败</h6><p>使用复制算法的 Minor GC 需要老年代的内存空间作担保，如果担保失败会执行一次 Full GC。具体内容请参考上面的内容。</p>
-<h6 id="4-JDK-1-7-及以前的永久代空间不足"><a href="#4-JDK-1-7-及以前的永久代空间不足" class="headerlink" title="4. JDK 1.7 及以前的永久代空间不足"></a>4. JDK 1.7 及以前的永久代空间不足</h6><p>在 JDK 1.7 及以前，HotSpot 虚拟机中的方法区是用永久代实现的，永久代中存放的为一些 Class 的信息、常量、静态变量等数据。</p>
+<h6 id="3. 空间分配担保失败"><a class="header-anchor" href="#3. 空间分配担保失败" aria-hidden="true">¶</a> 3. 空间分配担保失败</h6>
+<p>使用复制算法的 Minor GC 需要老年代的内存空间作担保，如果担保失败会执行一次 Full GC。具体内容请参考上面的内容。</p>
+<h6 id="4. JDK 1.7 及以前的永久代空间不足"><a class="header-anchor" href="#4. JDK 1.7 及以前的永久代空间不足" aria-hidden="true">¶</a> 4. JDK 1.7 及以前的永久代空间不足</h6>
+<p>在 JDK 1.7 及以前，HotSpot 虚拟机中的方法区是用永久代实现的，永久代中存放的为一些 Class 的信息、常量、静态变量等数据。</p>
 <p>当系统中要加载的类、反射的类和调用的方法较多时，永久代可能会被占满，在未配置为采用 CMS GC 的情况下也会执行 Full GC。如果经过 Full GC 仍然回收不了，那么虚拟机会抛出 java.lang.OutOfMemoryError。</p>
 <p>为避免以上原因引起的 Full GC，可采用的方法为增大永久代空间或转为使用 CMS GC。</p>
-<h6 id="5-Concurrent-Mode-Failure"><a href="#5-Concurrent-Mode-Failure" class="headerlink" title="5. Concurrent Mode Failure"></a>5. Concurrent Mode Failure</h6><p>执行 CMS GC 的过程中同时有对象要放入老年代，而此时老年代空间不足（可能是 GC 过程中浮动垃圾过多导致暂时性的空间不足），便会报 Concurrent Mode Failure 错误，并触发 Full GC。</p>
-
+<h6 id="5. Concurrent Mode Failure"><a class="header-anchor" href="#5. Concurrent Mode Failure" aria-hidden="true">¶</a> 5. Concurrent Mode Failure</h6>
+<p>执行 CMS GC 的过程中同时有对象要放入老年代，而此时老年代空间不足（可能是 GC 过程中浮动垃圾过多导致暂时性的空间不足），便会报 Concurrent Mode Failure 错误，并触发 Full GC。</p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -527,8 +544,8 @@ Heap
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/12/2019-9-12-垃圾回收算法/" rel="next" title="垃圾回收算法">
-                  <i class="fa fa-chevron-left"></i> 垃圾回收算法
+                <a href="/2019/09/12/2019-9-12-垃圾收集器/" rel="next" title="垃圾收集器">
+                  <i class="fa fa-chevron-left"></i> 垃圾收集器
                 </a>
               
             </div>
@@ -591,7 +608,7 @@ Heap
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Full-GC-与-Minor-GC"><span class="nav-text">一、Full GC 与 Minor GC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、对象优先在Eden分配"><span class="nav-text">二、对象优先在Eden分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、大对象直接进入老年代"><span class="nav-text">三、大对象直接进入老年代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、长期存活的对象进入老年代"><span class="nav-text">四、长期存活的对象进入老年代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、动态对象年龄判定"><span class="nav-text">五、动态对象年龄判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、空间分配担保"><span class="nav-text">六、空间分配担保</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、Full-GC-的触发条件"><span class="nav-text">七、Full GC 的触发条件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-调用-System-gc"><span class="nav-text">1. 调用 System.gc()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-老年代空间不足"><span class="nav-text">2. 老年代空间不足</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-空间分配担保失败"><span class="nav-text">3. 空间分配担保失败</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-JDK-1-7-及以前的永久代空间不足"><span class="nav-text">4. JDK 1.7 及以前的永久代空间不足</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-Concurrent-Mode-Failure"><span class="nav-text">5. Concurrent Mode Failure</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Full GC 与 Minor GC"><span class="nav-text">¶ 一、Full GC 与 Minor GC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、对象优先在Eden分配"><span class="nav-text">¶ 二、对象优先在Eden分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、大对象直接进入老年代"><span class="nav-text">¶ 三、大对象直接进入老年代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、长期存活的对象进入老年代"><span class="nav-text">¶ 四、长期存活的对象进入老年代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、动态对象年龄判定"><span class="nav-text">¶ 五、动态对象年龄判定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、空间分配担保"><span class="nav-text">¶ 六、空间分配担保</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、Full GC 的触发条件"><span class="nav-text">¶ 七、Full GC 的触发条件</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1. 调用 System.gc()"><span class="nav-text">¶ 1. 调用 System.gc()</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2. 老年代空间不足"><span class="nav-text">¶ 2. 老年代空间不足</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3. 空间分配担保失败"><span class="nav-text">¶ 3. 空间分配担保失败</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4. JDK 1.7 及以前的永久代空间不足"><span class="nav-text">¶ 4. JDK 1.7 及以前的永久代空间不足</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5. Concurrent Mode Failure"><span class="nav-text">¶ 5. Concurrent Mode Failure</span></a></li></ol></li></ol></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -689,12 +706,12 @@ Heap
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

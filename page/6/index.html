@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>9.9k</span>
+              <span>10k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -374,7 +374,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-数据模型处理"><a href="#1-数据模型处理" class="headerlink" title="1. 数据模型处理"></a>1. 数据模型处理</h1><p>Spring MVC 提供了以下几种途径输出模型数据：</p>
+          <h1 id="1. 数据模型处理"><a class="header-anchor" href="#1. 数据模型处理" aria-hidden="true">¶</a> 1. 数据模型处理</h1>
+<p>Spring MVC 提供了以下几种途径输出模型数据：</p>
 <ul>
 <li>ModelAndView: 处理方法返回值类型为 ModelAndView时, 方法体即可通过该对象添加模型数据；</li>
 <li>Map 及 Model: 入参为org.springframework.ui.Model、org.springframework.ui.ModelMap 或 java.uti.Map 时，处理方法返回时，Map中的数据会自动添加到模型中；</li>
@@ -492,7 +493,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>13k</span>
+              <span>14k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -515,7 +516,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-数据转换"><a href="#1-数据转换" class="headerlink" title="1. 数据转换"></a>1. 数据转换</h1><h2 id="1-1-默认数据转换器"><a href="#1-1-默认数据转换器" class="headerlink" title="1.1 默认数据转换器"></a>1.1 默认数据转换器</h2><p>Spring MVC 上下文中内建了很多转换器，可完成大多数 Java 类型的转换工作。</p>
+          <h1 id="1. 数据转换"><a class="header-anchor" href="#1. 数据转换" aria-hidden="true">¶</a> 1. 数据转换</h1>
+<h2 id="1.1 默认数据转换器"><a class="header-anchor" href="#1.1 默认数据转换器" aria-hidden="true">¶</a> 1.1 默认数据转换器</h2>
+<p>Spring MVC 上下文中内建了很多转换器，可完成大多数 Java 类型的转换工作。</p>
 <p>比如我们在页面的文本框上输入了整数或者是布尔值的数据，虽然在文本框的格式依旧是字符串，但是SpringMVC支持将这些数据转成对应的格式。</p>
 <p>比如现在有如下的页面代码如下所示：</p>
           <!--noindex-->
@@ -652,7 +655,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-创建数据库表"><a href="#1-创建数据库表" class="headerlink" title="1.  创建数据库表"></a>1.  创建数据库表</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tbl_employee (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">  last_name <span class="built_in">varchar</span>(<span class="number">255</span>) ,</span><br><span class="line">  gender <span class="built_in">char</span>(<span class="number">1</span>) ,</span><br><span class="line">  email <span class="built_in">varchar</span>(<span class="number">255</span>) </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+          <h3 id="1.  创建数据库表"><a class="header-anchor" href="#1.  创建数据库表" aria-hidden="true">¶</a> 1.  创建数据库表</h3>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> tbl_employee (</span><br><span class="line">  <span class="keyword">id</span> <span class="built_in">int</span>(<span class="number">11</span>) PRIMARY <span class="keyword">KEY</span> AUTO_INCREMENT,</span><br><span class="line">  last_name <span class="built_in">varchar</span>(<span class="number">255</span>) ,</span><br><span class="line">  gender <span class="built_in">char</span>(<span class="number">1</span>) ,</span><br><span class="line">  email <span class="built_in">varchar</span>(<span class="number">255</span>) </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -764,7 +768,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>9.7k</span>
+              <span>9.6k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -787,8 +791,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-事务"><a href="#1-事务" class="headerlink" title="1. 事务"></a>1. 事务</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>事务就是逻辑上的一组操作，组成这组操作的各个单元，要么全都成功，要么全都失败。</p>
-<h2 id="1-2-特性"><a href="#1-2-特性" class="headerlink" title="1.2 特性"></a>1.2 特性</h2><ul>
+          <h1 id="1. 事务"><a class="header-anchor" href="#1. 事务" aria-hidden="true">¶</a> 1. 事务</h1>
+<h2 id="1.1 概念"><a class="header-anchor" href="#1.1 概念" aria-hidden="true">¶</a> 1.1 概念</h2>
+<p>事务就是逻辑上的一组操作，组成这组操作的各个单元，要么全都成功，要么全都失败。</p>
+<h2 id="1.2 特性"><a class="header-anchor" href="#1.2 特性" aria-hidden="true">¶</a> 1.2 特性</h2>
+<ul>
 <li><strong>原子性</strong>：事务不可分割，整个事务中的所有操作，要么全部完成，要么全部不完成，不可能停滞在中间某个环节。事务在执行过程中发生错误，会被回滚到事务开始前的状态，就像事务出来没有被执行过一样；</li>
 <li><strong>一致性</strong>：事务执行前后数据完整性保持一致；</li>
 <li><strong>隔离性</strong>：一个事务的执行不应该受到其他事务的干扰，指两个事务之间的隔离程度；</li>
@@ -905,7 +912,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>7.2k</span>
+              <span>7.3k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -928,8 +935,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Spring的JDBC的模板"><a href="#1-Spring的JDBC的模板" class="headerlink" title="1. Spring的JDBC的模板"></a>1. Spring的JDBC的模板</h2><p>Spring是EE开发的一站式的框架，有EE开发的每层的解决方案。Spring对持久层也提供了解决方案：ORM模块和JDBC的模板。</p>
-<p>Spring提供了很多的模板用于简化开发：<br><img src="/2020/01/05/（四）Spring学习笔记-JDBC模板/20190127092517461.png" alt="在这里插入图片描述"></p>
+          <h2 id="1. Spring的JDBC的模板"><a class="header-anchor" href="#1. Spring的JDBC的模板" aria-hidden="true">¶</a> 1. Spring的JDBC的模板</h2>
+<p>Spring是EE开发的一站式的框架，有EE开发的每层的解决方案。Spring对持久层也提供了解决方案：ORM模块和JDBC的模板。</p>
+<p>Spring提供了很多的模板用于简化开发：<br>
+<img src="/2020/01/05/（四）Spring学习笔记-JDBC模板/20190127092517461.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1041,7 +1050,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>9.7k</span>
+              <span>9.8k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1064,7 +1073,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-AOP概念和术语"><a href="#1-AOP概念和术语" class="headerlink" title="1. AOP概念和术语"></a>1. AOP概念和术语</h1><h2 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h2><p>AOP即为Aspect Oriented Programming的缩写，意为：面向切面编程。AOP是OOP（面向对象编程）的扩展和延伸，用于解决OOP开发遇到的问题。</p>
+          <h1 id="1. AOP概念和术语"><a class="header-anchor" href="#1. AOP概念和术语" aria-hidden="true">¶</a> 1. AOP概念和术语</h1>
+<h2 id="1.1 概念"><a class="header-anchor" href="#1.1 概念" aria-hidden="true">¶</a> 1.1 概念</h2>
+<p>AOP即为Aspect Oriented Programming的缩写，意为：面向切面编程。AOP是OOP（面向对象编程）的扩展和延伸，用于解决OOP开发遇到的问题。</p>
 <p>AOP思想是最早由AOP联盟组织提出的，Spring是目前使用这种思想最好的框架。Spring的AOP有自己的实现方式。因其比较繁琐，所以Spring引入AspectJ（一个AOP框架）作为自身AOP的开发。</p>
           <!--noindex-->
           
@@ -1177,7 +1188,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>17k</span>
+              <span>18k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1200,12 +1211,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Bean实例化方式"><a href="#1-Bean实例化方式" class="headerlink" title="1. Bean实例化方式"></a>1. Bean实例化方式</h2><p>下面演示一下Spring中的Bean实例化过程。</p>
-<h3 id="1-1-无参构造方法方式（默认）"><a href="#1-1-无参构造方法方式（默认）" class="headerlink" title="1.1 无参构造方法方式（默认）"></a>1.1 无参构造方法方式（默认）</h3><ol>
-<li>编写如下类：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bean1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Bean1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        System.out.println(<span class="string">"Bean1的无参构造方法执行了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
+          <h2 id="1. Bean实例化方式"><a class="header-anchor" href="#1. Bean实例化方式" aria-hidden="true">¶</a> 1. Bean实例化方式</h2>
+<p>下面演示一下Spring中的Bean实例化过程。</p>
+<h3 id="1.1 无参构造方法方式（默认）"><a class="header-anchor" href="#1.1 无参构造方法方式（默认）" aria-hidden="true">¶</a> 1.1 无参构造方法方式（默认）</h3>
+<ol>
+<li>编写如下类：</li>
 </ol>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Bean1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Bean1</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        System.out.println(<span class="string">"Bean1的无参构造方法执行了。。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1317,7 +1329,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.8k</span>
+              <span>4.9k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1340,7 +1352,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-Spring-IoC概述"><a href="#1-Spring-IoC概述" class="headerlink" title="1. Spring IoC概述"></a>1. Spring IoC概述</h2><p>IoC即为控制反转（Inversion of Controll），它用来将对象的创建权反转给（交给）Spring来创建。假如，你现在需要一杯果汁，你没有必要去买果汁机，橙子，准备橙子等操作，而是去超市直接买即可。果汁就相当于你需要使用的对象，而该对象是由果汁厂创建然后由超市提供的，果汁厂就相当于Spring。</p>
+          <h2 id="1. Spring IoC概述"><a class="header-anchor" href="#1. Spring IoC概述" aria-hidden="true">¶</a> 1. Spring IoC概述</h2>
+<p>IoC即为控制反转（Inversion of Controll），它用来将对象的创建权反转给（交给）Spring来创建。假如，你现在需要一杯果汁，你没有必要去买果汁机，橙子，准备橙子等操作，而是去超市直接买即可。果汁就相当于你需要使用的对象，而该对象是由果汁厂创建然后由超市提供的，果汁厂就相当于Spring。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1618,7 +1631,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-clone对象使用原因"><a href="#1-clone对象使用原因" class="headerlink" title="1. clone对象使用原因"></a>1. clone对象使用原因</h3><p>在实际编程过程中，我们常常要遇到这种情况：有一个对象 A，在某一时刻 A 中已经包含了一些有效值，此时可能会需要一个和 A 完全相同新对象 B，并且此后对 B 任何改动都不会影响到 A 中的值，也就是说， A 与 B 是两个独立的对象，但 B 的初始值是由 A 对象确定的。在 Java 语言中，用简单的赋值语句是不能满足这种需求的。要满足这种需求虽然有很多途径，但实现 clone（）方法是其中最简单，也是最高效的手段。</p>
+          <h3 id="1. clone对象使用原因"><a class="header-anchor" href="#1. clone对象使用原因" aria-hidden="true">¶</a> 1. clone对象使用原因</h3>
+<p>在实际编程过程中，我们常常要遇到这种情况：有一个对象 A，在某一时刻 A 中已经包含了一些有效值，此时可能会需要一个和 A 完全相同新对象 B，并且此后对 B 任何改动都不会影响到 A 中的值，也就是说， A 与 B 是两个独立的对象，但 B 的初始值是由 A 对象确定的。在 Java 语言中，用简单的赋值语句是不能满足这种需求的。要满足这种需求虽然有很多途径，但实现 clone（）方法是其中最简单，也是最高效的手段。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1782,12 +1796,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

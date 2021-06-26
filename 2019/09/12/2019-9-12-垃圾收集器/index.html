@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。  单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。 串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。">
+  <meta name="description" content="以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。   单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。 串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垃圾收集器">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/09/12/2019-9-12-垃圾收集器/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。  单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。 串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。">
+<meta property="og:description" content="以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。   单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。 串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/12/2019-9-12-垃圾收集器/1568301519686.png">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/12/2019-9-12-垃圾收集器/1568301519545.jpg">
@@ -77,7 +77,7 @@
 <meta property="og:updated_time" content="2020-01-01T13:05:05.185Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾收集器">
-<meta name="twitter:description" content="以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。  单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。 串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。">
+<meta name="twitter:description" content="以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。   单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。 串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。">
 <meta name="twitter:image" content="https://shotozheng.github.io/2019/09/12/2019-9-12-垃圾收集器/1568301519686.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/09/12/2019-9-12-垃圾收集器/">
 
@@ -401,35 +401,52 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519686.png" alt></p>
+        <p>以下是 HotSpot 虚拟机中的 7 个垃圾收集器，连线表示垃圾收集器可以配合使用。<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519686.png" alt></p>
 <ul>
 <li>单线程与并行（多线程）：单线程指的是垃圾收集器只使用一个线程进行收集，而并行使用多个线程。</li>
-<li>串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。<a id="more"></a>
-<h3 id="一、Serial收集器"><a href="#一、Serial收集器" class="headerlink" title="一、Serial收集器"></a>一、Serial收集器</h3>Serial收集器单线程的新生代收集器，其执行过程如下图所示：<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519545.jpg" alt><br>Serial 翻译为串行，也就是说它以串行的方式执行。它是单线程的垃圾收集器，只会使用一个线程进行垃圾收集工作。</li>
+<li>串行与并发：串行指的是垃圾收集器与用户程序交替执行，这意味着在执行垃圾收集的时候需要停顿用户程序；并发指的是垃圾收集器和用户程序同时执行。除了 CMS 和 G1 之外，其它垃圾收集器都是以串行的方式执行。</li>
 </ul>
+<a id="more"></a>
+<h3 id="一、Serial收集器"><a class="header-anchor" href="#一、Serial收集器" aria-hidden="true">¶</a> 一、Serial收集器</h3>
+<p>Serial收集器单线程的新生代收集器，其执行过程如下图所示：<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519545.jpg" alt><br>
+Serial 翻译为串行，也就是说它以串行的方式执行。它是单线程的垃圾收集器，只会使用一个线程进行垃圾收集工作。</p>
 <p>它的优点是简单高效，对于单个 CPU 环境来说，由于没有线程交互的开销，因此拥有最高的单线程收集效率。</p>
 <p>它是 Client 模式下的默认新生代收集器，因为在用户的桌面应用场景下，分配给虚拟机管理的内存一般来说不会很大。Serial 收集器收集几十兆甚至一两百兆的新生代停顿时间可以控制在一百多毫秒以内，只要不是太频繁，这点停顿是可以接受的。</p>
-<h3 id="二、ParNew收集器"><a href="#二、ParNew收集器" class="headerlink" title="二、ParNew收集器"></a>二、ParNew收集器</h3><p>ParNew收集器是Serial收集器的多线程版本，是多线程的新生代收集器。其执行流程如下如所示：<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519610.jpg" alt><br>它是 Server 模式下的虚拟机首选新生代收集器，除了性能原因外，主要是因为<strong>除了 Serial 收集器，只有它能与 CMS 收集器配合工作。</strong></p>
+<h3 id="二、ParNew收集器"><a class="header-anchor" href="#二、ParNew收集器" aria-hidden="true">¶</a> 二、ParNew收集器</h3>
+<p>ParNew收集器是Serial收集器的多线程版本，是多线程的新生代收集器。其执行流程如下如所示：<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519610.jpg" alt><br>
+它是 Server 模式下的虚拟机首选新生代收集器，除了性能原因外，主要是因为<strong>除了 Serial 收集器，只有它能与 CMS 收集器配合工作。</strong></p>
 <p>默认开启的线程数量与 CPU 数量相同，可以使用 -XX:ParallelGCThreads 参数来设置线程数。</p>
-<h3 id="三、Parallel-Scavenge-收集器"><a href="#三、Parallel-Scavenge-收集器" class="headerlink" title="三、Parallel Scavenge 收集器"></a>三、Parallel Scavenge 收集器</h3><p>Parallel Scavenge 收集器是多线程的新生代收集器，其与ParNew收集器的功能大致相同，但其更关注吞吐量。</p>
+<h3 id="三、Parallel Scavenge 收集器"><a class="header-anchor" href="#三、Parallel Scavenge 收集器" aria-hidden="true">¶</a> 三、Parallel Scavenge 收集器</h3>
+<p>Parallel Scavenge 收集器是多线程的新生代收集器，其与ParNew收集器的功能大致相同，但其更关注吞吐量。</p>
 <p>其它收集器关注点是尽可能缩短垃圾收集时用户线程的停顿时间，而它的目标是达到一个可控制的吞吐量，它被称为“吞吐量优先”收集器。这里的吞吐量指 CPU 用于运行用户代码的时间占总时间的比值，总时间即为执行用户代码的时间与垃圾回收时间之和。</p>
 <p>停顿时间越短就越适合需要与用户交互的程序，良好的响应速度能提升用户体验。而高吞吐量则可以高效率地利用 CPU 时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的任务。</p>
 <p>虚拟机提供了两个参数用于精确控制吞吐量，分别是控制最大垃圾收集停顿时间 -XX:MaxGCPauseMillis 参数以及直接设置吞吐量大小的 -XX:GCTimeRatio 参数（值为大于 0 且小于 100 的整数）。缩短停顿时间是以牺牲吞吐量和新生代空间来换取的，因为新生代空间变小，垃圾回收变得频繁，导致吞吐量下降。</p>
 <p>虚拟机还提供了一个参数 -XX:+UseAdaptiveSizePolicy，这是一个开关参数，打开参数后，就不需要手工指定新生代的大小（-Xmn）、Eden 和 Survivor 区的比例（-XX:SurvivorRatio）、晋升老年代对象年龄（-XX:PretenureSizeThreshold）等细节参数了，虚拟机会根据当前系统的运行情况收集性能监控信息，动态调整这些参数以提供最合适的停顿时间或者最大的吞吐量，这种方式称为 GC 自适应的调节策略（GC Ergonomics）。</p>
-<h3 id="四、Serial-Old收集器"><a href="#四、Serial-Old收集器" class="headerlink" title="四、Serial Old收集器"></a>四、Serial Old收集器</h3><p>Serial Old收集器是Serial收集器的老年代版本，单线程收集器，可以给 Client 模式下的虚拟机使用。其执行流程如下图所示：<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519640.jpg" alt></p>
+<h3 id="四、Serial Old收集器"><a class="header-anchor" href="#四、Serial Old收集器" aria-hidden="true">¶</a> 四、Serial Old收集器</h3>
+<p>Serial Old收集器是Serial收集器的老年代版本，单线程收集器，可以给 Client 模式下的虚拟机使用。其执行流程如下图所示：<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519640.jpg" alt></p>
 <p>如果用在 Server 模式下，它有两大用途：</p>
 <ul>
 <li>在 JDK 1.5 以及之前版本（Parallel Old 诞生以前）中与 Parallel Scavenge 收集器搭配使用。</li>
 <li>作为 CMS 收集器的后备预案，在并发收集发生 Concurrent Mode Failure（后面解释） 时使用。</li>
 </ul>
-<h3 id="五、Parallel-Old收集器"><a href="#五、Parallel-Old收集器" class="headerlink" title="五、Parallel Old收集器"></a>五、Parallel Old收集器</h3><p>Parallel Old收集器是Parallel Scavenge收集器的老年代版本，多线程的老年代收集器。其运行流程如下图所示：<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519645.jpg" alt><br>在注重吞吐量以及 CPU 资源敏感的场合，都可以优先考虑 Parallel Scavenge 加 Parallel Old 收集器。</p>
-<h3 id="六、CMS收集器"><a href="#六、CMS收集器" class="headerlink" title="六、CMS收集器"></a>六、CMS收集器</h3><p>CMS（Concurrent Mark Sweep），其中 Mark Sweep 指的是标记 - 清除算法。特点是并发收集、低停顿。</p>
+<h3 id="五、Parallel Old收集器"><a class="header-anchor" href="#五、Parallel Old收集器" aria-hidden="true">¶</a> 五、Parallel Old收集器</h3>
+<p>Parallel Old收集器是Parallel Scavenge收集器的老年代版本，多线程的老年代收集器。其运行流程如下图所示：<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519645.jpg" alt><br>
+在注重吞吐量以及 CPU 资源敏感的场合，都可以优先考虑 Parallel Scavenge 加 Parallel Old 收集器。</p>
+<h3 id="六、CMS收集器"><a class="header-anchor" href="#六、CMS收集器" aria-hidden="true">¶</a> 六、CMS收集器</h3>
+<p>CMS（Concurrent Mark Sweep），其中 Mark Sweep 指的是标记 - 清除算法。特点是并发收集、低停顿。</p>
 <p>参考下图，其垃圾收集分为以下四个流程：</p>
 <ul>
 <li>初始标记：仅仅只是标记一下 GC Roots 能直接关联到的对象，速度很快，需要停顿。</li>
 <li>并发标记：进行 GC Roots Tracing 的过程，它在整个回收过程中耗时最长，不需要停顿。</li>
 <li>重新标记：为了修正并发标记期间因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，需要停顿。</li>
-<li>并发清除：不需要停顿。<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519679.jpg" alt><br>在整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，不需要进行停顿。</li>
+<li>并发清除：不需要停顿。<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519679.jpg" alt><br>
+在整个过程中耗时最长的并发标记和并发清除过程中，收集器线程都可以与用户线程一起工作，不需要进行停顿。</li>
 </ul>
 <p>CMS收集器具有以下缺点：</p>
 <ul>
@@ -437,102 +454,116 @@
 <li>无法处理浮动垃圾，可能出现 Concurrent Mode Failure。浮动垃圾是指并发清除阶段由于用户线程继续运行而产生的垃圾，这部分垃圾只能到下一次 GC 时才能进行回收。由于浮动垃圾的存在，因此需要预留出一部分内存，意味着 CMS 收集不能像其它收集器那样等待老年代快满的时候再回收。如果预留的内存不够存放浮动垃圾，就会出现 Concurrent Mode Failure，这时虚拟机将启动后备预案：临时启用 Serial Old 来替代 CMS。</li>
 <li>标记 - 清除算法导致的空间碎片，往往出现老年代空间剩余，但无法找到足够大连续空间来分配当前对象，不得不提前触发一次垃圾回收。</li>
 </ul>
-<h3 id="七、G1收集器"><a href="#七、G1收集器" class="headerlink" title="七、G1收集器"></a>七、G1收集器</h3><p>G1（Garbage-First），它是一款面向服务端应用的垃圾收集器，在多 CPU 和大内存的场景下有很好的性能。HotSpot 开发团队赋予它的使命是未来可以替换掉 CMS 收集器。</p>
+<h3 id="七、G1收集器"><a class="header-anchor" href="#七、G1收集器" aria-hidden="true">¶</a> 七、G1收集器</h3>
+<p>G1（Garbage-First），它是一款面向服务端应用的垃圾收集器，在多 CPU 和大内存的场景下有很好的性能。HotSpot 开发团队赋予它的使命是未来可以替换掉 CMS 收集器。</p>
 <p>Java 堆被分为新生代、老年代，其它收集器进行收集的范围都是整个新生代或者老年代，而 G1 可以直接对新生代和老年代一起回收。</p>
-<p>G1 把堆划分成多个大小相等的独立区域（Region），新生代和老年代不再物理隔离。<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519681.png" alt><br>通过引入 Region 的概念，从而将原来的一整块内存空间划分成多个的小空间，使得每个小空间可以单独进行垃圾回收。这种划分方法带来了很大的灵活性，使得可预测的停顿时间模型成为可能。通过记录每个 Region 垃圾回收时间以及回收所获得的空间（这两个值是通过过去回收的经验获得），并维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的 Region。</p>
+<p>G1 把堆划分成多个大小相等的独立区域（Region），新生代和老年代不再物理隔离。<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519681.png" alt><br>
+通过引入 Region 的概念，从而将原来的一整块内存空间划分成多个的小空间，使得每个小空间可以单独进行垃圾回收。这种划分方法带来了很大的灵活性，使得可预测的停顿时间模型成为可能。通过记录每个 Region 垃圾回收时间以及回收所获得的空间（这两个值是通过过去回收的经验获得），并维护一个优先列表，每次根据允许的收集时间，优先回收价值最大的 Region。</p>
 <p>每个 Region 都有一个 Remembered Set，用来记录引用的 Region的位置。通过使用 Remembered Set，在做可达性分析的时候就可以避免全堆扫描。</p>
 <p>参考下图，如果不计算维护 Remembered Set 的操作，G1 收集器的运作大致可划分为以下几个步骤：</p>
 <ul>
-<li><p>初始标记</p>
+<li>
+<p>初始标记</p>
 </li>
-<li><p>并发标记</p>
+<li>
+<p>并发标记</p>
 </li>
-<li><p>最终标记：为了修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象变化记录在线程的 Remembered Set Logs 里面，最终标记阶段需要把 Remembered Set Logs 的数据合并到 Remembered Set 中。最终标记这阶段需要停顿线程，但是可并行执行。</p>
+<li>
+<p>最终标记：为了修正在并发标记期间因用户程序继续运作而导致标记产生变动的那一部分标记记录，虚拟机将这段时间对象变化记录在线程的 Remembered Set Logs 里面，最终标记阶段需要把 Remembered Set Logs 的数据合并到 Remembered Set 中。最终标记这阶段需要停顿线程，但是可并行执行。</p>
 </li>
-<li><p>筛选回收：首先对各个 Region 中的回收价值和成本进行排序，根据用户所期望的 GC 停顿时间来制定回收计划。此阶段其实也可以做到与用户程序一起并发执行，但是因为只回收一部分 Region，时间是用户可控制的，而且停顿用户线程将大幅度提高收集效率。<br><img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519684.jpg" alt><br>G1收集器具备如下特点：</p>
+<li>
+<p>筛选回收：首先对各个 Region 中的回收价值和成本进行排序，根据用户所期望的 GC 停顿时间来制定回收计划。此阶段其实也可以做到与用户程序一起并发执行，但是因为只回收一部分 Region，时间是用户可控制的，而且停顿用户线程将大幅度提高收集效率。<br>
+<img src="/2019/09/12/2019-9-12-垃圾收集器/1568301519684.jpg" alt><br>
+G1收集器具备如下特点：</p>
 </li>
-<li><p>空间整合：整体来看是基于“标记 - 整理”算法实现的收集器，从局部（两个 Region 之间）上来看是基于“复制”算法实现的，这意味着运行期间不会产生内存空间碎片。</p>
+<li>
+<p>空间整合：整体来看是基于“标记 - 整理”算法实现的收集器，从局部（两个 Region 之间）上来看是基于“复制”算法实现的，这意味着运行期间不会产生内存空间碎片。</p>
 </li>
-<li><p>可预测的停顿：能让使用者明确指定在一个长度为 M 毫秒的时间片段内，消耗在 GC 上的时间不得超过 N 毫秒。</p>
+<li>
+<p>可预测的停顿：能让使用者明确指定在一个长度为 M 毫秒的时间片段内，消耗在 GC 上的时间不得超过 N 毫秒。</p>
 </li>
 </ul>
-<h3 id="八、比较"><a href="#八、比较" class="headerlink" title="八、比较"></a>八、比较</h3><table>
+<h3 id="八、比较"><a class="header-anchor" href="#八、比较" aria-hidden="true">¶</a> 八、比较</h3>
+<table>
 <thead>
 <tr>
-<th align="center">收集器</th>
-<th align="center">单线程/并行</th>
-<th align="center">串行/并发</th>
-<th align="center">新生代/老年代</th>
-<th align="center">收集算法</th>
-<th align="center">目标</th>
-<th align="center">适用场景</th>
+<th style="text-align:center">收集器</th>
+<th style="text-align:center">单线程/并行</th>
+<th style="text-align:center">串行/并发</th>
+<th style="text-align:center">新生代/老年代</th>
+<th style="text-align:center">收集算法</th>
+<th style="text-align:center">目标</th>
+<th style="text-align:center">适用场景</th>
 </tr>
 </thead>
-<tbody><tr>
-<td align="center"><strong>Serial</strong></td>
-<td align="center">单线程</td>
-<td align="center">串行</td>
-<td align="center">新生代</td>
-<td align="center">复制</td>
-<td align="center">响应速度优先</td>
-<td align="center">单 CPU 环境下的 Client 模式</td>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>Serial</strong></td>
+<td style="text-align:center">单线程</td>
+<td style="text-align:center">串行</td>
+<td style="text-align:center">新生代</td>
+<td style="text-align:center">复制</td>
+<td style="text-align:center">响应速度优先</td>
+<td style="text-align:center">单 CPU 环境下的 Client 模式</td>
 </tr>
 <tr>
-<td align="center"><strong>Serial Old</strong></td>
-<td align="center">单线程</td>
-<td align="center">串行</td>
-<td align="center">老年代</td>
-<td align="center">标记-整理</td>
-<td align="center">响应速度优先</td>
-<td align="center">单 CPU 环境下的 Client 模式、CMS 的后备预案</td>
+<td style="text-align:center"><strong>Serial Old</strong></td>
+<td style="text-align:center">单线程</td>
+<td style="text-align:center">串行</td>
+<td style="text-align:center">老年代</td>
+<td style="text-align:center">标记-整理</td>
+<td style="text-align:center">响应速度优先</td>
+<td style="text-align:center">单 CPU 环境下的 Client 模式、CMS 的后备预案</td>
 </tr>
 <tr>
-<td align="center"><strong>ParNew</strong></td>
-<td align="center">并行</td>
-<td align="center">串行</td>
-<td align="center">新生代</td>
-<td align="center">复制算法</td>
-<td align="center">响应速度优先</td>
-<td align="center">多 CPU 环境时在 Server 模式下与 CMS 配合</td>
+<td style="text-align:center"><strong>ParNew</strong></td>
+<td style="text-align:center">并行</td>
+<td style="text-align:center">串行</td>
+<td style="text-align:center">新生代</td>
+<td style="text-align:center">复制算法</td>
+<td style="text-align:center">响应速度优先</td>
+<td style="text-align:center">多 CPU 环境时在 Server 模式下与 CMS 配合</td>
 </tr>
 <tr>
-<td align="center"><strong>Parallel Scavenge</strong></td>
-<td align="center">并行</td>
-<td align="center">串行</td>
-<td align="center">新生代</td>
-<td align="center">复制算法</td>
-<td align="center">吞吐量优先</td>
-<td align="center">在后台运算而不需要太多交互的任务</td>
+<td style="text-align:center"><strong>Parallel Scavenge</strong></td>
+<td style="text-align:center">并行</td>
+<td style="text-align:center">串行</td>
+<td style="text-align:center">新生代</td>
+<td style="text-align:center">复制算法</td>
+<td style="text-align:center">吞吐量优先</td>
+<td style="text-align:center">在后台运算而不需要太多交互的任务</td>
 </tr>
 <tr>
-<td align="center"><strong>Parallel Old</strong></td>
-<td align="center">并行</td>
-<td align="center">串行</td>
-<td align="center">老年代</td>
-<td align="center">标记-整理</td>
-<td align="center">吞吐量优先</td>
-<td align="center">在后台运算而不需要太多交互的任务</td>
+<td style="text-align:center"><strong>Parallel Old</strong></td>
+<td style="text-align:center">并行</td>
+<td style="text-align:center">串行</td>
+<td style="text-align:center">老年代</td>
+<td style="text-align:center">标记-整理</td>
+<td style="text-align:center">吞吐量优先</td>
+<td style="text-align:center">在后台运算而不需要太多交互的任务</td>
 </tr>
 <tr>
-<td align="center"><strong>CMS</strong></td>
-<td align="center">并行</td>
-<td align="center">并发</td>
-<td align="center">老年代</td>
-<td align="center">标记-清除</td>
-<td align="center">响应速度优先</td>
-<td align="center">集中在互联网站或 B/S 系统服务端上的 Java 应用</td>
+<td style="text-align:center"><strong>CMS</strong></td>
+<td style="text-align:center">并行</td>
+<td style="text-align:center">并发</td>
+<td style="text-align:center">老年代</td>
+<td style="text-align:center">标记-清除</td>
+<td style="text-align:center">响应速度优先</td>
+<td style="text-align:center">集中在互联网站或 B/S 系统服务端上的 Java 应用</td>
 </tr>
 <tr>
-<td align="center"><strong>G1</strong></td>
-<td align="center">并行</td>
-<td align="center">并发</td>
-<td align="center">新生代 + 老年代</td>
-<td align="center">标记-整理 + 复制算法</td>
-<td align="center">响应速度优先</td>
-<td align="center">面向服务端应用，将来替换 CMS</td>
+<td style="text-align:center"><strong>G1</strong></td>
+<td style="text-align:center">并行</td>
+<td style="text-align:center">并发</td>
+<td style="text-align:center">新生代 + 老年代</td>
+<td style="text-align:center">标记-整理 + 复制算法</td>
+<td style="text-align:center">响应速度优先</td>
+<td style="text-align:center">面向服务端应用，将来替换 CMS</td>
 </tr>
-</tbody></table>
-
+</tbody>
+</table>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -568,8 +599,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/12/2019-9-12-类加载机制/" rel="next" title="类加载机制">
-                  <i class="fa fa-chevron-left"></i> 类加载机制
+                <a href="/2019/09/12/2019-9-12-垃圾回收算法/" rel="next" title="垃圾回收算法">
+                  <i class="fa fa-chevron-left"></i> 垃圾回收算法
                 </a>
               
             </div>
@@ -578,8 +609,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/09/12/2019-9-12-垃圾回收算法/" rel="prev" title="垃圾回收算法">
-                  垃圾回收算法 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/12/2019-9-12-内存分配与回收策略/" rel="prev" title="内存分配与回收策略">
+                  内存分配与回收策略 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -632,7 +663,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Serial收集器"><span class="nav-text">一、Serial收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、ParNew收集器"><span class="nav-text">二、ParNew收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Parallel-Scavenge-收集器"><span class="nav-text">三、Parallel Scavenge 收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Serial-Old收集器"><span class="nav-text">四、Serial Old收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Parallel-Old收集器"><span class="nav-text">五、Parallel Old收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、CMS收集器"><span class="nav-text">六、CMS收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、G1收集器"><span class="nav-text">七、G1收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、比较"><span class="nav-text">八、比较</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、Serial收集器"><span class="nav-text">¶ 一、Serial收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、ParNew收集器"><span class="nav-text">¶ 二、ParNew收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#三、Parallel Scavenge 收集器"><span class="nav-text">¶ 三、Parallel Scavenge 收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#四、Serial Old收集器"><span class="nav-text">¶ 四、Serial Old收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#五、Parallel Old收集器"><span class="nav-text">¶ 五、Parallel Old收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#六、CMS收集器"><span class="nav-text">¶ 六、CMS收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#七、G1收集器"><span class="nav-text">¶ 七、G1收集器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#八、比较"><span class="nav-text">¶ 八、比较</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -730,12 +761,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -398,7 +398,6 @@
 <li>重写发生在子类与父类之间，重写要求子类被重写方法与父类被重写方法有相同的返回类型，比父类被重写方法更好访问，不能比父类被重写方法声明更多的异常（里氏代换原则）。重载对返回类型没有特殊的要求。</li>
 </ul>
 <a id="more"></a>
-
 <p>方法重载的规则：</p>
 <ol>
 <li>方法名一致，参数列表中参数的顺序，类型，个数不同。</li>
@@ -413,11 +412,11 @@
 <li>重写的方法能够抛出任何非强制异常（UncheckedException，也叫非运行时异常），无论被重写的方法是否抛出异常。但是，重写的方法不能抛出新的强制性异常，或者比被重写方法声明的更广泛的强制性异常，反之则可以。</li>
 </ol>
 <hr>
-<p>为什么函数不能根据返回类型来区分重载？<br>因为调用时不能指定类型信息，编译器不知道你要调用哪个函数。例如</p>
+<p>为什么函数不能根据返回类型来区分重载？<br>
+因为调用时不能指定类型信息，编译器不知道你要调用哪个函数。例如</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">float max(int a, int b);</span><br><span class="line">int max(int a, int b);</span><br></pre></td></tr></table></figure>
-
 <p>当调用 max(1, 2);时无法确定调用的是哪个，单从这一点上来说，仅返回值类型不同的重载是不应该允许的。</p>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -613,12 +612,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

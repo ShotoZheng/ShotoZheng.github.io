@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="题目描述给定一个不含有重复值的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。 输入描述: 第一行输入一个数字 n，表示数组 arr 的长度。以下一行输出 n个数字，表示数组的值。  输出描述: 输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。  示例1 输入73 4 1 5 6 2 7   输出-1 2">
+  <meta name="description" content="¶ 题目描述 给定一个不含有重复值的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。 ¶ 输入描述:  第一行输入一个数字 n，表示数组 arr 的长度。 以下一行输出 n个数字，表示数组的值。  ¶ 输出描述:  输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。  ¶ 示例1  输入 7 3 4 1 5">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="单调栈结构">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/09/09/2019-9-9-单调栈结构/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="题目描述给定一个不含有重复值的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。 输入描述: 第一行输入一个数字 n，表示数组 arr 的长度。以下一行输出 n个数字，表示数组的值。  输出描述: 输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。  示例1 输入73 4 1 5 6 2 7   输出-1 2">
+<meta property="og:description" content="¶ 题目描述 给定一个不含有重复值的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。 ¶ 输入描述:  第一行输入一个数字 n，表示数组 arr 的长度。 以下一行输出 n个数字，表示数组的值。  ¶ 输出描述:  输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。  ¶ 示例1  输入 7 3 4 1 5">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-单调栈结构/1568038170343.png">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-单调栈结构/1568038170345.png">
@@ -76,7 +76,7 @@
 <meta property="og:updated_time" content="2020-01-01T07:35:36.453Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="单调栈结构">
-<meta name="twitter:description" content="题目描述给定一个不含有重复值的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。 输入描述: 第一行输入一个数字 n，表示数组 arr 的长度。以下一行输出 n个数字，表示数组的值。  输出描述: 输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。  示例1 输入73 4 1 5 6 2 7   输出-1 2">
+<meta name="twitter:description" content="¶ 题目描述 给定一个不含有重复值的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。 ¶ 输入描述:  第一行输入一个数字 n，表示数组 arr 的长度。 以下一行输出 n个数字，表示数组的值。  ¶ 输出描述:  输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。  ¶ 示例1  输入 7 3 4 1 5">
 <meta name="twitter:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-单调栈结构/1568038170343.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/09/09/2019-9-9-单调栈结构/">
 
@@ -407,26 +407,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定一个<code>不含有重复值</code>的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。</p>
-<h5 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h5><blockquote>
-<p>第一行输入一个数字 n，表示数组 arr 的长度。<br>以下一行输出 n个数字，表示数组的值。</p>
+        <h5 id="题目描述"><a class="header-anchor" href="#题目描述" aria-hidden="true">¶</a> 题目描述</h5>
+<p>给定一个<code>不含有重复值</code>的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。</p>
+<h5 id="输入描述:"><a class="header-anchor" href="#输入描述:" aria-hidden="true">¶</a> 输入描述:</h5>
+<blockquote>
+<p>第一行输入一个数字 n，表示数组 arr 的长度。<br>
+以下一行输出 n个数字，表示数组的值。</p>
 </blockquote>
-<h5 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h5><blockquote>
+<h5 id="输出描述:"><a class="header-anchor" href="#输出描述:" aria-hidden="true">¶</a> 输出描述:</h5>
+<blockquote>
 <p>输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。</p>
 </blockquote>
-<h5 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h5><blockquote>
-<p>输入<br>7<br>3 4 1 5 6 2 7</p>
+<h5 id="示例1"><a class="header-anchor" href="#示例1" aria-hidden="true">¶</a> 示例1</h5>
+<blockquote>
+<p>输入<br>
+7<br>
+3 4 1 5 6 2 7</p>
 </blockquote>
 <blockquote>
-<p>输出<br>-1 2<br>0 2<br>-1 -1<br>2 5<br>3 5<br>2 -1<br>5 -1</p>
+<p>输出<br>
+-1 2<br>
+0 2<br>
+-1 -1<br>
+2 5<br>
+3 5<br>
+2 -1<br>
+5 -1</p>
 </blockquote>
 <a id="more"></a>
-<h5 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h5><p>要找到数组中每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置，我们需要借助栈来实现，该<code>栈保存数组的下标，且需要保持从栈顶到栈底的下标idx所对应的arr[idx]由大到小</code>。当然，如果我们是要找到数组中每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 大的位置，那么我们就需要保持栈从栈顶到栈底的下标idx所对应的arr[idx]由小到大的特性。</p>
+<h5 id="分析"><a class="header-anchor" href="#分析" aria-hidden="true">¶</a> 分析</h5>
+<p>要找到数组中每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置，我们需要借助栈来实现，该<code>栈保存数组的下标，且需要保持从栈顶到栈底的下标idx所对应的arr[idx]由大到小</code>。当然，如果我们是要找到数组中每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 大的位置，那么我们就需要保持栈从栈顶到栈底的下标idx所对应的arr[idx]由小到大的特性。</p>
 <p>接下来我们来使用单调栈来求得数组arr[3 4 1 5 6 2 7]中每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置：</p>
-<p>当数组遍历到0号位时，发现栈为空，那么就直接将下标0压入栈中，如下图所示：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170343.png" alt><br>当数组遍历到1号位时，发现arr[1]大于栈顶元素即数组的坐标0所对应的数组元素3，那么直接将下标1压入栈中，如下图示：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170345.png" alt><br>接着数组遍历到2号位时，发现arr[2]小于栈顶元素即数组的下标1所对应的数组元素4，那么直接弹出栈顶元素1，<code>那么 1 位置左边和右边离 1 位置最近且值比 arr[1] 小的位置分别为新的栈顶0和当前的i = 2</code>，并记录在结果数组中。<code>若当前位置i其左边和右边不存在比arr[i]最近且比其小元素，那么就默认位置为-1</code>。重复上述过程，直到栈为空或者arr[2]大于栈顶下标所对应的数组元素时直接压入i。该过程的结果如下图示：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170346.png" alt><br>当数组从3号位遍历到4号时，会将数组元素5和6所对应的下标压入栈中。如下图示：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170363.png" alt><br>当数组遍历到5号位时，发现arr[5]小于栈顶中元素4所对应的数组元素6，那么弹出栈顶元素并记录其左右比arr[5]小且最近的元素的下标。同理，新的栈顶也会被弹出。然后压入元素2的下标5。如下图示：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170364.png" alt><br>当数组遍历到6号位时，发现arr[6]大于栈顶元素5所对应的arr[5]，即2，那么直接压入下标6。自此，数组遍历结束，栈和结果数组的状态如下图所示：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170365.png" alt><br>接着，我们循环的弹出栈顶元素idx，并记录arr[idx]的左边和右边最近且比arr[idx]小的元素下标，我们可以发现左边最近且比arr[idx]小的元素的下标为新的栈顶元素（若不存在则为-1），右边最近且比arr[idx]小的元素的下标不存在，即为-1。最后我们得到如下结果数组：<br><img src="/2019/09/09/2019-9-9-单调栈结构/1568038170366.png" alt></p>
-<h5 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 核心代码</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[][] getNearLessNoRepeat(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">        ArrayDeque&lt;Integer&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; arr[i] &lt; arr[stack.peek()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> top = stack.pop();</span><br><span class="line">                <span class="keyword">int</span> leftIdx = stack.isEmpty() ? -<span class="number">1</span> : stack.peek();</span><br><span class="line">                res[top][<span class="number">0</span>] = leftIdx;</span><br><span class="line">                res[top][<span class="number">1</span>] = i;</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> top = stack.pop();</span><br><span class="line">            <span class="keyword">int</span> leftIdx = stack.isEmpty() ? -<span class="number">1</span> : stack.peek();</span><br><span class="line">            res[top][<span class="number">0</span>] = leftIdx;</span><br><span class="line">            res[top][<span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> n = sc.nextInt();</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            arr[i] = sc.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[][] res = getNearLessNoRepeat(arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">            System.out.println(res[i][<span class="number">0</span>] + <span class="string">" "</span> + res[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+<p>当数组遍历到0号位时，发现栈为空，那么就直接将下标0压入栈中，如下图所示：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170343.png" alt><br>
+当数组遍历到1号位时，发现arr[1]大于栈顶元素即数组的坐标0所对应的数组元素3，那么直接将下标1压入栈中，如下图示：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170345.png" alt><br>
+接着数组遍历到2号位时，发现arr[2]小于栈顶元素即数组的下标1所对应的数组元素4，那么直接弹出栈顶元素1，<code>那么 1 位置左边和右边离 1 位置最近且值比 arr[1] 小的位置分别为新的栈顶0和当前的i = 2</code>，并记录在结果数组中。<code>若当前位置i其左边和右边不存在比arr[i]最近且比其小元素，那么就默认位置为-1</code>。重复上述过程，直到栈为空或者arr[2]大于栈顶下标所对应的数组元素时直接压入i。该过程的结果如下图示：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170346.png" alt><br>
+当数组从3号位遍历到4号时，会将数组元素5和6所对应的下标压入栈中。如下图示：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170363.png" alt><br>
+当数组遍历到5号位时，发现arr[5]小于栈顶中元素4所对应的数组元素6，那么弹出栈顶元素并记录其左右比arr[5]小且最近的元素的下标。同理，新的栈顶也会被弹出。然后压入元素2的下标5。如下图示：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170364.png" alt><br>
+当数组遍历到6号位时，发现arr[6]大于栈顶元素5所对应的arr[5]，即2，那么直接压入下标6。自此，数组遍历结束，栈和结果数组的状态如下图所示：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170365.png" alt><br>
+接着，我们循环的弹出栈顶元素idx，并记录arr[idx]的左边和右边最近且比arr[idx]小的元素下标，我们可以发现左边最近且比arr[idx]小的元素的下标为新的栈顶元素（若不存在则为-1），右边最近且比arr[idx]小的元素的下标不存在，即为-1。最后我们得到如下结果数组：<br>
+<img src="/2019/09/09/2019-9-9-单调栈结构/1568038170366.png" alt></p>
+<h5 id="代码"><a class="header-anchor" href="#代码" aria-hidden="true">¶</a> 代码</h5>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 核心代码</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[][] getNearLessNoRepeat(<span class="keyword">int</span>[] arr) &#123;</span><br><span class="line">        ArrayDeque&lt;Integer&gt; stack = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span>[][] res = <span class="keyword">new</span> <span class="keyword">int</span>[arr.length][<span class="number">2</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">while</span> (!stack.isEmpty() &amp;&amp; arr[i] &lt; arr[stack.peek()]) &#123;</span><br><span class="line">                <span class="keyword">int</span> top = stack.pop();</span><br><span class="line">                <span class="keyword">int</span> leftIdx = stack.isEmpty() ? -<span class="number">1</span> : stack.peek();</span><br><span class="line">                res[top][<span class="number">0</span>] = leftIdx;</span><br><span class="line">                res[top][<span class="number">1</span>] = i;</span><br><span class="line">            &#125;</span><br><span class="line">            stack.push(i);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!stack.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">int</span> top = stack.pop();</span><br><span class="line">            <span class="keyword">int</span> leftIdx = stack.isEmpty() ? -<span class="number">1</span> : stack.peek();</span><br><span class="line">            res[top][<span class="number">0</span>] = leftIdx;</span><br><span class="line">            res[top][<span class="number">1</span>] = -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Scanner sc = <span class="keyword">new</span> Scanner(System.in);</span><br><span class="line">        <span class="keyword">int</span> n = sc.nextInt();</span><br><span class="line">        <span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">            arr[i] = sc.nextInt();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span>[][] res = getNearLessNoRepeat(arr);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; res.length; i++) &#123;</span><br><span class="line">            System.out.println(res[i][<span class="number">0</span>] + <span class="string">" "</span> + res[i][<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -526,7 +554,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目描述"><span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入描述"><span class="nav-text">输入描述:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输出描述"><span class="nav-text">输出描述:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例1"><span class="nav-text">示例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-text">分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#题目描述"><span class="nav-text">¶ 题目描述</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入描述:"><span class="nav-text">¶ 输入描述:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输出描述:"><span class="nav-text">¶ 输出描述:</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#示例1"><span class="nav-text">¶ 示例1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分析"><span class="nav-text">¶ 分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码"><span class="nav-text">¶ 代码</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -624,12 +652,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

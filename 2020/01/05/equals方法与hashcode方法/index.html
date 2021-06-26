@@ -399,15 +399,15 @@
 <li>不同对象可能有相同的哈希码，因为自身算法的原因，所以当a.equals(b) == true（对象值相同）时，两个对象一定相等，但是如果两个对象的哈希码相等却不能断定两个对象是相等的。</li>
 </ul>
 <a id="more"></a>
-
 <hr>
 <p><strong>equals和hashcode的使用在集合框架Set中有体现：</strong></p>
 <ul>
 <li>将对象放入到集合中时，首先判断要放入对象的hashCode值与集合中的任意一个元素的hashCode值是否相等。</li>
 <li>如果不相等直接将该对象放入集合中。如果hashCode值相等，然后再通过equals方法判断要放入对象与集合中的任意一个对象是否相等，如果equals判断不相等，直接将该元素放入到集合中，否则不放入。</li>
 </ul>
-<p>具体流程如下图所示：<br><img src="/2020/01/05/equals方法与hashcode方法/20181225162219337.png" alt="在这里插入图片描述"></p>
-
+<p>具体流程如下图所示：<br>
+<img src="/2020/01/05/equals方法与hashcode方法/20181225162219337.png" alt="在这里插入图片描述"></p>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -603,12 +603,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

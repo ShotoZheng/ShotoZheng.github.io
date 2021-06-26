@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="1. 文件存储1.1 普通文件存储方式和问题单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。">
+  <meta name="description" content="¶ 1. 文件存储 ¶ 1.1 普通文件存储方式和问题 单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。">
 <meta name="keywords" content="项目,业务场景">
 <meta property="og:type" content="article">
 <meta property="og:title" content="oss 实现文件上传">
 <meta property="og:url" content="https://ShotoZheng.github.io/2021/06/07/oss-实现文件上传/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="1. 文件存储1.1 普通文件存储方式和问题单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。">
+<meta property="og:description" content="¶ 1. 文件存储 ¶ 1.1 普通文件存储方式和问题 单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2021/06/07/oss-实现文件上传/image-20210607230520569.png">
 <meta property="og:image" content="https://shotozheng.github.io/2021/06/07/oss-实现文件上传/image-20210607230710320.png">
@@ -75,7 +75,7 @@
 <meta property="og:updated_time" content="2021-06-09T15:11:13.435Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="oss 实现文件上传">
-<meta name="twitter:description" content="1. 文件存储1.1 普通文件存储方式和问题单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。">
+<meta name="twitter:description" content="¶ 1. 文件存储 ¶ 1.1 普通文件存储方式和问题 单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。">
 <meta name="twitter:image" content="https://shotozheng.github.io/2021/06/07/oss-实现文件上传/image-20210607230520569.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2021/06/07/oss-实现文件上传/">
 
@@ -406,53 +406,70 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1-文件存储"><a href="#1-文件存储" class="headerlink" title="1. 文件存储"></a>1. 文件存储</h2><h3 id="1-1-普通文件存储方式和问题"><a href="#1-1-普通文件存储方式和问题" class="headerlink" title="1.1 普通文件存储方式和问题"></a>1.1 普通文件存储方式和问题</h3><p>单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。</p>
+        <h2 id="1. 文件存储"><a class="header-anchor" href="#1. 文件存储" aria-hidden="true">¶</a> 1. 文件存储</h2>
+<h3 id="1.1 普通文件存储方式和问题"><a class="header-anchor" href="#1.1 普通文件存储方式和问题" aria-hidden="true">¶</a> 1.1 普通文件存储方式和问题</h3>
+<p>单点项目服务上传方式如图1所示，即浏览器上传文件生成文件流最终写在服务器指定目录文件下。但是当在分布式的情况下时，如图2所示，由于文件可能上传到某台服务器上，因此有些服务器缺少对应的上传文件，导致无法访问到上传的文件。</p>
 <a id="more"></a>
-
 <p><img src="/2021/06/07/oss-实现文件上传/image-20210607230520569.png" alt="图1"></p>
 <p><img src="/2021/06/07/oss-实现文件上传/image-20210607230710320.png" alt="图2"></p>
-<h3 id="1-2-公共文件中心存储"><a href="#1-2-公共文件中心存储" class="headerlink" title="1.2 公共文件中心存储"></a>1.2 公共文件中心存储</h3><p>如图3所示，我们将上传的文件集中存储在文件存储中心，文件存储中心可以是自建服务器中心，也可以利用第三方云存储，比如阿里云对象存储。文章后面我们采用阿里云对象存储 OSS 来实现文件的上传功能。</p>
+<h3 id="1.2 公共文件中心存储"><a class="header-anchor" href="#1.2 公共文件中心存储" aria-hidden="true">¶</a> 1.2 公共文件中心存储</h3>
+<p>如图3所示，我们将上传的文件集中存储在文件存储中心，文件存储中心可以是自建服务器中心，也可以利用第三方云存储，比如阿里云对象存储。文章后面我们采用阿里云对象存储 OSS 来实现文件的上传功能。</p>
 <p><img src="/2021/06/07/oss-实现文件上传/image-20210607231116770.png" alt="图3"></p>
-<h2 id="2-OSS-文件上传"><a href="#2-OSS-文件上传" class="headerlink" title="2. OSS 文件上传"></a>2. OSS 文件上传</h2><h3 id="2-1-阿里云对象存储-普通上传方式"><a href="#2-1-阿里云对象存储-普通上传方式" class="headerlink" title="2.1 阿里云对象存储-普通上传方式"></a>2.1 阿里云对象存储-普通上传方式</h3><p>对于普通上传方式，用户在浏览器点击上传文件，然后生成文件流传输到后台，然后交由后台使用 OSS 登录秘钥等信息实现将文件上传到 OSS 文件存储中心。因为上传文件传输的步骤需要经过应用服务器处理，所以这种方式有一个很大的缺点就是应用服务器容易遇到性能瓶颈。</p>
+<h2 id="2. OSS 文件上传"><a class="header-anchor" href="#2. OSS 文件上传" aria-hidden="true">¶</a> 2. OSS 文件上传</h2>
+<h3 id="2.1 阿里云对象存储-普通上传方式"><a class="header-anchor" href="#2.1 阿里云对象存储-普通上传方式" aria-hidden="true">¶</a> 2.1 阿里云对象存储-普通上传方式</h3>
+<p>对于普通上传方式，用户在浏览器点击上传文件，然后生成文件流传输到后台，然后交由后台使用 OSS 登录秘钥等信息实现将文件上传到 OSS 文件存储中心。因为上传文件传输的步骤需要经过应用服务器处理，所以这种方式有一个很大的缺点就是应用服务器容易遇到性能瓶颈。</p>
 <p><img src="/2021/06/07/oss-实现文件上传/image-20210607231419584.png" alt="普通上传方式"></p>
-<h3 id="2-2-阿里云对象存储-服务端签名后直传"><a href="#2-2-阿里云对象存储-服务端签名后直传" class="headerlink" title="2.2 阿里云对象存储-服务端签名后直传"></a>2.2 阿里云对象存储-服务端签名后直传</h3><p>阿里云对象存储提供给我们另外一种解决方案，如下图，用户首先向服务获取 OSS 访问秘钥等信息，然后直接由用户在浏览器实现将文件上传到 OSS 文件存储中心，以此避免后台应用服务器进行文件数据传输和上传等步骤。</p>
+<h3 id="2.2 阿里云对象存储-服务端签名后直传"><a class="header-anchor" href="#2.2 阿里云对象存储-服务端签名后直传" aria-hidden="true">¶</a> 2.2 阿里云对象存储-服务端签名后直传</h3>
+<p>阿里云对象存储提供给我们另外一种解决方案，如下图，用户首先向服务获取 OSS 访问秘钥等信息，然后直接由用户在浏览器实现将文件上传到 OSS 文件存储中心，以此避免后台应用服务器进行文件数据传输和上传等步骤。</p>
 <p><img src="/2021/06/07/oss-实现文件上传/image-20210607231823480.png" alt="服务端签名后直传"></p>
-<h2 id="3-普通-Java-实现"><a href="#3-普通-Java-实现" class="headerlink" title="3. 普通 Java 实现"></a>3. 普通 Java 实现</h2><ol>
-<li><p>创建 Bucket，创建地址<a href="https://oss.console.aliyun.com/bucket" target="_blank" rel="noopener">点击进入</a>，创建完成后即可获取查看 Endpoint 信息；</p>
+<h2 id="3. 普通 Java 实现"><a class="header-anchor" href="#3. 普通 Java 实现" aria-hidden="true">¶</a> 3. 普通 Java 实现</h2>
+<ol>
+<li>
+<p>创建 Bucket，创建地址<a href="https://oss.console.aliyun.com/bucket" target="_blank" rel="noopener">点击进入</a>，创建完成后即可获取查看 Endpoint 信息；</p>
 </li>
-<li><p>创建 RAM 访问控制子用户，得到  AccessKey 和 accessKeySecret；</p>
+<li>
+<p>创建 RAM 访问控制子用户，得到  AccessKey 和 accessKeySecret；</p>
 </li>
-<li><p>创建 Maven 工程，引入依赖：</p>
+<li>
+<p>创建 Maven 工程，引入依赖：</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.aliyun.oss<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aliyun-sdk-oss<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>3.10.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>创建如下测试方法，即可将对应路径中的文件上传到 OSS 文件中心：</p>
+<li>
+<p>创建如下测试方法，即可将对应路径中的文件上传到 OSS 文件中心：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testOssUpload</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">    <span class="comment">// Endpoint以广州为例，其它Region请按实际情况填写。</span></span><br><span class="line">    String endpoint = <span class="string">"https://oss-cn-guangzhou.aliyuncs.com"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。</span></span><br><span class="line">    String accessKeyId = <span class="string">"xxxx"</span>;</span><br><span class="line">    String accessKeySecret = <span class="string">"xxxx"</span>;</span><br><span class="line">    String bucketName = <span class="string">"gulimall-oss-shotozheng"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 创建OSSClient实例。</span></span><br><span class="line">    OSS ossClient = <span class="keyword">new</span> OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// &lt;yourObjectName&gt;上传文件到OSS时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。</span></span><br><span class="line">    String objectName = <span class="string">"imgs/aa.jpeg"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 上传文件流</span></span><br><span class="line">    InputStream inputStream = <span class="keyword">new</span> FileInputStream(<span class="string">"C:\\Users\\admin\\Pictures\\Camera Roll\\f.jpeg"</span>);</span><br><span class="line">    ossClient.putObject(bucketName, objectName, inputStream);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 关闭OSSClient。</span></span><br><span class="line">    ossClient.shutdown();</span><br><span class="line"></span><br><span class="line">    log.info(<span class="string">"上传完成..."</span>);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>关于更新信息，可以查看<a href="https://help.aliyun.com/document_detail/32011.html?spm=a2c4g.11186623.6.919.7a2734f3pyh51E" target="_blank" rel="noopener">官网</a>。</p>
+<li>
+<p>关于更新信息，可以查看<a href="https://help.aliyun.com/document_detail/32011.html?spm=a2c4g.11186623.6.919.7a2734f3pyh51E" target="_blank" rel="noopener">官网</a>。</p>
 </li>
 </ol>
-<h2 id="4-Spring-Cloud-实现"><a href="#4-Spring-Cloud-实现" class="headerlink" title="4. Spring Cloud 实现"></a>4. Spring Cloud 实现</h2><ol>
-<li><p>创建 Bucket，创建地址<a href="https://oss.console.aliyun.com/bucket" target="_blank" rel="noopener">点击进入</a>，创建完成后即可获取查看 Endpoint 信息；</p>
+<h2 id="4. Spring Cloud 实现"><a class="header-anchor" href="#4. Spring Cloud 实现" aria-hidden="true">¶</a> 4. Spring Cloud 实现</h2>
+<ol>
+<li>
+<p>创建 Bucket，创建地址<a href="https://oss.console.aliyun.com/bucket" target="_blank" rel="noopener">点击进入</a>，创建完成后即可获取查看 Endpoint 信息；</p>
 </li>
-<li><p>创建 RAM 访问控制子用户，得到  AccessKey 和 accessKeySecret；</p>
+<li>
+<p>创建 RAM 访问控制子用户，得到  AccessKey 和 accessKeySecret；</p>
 </li>
-<li><p>POM 文件引入依赖：</p>
+<li>
+<p>POM 文件引入依赖：</p>
  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alicloud-oss<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.1.0.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>application.yml 中配置如下信息：</p>
+<li>
+<p>application.yml 中配置如下信息：</p>
  <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line"><span class="attr">  cloud:</span></span><br><span class="line"><span class="attr">    alicloud:</span></span><br><span class="line"><span class="attr">      access-key:</span> <span class="string">xxx</span></span><br><span class="line"><span class="attr">      secret-key:</span> <span class="string">xxx</span></span><br><span class="line"><span class="attr">      oss:</span></span><br><span class="line"><span class="attr">        endpoint:</span> <span class="string">oss-cn-guangzhou.aliyuncs.com</span></span><br><span class="line"><span class="attr">        bucket:</span> <span class="string">gulimall-oss-shotozheng</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><p>创建测试类，如下所示：</p>
+<li>
+<p>创建测试类，如下所示：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OssUploadTests</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OSSClient ossClient;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Value</span>(<span class="string">"$&#123;spring.cloud.alicloud.oss.bucket&#125;"</span>)</span><br><span class="line">    <span class="keyword">private</span> String bucket;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">saveFile</span><span class="params">()</span> <span class="keyword">throws</span> FileNotFoundException </span>&#123;</span><br><span class="line">        String objectName = <span class="string">"imgs/bb.jpeg"</span>;</span><br><span class="line">        InputStream inputStream = <span class="keyword">new</span> FileInputStream(<span class="string">"C:\\Users\\admin\\Pictures\\Camera Roll\\f.jpeg"</span>);</span><br><span class="line">        ossClient.putObject(bucket, objectName, inputStream);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 关闭OSSClient。</span></span><br><span class="line">        ossClient.shutdown();</span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">"上传完成..."</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>服务端签名后上传，前台访问后台获取访问 OSS 上传签名之后才能直接在前端上传文件到 OSS 文件中，如下是获取服务端签名代码：</p>
+<li>
+<p>服务端签名后上传，前台访问后台获取访问 OSS 上传签名之后才能直接在前端上传文件到 OSS 文件中，如下是获取服务端签名代码：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf</span>4j</span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">OssController</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">        <span class="meta">@Resource</span></span><br><span class="line">        <span class="keyword">private</span> OSSClient ossClient;</span><br><span class="line">    </span><br><span class="line">        <span class="meta">@Value</span>(<span class="string">"$&#123;spring.cloud.alicloud.access-key&#125;"</span>)</span><br><span class="line">        <span class="keyword">private</span> String accessId;</span><br><span class="line">    </span><br><span class="line">        <span class="meta">@Value</span>(<span class="string">"$&#123;spring.cloud.alicloud.oss.endpoint&#125;"</span>)</span><br><span class="line">        <span class="keyword">private</span> String endpoint;</span><br><span class="line">    </span><br><span class="line">        <span class="meta">@Value</span>(<span class="string">"$&#123;spring.cloud.alicloud.oss.bucket&#125;"</span>)</span><br><span class="line">        <span class="keyword">private</span> String bucket;</span><br><span class="line">    </span><br><span class="line">        <span class="meta">@RequestMapping</span>(<span class="string">"/oss/policy"</span>)</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Map&lt;String, String&gt; <span class="title">policy</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="comment">// host的格式为 bucketname.endpoint</span></span><br><span class="line">            String host = <span class="string">"https://"</span> + bucket + <span class="string">"."</span> + endpoint;</span><br><span class="line">            <span class="comment">// 用户上传文件时指定的前缀。</span></span><br><span class="line">            String prefix = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>).format(<span class="keyword">new</span> Date());</span><br><span class="line">            String dir = prefix + <span class="string">"/"</span>;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="keyword">long</span> expireTime = <span class="number">30</span>;</span><br><span class="line">                <span class="keyword">long</span> expireEndTime = System.currentTimeMillis() + expireTime * <span class="number">1000</span>;</span><br><span class="line">                Date expiration = <span class="keyword">new</span> Date(expireEndTime);</span><br><span class="line">                <span class="comment">// PostObject请求最大可支持的文件大小为5 GB，即CONTENT_LENGTH_RANGE为5*1024*1024*1024。</span></span><br><span class="line">                PolicyConditions policyConds = <span class="keyword">new</span> PolicyConditions();</span><br><span class="line">                policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, <span class="number">0</span>, <span class="number">1048576000</span>);</span><br><span class="line">                policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);</span><br><span class="line">    </span><br><span class="line">                String postPolicy = ossClient.generatePostPolicy(expiration, policyConds);</span><br><span class="line">                <span class="keyword">byte</span>[] binaryData = postPolicy.getBytes(<span class="string">"utf-8"</span>);</span><br><span class="line">                String encodedPolicy = BinaryUtil.toBase64String(binaryData);</span><br><span class="line">                String postSignature = ossClient.calculatePostSignature(postPolicy);</span><br><span class="line">    </span><br><span class="line">                Map&lt;String, String&gt; respMap = <span class="keyword">new</span> LinkedHashMap&lt;&gt;();</span><br><span class="line">                respMap.put(<span class="string">"accessid"</span>, accessId);</span><br><span class="line">                respMap.put(<span class="string">"policy"</span>, encodedPolicy);</span><br><span class="line">                respMap.put(<span class="string">"signature"</span>, postSignature);</span><br><span class="line">                respMap.put(<span class="string">"dir"</span>, dir);</span><br><span class="line">                respMap.put(<span class="string">"host"</span>, host);</span><br><span class="line">                respMap.put(<span class="string">"expire"</span>, String.valueOf(expireEndTime / <span class="number">1000</span>));</span><br><span class="line">    </span><br><span class="line">                <span class="keyword">return</span> respMap;</span><br><span class="line">            &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">                log.info(e.getMessage());</span><br><span class="line">            &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">                ossClient.shutdown();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p> 访问结果如下图所示：</p>
-<p> <img src="/2021/06/07/oss-实现文件上传/image-20210609230035269.png" alt="获取签名结果"></p>
+<p>访问结果如下图所示：</p>
+<p><img src="/2021/06/07/oss-实现文件上传/image-20210609230035269.png" alt="获取签名结果"></p>
 </li>
 </ol>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -554,7 +571,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-文件存储"><span class="nav-text">1. 文件存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-普通文件存储方式和问题"><span class="nav-text">1.1 普通文件存储方式和问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-公共文件中心存储"><span class="nav-text">1.2 公共文件中心存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-OSS-文件上传"><span class="nav-text">2. OSS 文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-阿里云对象存储-普通上传方式"><span class="nav-text">2.1 阿里云对象存储-普通上传方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-阿里云对象存储-服务端签名后直传"><span class="nav-text">2.2 阿里云对象存储-服务端签名后直传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-普通-Java-实现"><span class="nav-text">3. 普通 Java 实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Spring-Cloud-实现"><span class="nav-text">4. Spring Cloud 实现</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1. 文件存储"><span class="nav-text">¶ 1. 文件存储</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1.1 普通文件存储方式和问题"><span class="nav-text">¶ 1.1 普通文件存储方式和问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1.2 公共文件中心存储"><span class="nav-text">¶ 1.2 公共文件中心存储</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2. OSS 文件上传"><span class="nav-text">¶ 2. OSS 文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2.1 阿里云对象存储-普通上传方式"><span class="nav-text">¶ 2.1 阿里云对象存储-普通上传方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2.2 阿里云对象存储-服务端签名后直传"><span class="nav-text">¶ 2.2 阿里云对象存储-服务端签名后直传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3. 普通 Java 实现"><span class="nav-text">¶ 3. 普通 Java 实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4. Spring Cloud 实现"><span class="nav-text">¶ 4. Spring Cloud 实现</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -652,12 +669,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

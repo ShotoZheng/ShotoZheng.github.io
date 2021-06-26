@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="一、概述程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。垃圾回收主要是针对 Java 堆和方法区进行。">
+  <meta name="description" content="¶ 一、概述 程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。垃圾回收主要是针对 Java 堆和方法区进行。">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="垃圾回收算法">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/09/12/2019-9-12-垃圾回收算法/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="一、概述程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。垃圾回收主要是针对 Java 堆和方法区进行。">
+<meta property="og:description" content="¶ 一、概述 程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。垃圾回收主要是针对 Java 堆和方法区进行。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/12/2019-9-12-垃圾回收算法/1568301690767.png">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/12/2019-9-12-垃圾回收算法/1568301690769.png">
@@ -77,7 +77,7 @@
 <meta property="og:updated_time" content="2020-01-01T13:04:03.997Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="垃圾回收算法">
-<meta name="twitter:description" content="一、概述程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。垃圾回收主要是针对 Java 堆和方法区进行。">
+<meta name="twitter:description" content="¶ 一、概述 程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。垃圾回收主要是针对 Java 堆和方法区进行。">
 <meta name="twitter:image" content="https://shotozheng.github.io/2019/09/12/2019-9-12-垃圾回收算法/1568301690767.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/09/12/2019-9-12-垃圾回收算法/">
 
@@ -401,15 +401,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h2><p>程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。<strong>垃圾回收主要是针对 Java 堆和方法区进行。</strong></p>
+        <h2 id="一、概述"><a class="header-anchor" href="#一、概述" aria-hidden="true">¶</a> 一、概述</h2>
+<p>程序计数器、虚拟机栈和本地方法栈这三个区域属于线程私有的，只存在于线程的生命周期内，线程结束之后也会消失，因此不需要对这三个区域进行垃圾回收。<strong>垃圾回收主要是针对 Java 堆和方法区进行。</strong></p>
 <a id="more"></a>
-<h2 id="二、判断对象已死"><a href="#二、判断对象已死" class="headerlink" title="二、判断对象已死"></a>二、判断对象已死</h2><p>垃圾回收需要回收堆和方法区中的已死的对象，也就是已经变为垃圾的对象。但是我们需要判断哪些对象可回收哪些对象不可以。下面我们介绍两种判断方法，即引用计数法和可达性分析法。</p>
-<h3 id="引用计数法"><a href="#引用计数法" class="headerlink" title="引用计数法"></a>引用计数法</h3><p>引用计数法的大致执行过程为：首先，给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。<br>主流的Java虚拟机里面不会选用引用技术算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。</p>
-<p>比如下图，虚拟机栈中objectA和objectB分别持有对堆中对象实例的引用，而堆中两个对象相互也有引用，此时堆中的两个对象实例的引用计算器值都为2。objectA和objectB不再持有对象实例的引用时，堆中的对象实例可以被视为垃圾，但是此时堆中的两个对象实例的引用计算器值却都为1，因此其很难解决对象之间相互循环引用的问题。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690767.png" alt><br>下面是相关的验证代码，运行参数设置为-verbose:gc -XX:+PrintGCDetails，这两个参数用于打印垃圾回收日志。</p>
+<h2 id="二、判断对象已死"><a class="header-anchor" href="#二、判断对象已死" aria-hidden="true">¶</a> 二、判断对象已死</h2>
+<p>垃圾回收需要回收堆和方法区中的已死的对象，也就是已经变为垃圾的对象。但是我们需要判断哪些对象可回收哪些对象不可以。下面我们介绍两种判断方法，即引用计数法和可达性分析法。</p>
+<h3 id="引用计数法"><a class="header-anchor" href="#引用计数法" aria-hidden="true">¶</a> 引用计数法</h3>
+<p>引用计数法的大致执行过程为：首先，给对象中添加一个引用计数器，每当有一个地方引用它时，计数器值就加1；当引用失效时，计数器值就减1；任何时刻计数器为0的对象就是不可能再被使用的。<br>
+主流的Java虚拟机里面不会选用引用技术算法来管理内存，其中最主要的原因是它很难解决对象之间相互循环引用的问题。</p>
+<p>比如下图，虚拟机栈中objectA和objectB分别持有对堆中对象实例的引用，而堆中两个对象相互也有引用，此时堆中的两个对象实例的引用计算器值都为2。objectA和objectB不再持有对象实例的引用时，堆中的对象实例可以被视为垃圾，但是此时堆中的两个对象实例的引用计算器值却都为1，因此其很难解决对象之间相互循环引用的问题。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690767.png" alt><br>
+下面是相关的验证代码，运行参数设置为-verbose:gc -XX:+PrintGCDetails，这两个参数用于打印垃圾回收日志。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReferenceCountingGC</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> Object instance = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 起到占用内存的作用</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">byte</span>[] bigSize = <span class="keyword">new</span> <span class="keyword">byte</span>[<span class="number">20</span> * <span class="number">1024</span> * <span class="number">1024</span>];</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ReferenceCountingGC objectA = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">        ReferenceCountingGC objectB = <span class="keyword">new</span> ReferenceCountingGC();</span><br><span class="line">        objectA.instance = objectB;</span><br><span class="line">        objectB.instance = objectA;</span><br><span class="line"></span><br><span class="line">        objectA = <span class="keyword">null</span>;</span><br><span class="line">        objectB = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        System.gc();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以发现新生代被回收了，从22476K变为616K，也说明堆中的对象是有被回收的，也说明主流的Java虚拟机里面不会选用引用技术算法来管理内存。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690769.png" alt></p>
-<h3 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h3><p>通过 GC Roots 作为起始点进行搜索，能够到达到的对象都是存活的，不可达的对象可被回收。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690888.png" alt><br>算法基本思路：通过一系列的称为”GC Roots”的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。</p>
+<p>可以发现新生代被回收了，从22476K变为616K，也说明堆中的对象是有被回收的，也说明主流的Java虚拟机里面不会选用引用技术算法来管理内存。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690769.png" alt></p>
+<h3 id="可达性分析算法"><a class="header-anchor" href="#可达性分析算法" aria-hidden="true">¶</a> 可达性分析算法</h3>
+<p>通过 GC Roots 作为起始点进行搜索，能够到达到的对象都是存活的，不可达的对象可被回收。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690888.png" alt><br>
+算法基本思路：通过一系列的称为&quot;GC Roots&quot;的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链，当一个对象到GC Roots没有任何引用链相连时，则证明此对象是不可用的。</p>
 <p>Java 虚拟机使用该算法来判断对象是否可被回收，在 Java 中 可作为 GC Roots 的对象包含以下几种：</p>
 <ul>
 <li>虚拟机栈中引用的对象</li>
@@ -417,24 +426,22 @@
 <li>方法区中类静态属性引用的对象</li>
 <li>方法区中的常量引用的对象</li>
 </ul>
-<h3 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h3><p>无论是通过引用计数算法判断对象的引用数量，还是通过可达性分析算法判断对象是否可达，判定对象是否可被回收都与引用有关。在JDK1.2之后，Java对引用的概念进行了扩充，将引用分为强引用、软引用、弱引用和虚引用4种。</p>
+<h3 id="引用类型"><a class="header-anchor" href="#引用类型" aria-hidden="true">¶</a> 引用类型</h3>
+<p>无论是通过引用计数算法判断对象的引用数量，还是通过可达性分析算法判断对象是否可达，判定对象是否可被回收都与引用有关。在JDK1.2之后，Java对引用的概念进行了扩充，将引用分为强引用、软引用、弱引用和虚引用4种。</p>
 <p><strong>（一）强引用</strong></p>
-<p>   被强引用关联的对象<strong>不会被垃圾收集器回收</strong>，我们可以使用 new 一个新对象的方式来创建强引用。</p>
+<p>被强引用关联的对象<strong>不会被垃圾收集器回收</strong>，我们可以使用 new 一个新对象的方式来创建强引用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br></pre></td></tr></table></figure>
-
 <p><strong>（二）软引用</strong></p>
 <p>​    软引用是用来描述一些还有用但并非必需的对象。被软引用关联的对象，只有<strong>在内存不够的情况下才会被回收</strong>，使用 java.lang.ref.SoftReference 类来创建软引用，具体代码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">SoftReference&lt;Object&gt; sf = <span class="keyword">new</span> SoftReference&lt;&gt;(obj);</span><br><span class="line">obj = <span class="keyword">null</span>;  <span class="comment">// 使对象只被软引用关联</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>（三）弱引用</strong></p>
-<p> 若引用也是用来描述非必需对象的，但是他的强度比软引用更弱一些，被弱引用关联的对象一定会<strong>被垃圾收集器回收</strong>，也就是说它只能存活到下一次垃圾收集，可以使用 WeakReference 类来实现弱引用。</p>
+<p>若引用也是用来描述非必需对象的，但是他的强度比软引用更弱一些，被弱引用关联的对象一定会<strong>被垃圾收集器回收</strong>，也就是说它只能存活到下一次垃圾收集，可以使用 WeakReference 类来实现弱引用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">WeakReference&lt;Object&gt; wf = <span class="keyword">new</span> WeakReference&lt;&gt;(obj);</span><br><span class="line">obj = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-
 <p><strong>（四）虚引用</strong></p>
 <p>​    虚引用又称为幽灵引用或者幻影引用。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。可以使用 PhantomReference 来实现虚引用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Object obj = <span class="keyword">new</span> Object();</span><br><span class="line">PhantomReference&lt;Object&gt; pf = <span class="keyword">new</span> PhantomReference&lt;&gt;(obj);</span><br><span class="line">obj = <span class="keyword">null</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="finalize方法"><a href="#finalize方法" class="headerlink" title="finalize方法"></a>finalize方法</h3><p>使在可达性分析算法中不可达的对象，也并非是要宣判“死亡”的，它们暂时都处于“缓刑”阶段，要真正宣告一个对象“死亡”，首先要经历<strong>两次标记过程</strong>：</p>
+<h3 id="finalize方法"><a class="header-anchor" href="#finalize方法" aria-hidden="true">¶</a> finalize方法</h3>
+<p>使在可达性分析算法中不可达的对象，也并非是要宣判“死亡”的，它们暂时都处于“缓刑”阶段，要真正宣告一个对象“死亡”，首先要经历<strong>两次标记过程</strong>：</p>
 <ol>
 <li>对象在进行可达性分析后发现没有与 GC Roots相连接的引用链，那它将会被第一次标记并进行一次筛选的条件是此对象是否有必要执行finalize方法。</li>
 <li>当对象没有覆盖finaliza() 方法，或者finaliza() 方法已经被虚拟机调用过，虚拟机则会回收这个对象。否则执行finalize方法，此过程可能会将宣判“死亡”的对象“救活”。</li>
@@ -446,55 +453,75 @@
 <p>如果对象想在<code>finaliza()</code> 方法中成功拯救自己，只要重新与引用链上的任何一个对象建立关联即可，例如把自己（this关键字）赋值给某个类变量或者对象的成员变量，这样在第二次标记时它将被移出“即将回收”的集合；如果对象这时候还没有逃脱，基本上它就被回收了。</p>
 <p><strong>代码示例：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">【一次对象自我拯救的演示】</span></span><br><span class="line"><span class="comment"> * 此代码演示了两点：</span></span><br><span class="line"><span class="comment"> * 1.对象可以在被GC时自我拯救。</span></span><br><span class="line"><span class="comment"> * 2.这种自救的机会只有一次，因为一个对象的finalize()方法最多只会被系统自动调用一次</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> zzm</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FinalizeEscapeGC</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> FinalizeEscapeGC SAVE_HOOK = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">isAlive</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"yes, i am still alive :)"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">finalize</span><span class="params">()</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.finalize();</span><br><span class="line">        System.out.println(<span class="string">"finalize mehtod executed!"</span>);</span><br><span class="line">        <span class="comment">//重新关联引用</span></span><br><span class="line">        FinalizeEscapeGC.SAVE_HOOK = <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Throwable </span>&#123;</span><br><span class="line">        SAVE_HOOK = <span class="keyword">new</span> FinalizeEscapeGC();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 1. 对象第一次成功拯救自己</span></span><br><span class="line">        SAVE_HOOK = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">//gc时会调用finalize方法</span></span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="comment">// 因为Finalizer方法优先级很低，暂停0.5秒，以等待它</span></span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">if</span> (SAVE_HOOK != <span class="keyword">null</span>) &#123;</span><br><span class="line">            SAVE_HOOK.isAlive();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"no, i am dead :("</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 下面这段代码与上面的完全相同，但是这次自救却失败了</span></span><br><span class="line">        SAVE_HOOK = <span class="keyword">null</span>;</span><br><span class="line">        <span class="comment">// 同样会再gc时调用finalize方法，但是finalize执行过一次了</span></span><br><span class="line">        System.gc();</span><br><span class="line">        <span class="comment">// 因为Finalizer方法优先级很低，暂停0.5秒，以等待它</span></span><br><span class="line">        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">        <span class="keyword">if</span> (SAVE_HOOK != <span class="keyword">null</span>) &#123;</span><br><span class="line">            SAVE_HOOK.isAlive();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            System.out.println(<span class="string">"no, i am dead :("</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong>运行结果：</strong></p>
 <pre><code>finalize method executed!
 yes, i am still alive :)
-no, i am dead :(</code></pre><p>由以上结果可知，SAVE_HOOK 对象的<code>finalize()</code> 方法确实被GC收集器触发过，并且在收集前成功逃脱了。</p>
+no, i am dead :(
+</code></pre>
+<p>由以上结果可知，SAVE_HOOK 对象的<code>finalize()</code> 方法确实被GC收集器触发过，并且在收集前成功逃脱了。</p>
 <p>另一个值得注意的地方，代码中有两段一模一样的代码段，执行结果却是一次逃脱成功，一次失败。</p>
 <p><strong>这是因为任何一个对象的<code>finalize()</code> 方法都只会被系统调用一次，如果对象面临下一次回收，它的<code>finalize()</code> 方法不会再被执行，因此第二次逃脱行动失败。</strong></p>
 <p><strong>执行过程：</strong></p>
 <p><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690893.png" alt></p>
 <p><strong>有关finaliza()方法的建议:</strong></p>
 <ul>
-<li><p>需要特别说的是，<code>finalize()</code> 方法，不建议开发人员使用这种方法拯救对象。</p>
+<li>
+<p>需要特别说的是，<code>finalize()</code> 方法，不建议开发人员使用这种方法拯救对象。</p>
 </li>
-<li><p>应当尽量避免使用它，因为它不是C/C++中的析构函数，而是Java刚诞生时为了使C/C++程序员更容易接受它所做的一个妥协。</p>
+<li>
+<p>应当尽量避免使用它，因为它不是C/C<ins>中的析构函数，而是Java刚诞生时为了使C/C</ins>程序员更容易接受它所做的一个妥协。</p>
 </li>
-<li><p>它的运行代价高昂，不确定性大，无法保证各个对象的调用顺序。</p>
+<li>
+<p>它的运行代价高昂，不确定性大，无法保证各个对象的调用顺序。</p>
 </li>
-<li><p>有些教材中描述它适合做“关闭外部资源”之类的工作，这完全是对此方法用途的一种自我安慰。</p>
+<li>
+<p>有些教材中描述它适合做“关闭外部资源”之类的工作，这完全是对此方法用途的一种自我安慰。</p>
 </li>
-<li><p><code>finalize()</code> 能做的工作，使用try-finally 或者其它方法都更合适和及时，所以<strong>作者建议大家可以忘掉此方法存在。</strong></p>
+<li>
+<p><code>finalize()</code> 能做的工作，使用try-finally 或者其它方法都更合适和及时，所以<strong>作者建议大家可以忘掉此方法存在。</strong></p>
 </li>
 </ul>
-<h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3><p>方法区的垃圾收集主要回收两部分内容：废弃常量和无用的类。</p>
+<h3 id="回收方法区"><a class="header-anchor" href="#回收方法区" aria-hidden="true">¶</a> 回收方法区</h3>
+<p>方法区的垃圾收集主要回收两部分内容：废弃常量和无用的类。</p>
 <ul>
-<li><p>废弃常量的回收：回收废弃常量与回收Java堆中的对象非常类似。以常量池中字符串常量的回收为例。例如一个字符串“abc”已经进入常量池，但是无任何String对象引用常量池的此常量，也无其它引用此字符串常量，“abc”常量会被系统清理出常量池。</p>
+<li>
+<p>废弃常量的回收：回收废弃常量与回收Java堆中的对象非常类似。以常量池中字符串常量的回收为例。例如一个字符串“abc”已经进入常量池，但是无任何String对象引用常量池的此常量，也无其它引用此字符串常量，“abc”常量会被系统清理出常量池。</p>
 </li>
-<li><p>无用类的回收：常量池中的其他类（接口）、方法、字段的符号引用也是如此。</p>
-<p>判定一个类是否是“无用类”的3个条件：</p>
+<li>
+<p>无用类的回收：常量池中的其他类（接口）、方法、字段的符号引用也是如此。</p>
 </li>
 </ul>
+<p>判定一个类是否是“无用类”的3个条件：</p>
 <ul>
 <li>该类的所有实例已被回收，也就是Java堆中不存在该类的任何实例。</li>
 <li>加载该类的ClassLoader已被回收。</li>
 <li>该类对应的java.lang.Class对象没有在任何地方被引用，无法通过反射访问该类的方法。</li>
 </ul>
-<h2 id="三、垃圾收集算法"><a href="#三、垃圾收集算法" class="headerlink" title="三、垃圾收集算法"></a>三、垃圾收集算法</h2><h3 id="标记-清除算法"><a href="#标记-清除算法" class="headerlink" title="标记-清除算法"></a>标记-清除算法</h3><p>参看下图，标记-清除算法将存活的对象进行标记，然后清理掉未被标记的对象。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690890.jpg" alt><br>不足：</p>
+<h2 id="三、垃圾收集算法"><a class="header-anchor" href="#三、垃圾收集算法" aria-hidden="true">¶</a> 三、垃圾收集算法</h2>
+<h3 id="标记-清除算法"><a class="header-anchor" href="#标记-清除算法" aria-hidden="true">¶</a> 标记-清除算法</h3>
+<p>参看下图，标记-清除算法将存活的对象进行标记，然后清理掉未被标记的对象。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690890.jpg" alt><br>
+不足：</p>
 <ul>
 <li>标记和清除过程效率都不高；</li>
 <li>会产生大量不连续的内存碎片，导致无法给大对象分配内存。</li>
 </ul>
-<h3 id="标记-整理算法"><a href="#标记-整理算法" class="headerlink" title="标记-整理算法"></a>标记-整理算法</h3><p>如下图所示，标记-整理算法让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存，该算法主要用于老年代。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690891.jpg" alt></p>
-<h3 id="复制算法"><a href="#复制算法" class="headerlink" title="复制算法"></a>复制算法</h3><p>复制算法将内存划分为大小相等的两块，每次只使用其中一块，当这一块内存用完了就将还存活的对象复制到另一块上面，然后再把使用过的内存空间进行一次清理。参见下图。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690891.jpg" alt><br>复制算法主要不足是只使用了内存的一半，代价较高。</p>
-<p>现在的商业虚拟机都采用这种收集算法来回收新生代，但是并不是将内存划分为大小相等的两块，而是分为一块较大的 Eden 空间和较小的 From Survivor 和  To Survivor空间，参见下图。每次使用 Eden 空间和一块 From Survivor。在回收时，将 Eden 和 From Survivor 中还存活着的对象一次性复制到To Survivor 空间上，最后清理 Eden 和使用过的From Survivor。HotSpot 虚拟机的 Eden 和 From Survivor 的大小比例默认为 8:1，保证了内存的利用率达到 90%。如果每次回收有多于 10% 的对象存活，那么To Survivor 空间就不够用了，此时需要依赖于老年代进行分配担保，也就是借用老年代的空间存储放不下的对象。<br><img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690892.png" alt></p>
-<h3 id="分代收集算法"><a href="#分代收集算法" class="headerlink" title="分代收集算法"></a>分代收集算法</h3><p>现在的商业虚拟机采用分代收集算法，它根据对象存活周期将内存划分为几块，不同块采用适当的收集算法。一般将 Java 堆分为新生代和老年代。</p>
+<h3 id="标记-整理算法"><a class="header-anchor" href="#标记-整理算法" aria-hidden="true">¶</a> 标记-整理算法</h3>
+<p>如下图所示，标记-整理算法让所有存活的对象都向一端移动，然后直接清理掉端边界以外的内存，该算法主要用于老年代。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690891.jpg" alt></p>
+<h3 id="复制算法"><a class="header-anchor" href="#复制算法" aria-hidden="true">¶</a> 复制算法</h3>
+<p>复制算法将内存划分为大小相等的两块，每次只使用其中一块，当这一块内存用完了就将还存活的对象复制到另一块上面，然后再把使用过的内存空间进行一次清理。参见下图。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690891.jpg" alt><br>
+复制算法主要不足是只使用了内存的一半，代价较高。</p>
+<p>现在的商业虚拟机都采用这种收集算法来回收新生代，但是并不是将内存划分为大小相等的两块，而是分为一块较大的 Eden 空间和较小的 From Survivor 和  To Survivor空间，参见下图。每次使用 Eden 空间和一块 From Survivor。在回收时，将 Eden 和 From Survivor 中还存活着的对象一次性复制到To Survivor 空间上，最后清理 Eden 和使用过的From Survivor。HotSpot 虚拟机的 Eden 和 From Survivor 的大小比例默认为 8:1，保证了内存的利用率达到 90%。如果每次回收有多于 10% 的对象存活，那么To Survivor 空间就不够用了，此时需要依赖于老年代进行分配担保，也就是借用老年代的空间存储放不下的对象。<br>
+<img src="/2019/09/12/2019-9-12-垃圾回收算法/1568301690892.png" alt></p>
+<h3 id="分代收集算法"><a class="header-anchor" href="#分代收集算法" aria-hidden="true">¶</a> 分代收集算法</h3>
+<p>现在的商业虚拟机采用分代收集算法，它根据对象存活周期将内存划分为几块，不同块采用适当的收集算法。一般将 Java 堆分为新生代和老年代。</p>
 <ul>
 <li>新生代使用：复制算法</li>
 <li>老年代使用：标记 - 清理 或者 标记 - 整理 算法</li>
 </ul>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -530,8 +557,8 @@ no, i am dead :(</code></pre><p>由以上结果可知，SAVE_HOOK 对象的<code
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/12/2019-9-12-垃圾收集器/" rel="next" title="垃圾收集器">
-                  <i class="fa fa-chevron-left"></i> 垃圾收集器
+                <a href="/2019/09/12/2019-9-12-类加载机制/" rel="next" title="类加载机制">
+                  <i class="fa fa-chevron-left"></i> 类加载机制
                 </a>
               
             </div>
@@ -540,8 +567,8 @@ no, i am dead :(</code></pre><p>由以上结果可知，SAVE_HOOK 对象的<code
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/09/12/2019-9-12-内存分配与回收策略/" rel="prev" title="内存分配与回收策略">
-                  内存分配与回收策略 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/12/2019-9-12-垃圾收集器/" rel="prev" title="垃圾收集器">
+                  垃圾收集器 <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -594,7 +621,7 @@ no, i am dead :(</code></pre><p>由以上结果可知，SAVE_HOOK 对象的<code
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、概述"><span class="nav-text">一、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、判断对象已死"><span class="nav-text">二、判断对象已死</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数法"><span class="nav-text">引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析算法"><span class="nav-text">可达性分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-text">引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize方法"><span class="nav-text">finalize方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收方法区"><span class="nav-text">回收方法区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、垃圾收集算法"><span class="nav-text">三、垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-清除算法"><span class="nav-text">标记-清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-整理算法"><span class="nav-text">标记-整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制算法"><span class="nav-text">复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集算法"><span class="nav-text">分代收集算法</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、概述"><span class="nav-text">¶ 一、概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、判断对象已死"><span class="nav-text">¶ 二、判断对象已死</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#引用计数法"><span class="nav-text">¶ 引用计数法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可达性分析算法"><span class="nav-text">¶ 可达性分析算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用类型"><span class="nav-text">¶ 引用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#finalize方法"><span class="nav-text">¶ finalize方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回收方法区"><span class="nav-text">¶ 回收方法区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、垃圾收集算法"><span class="nav-text">¶ 三、垃圾收集算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-清除算法"><span class="nav-text">¶ 标记-清除算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标记-整理算法"><span class="nav-text">¶ 标记-整理算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复制算法"><span class="nav-text">¶ 复制算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分代收集算法"><span class="nav-text">¶ 分代收集算法</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -692,12 +719,12 @@ no, i am dead :(</code></pre><p>由以上结果可知，SAVE_HOOK 对象的<code
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

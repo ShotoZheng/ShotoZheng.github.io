@@ -374,7 +374,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1-表单标签"><a href="#1-表单标签" class="headerlink" title="1. 表单标签"></a>1. 表单标签</h1><p>通过 SpringMVC 的表单标签可以实现<strong>将模型数据中的属性和 HTML 表单元素相绑定</strong>，以实现表单数据更便捷编辑和<strong>表单值的回显</strong>。</p>
+          <h1 id="1. 表单标签"><a class="header-anchor" href="#1. 表单标签" aria-hidden="true">¶</a> 1. 表单标签</h1>
+<p>通过 SpringMVC 的表单标签可以实现<strong>将模型数据中的属性和 HTML 表单元素相绑定</strong>，以实现表单数据更便捷编辑和<strong>表单值的回显</strong>。</p>
 <p>SpringMVC 提供了多个表单组件标签，如 <strong>&lt;form:input/&gt;、&lt;form:select/&gt;</strong>  等，用以绑定表单字段的属性值，它们的共有属性如下：</p>
 <ul>
 <li>path：表单字段，对应 html 元素的 name 属性，支持级联属性</li>
@@ -517,10 +518,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-返回JSON"><a href="#1-返回JSON" class="headerlink" title="1. 返回JSON"></a>1. 返回JSON</h2><ol>
-<li><p>加入Jar包：<br>  <img src="/2020/01/05/（六）SpringMVC学习笔记-返回JSON/20190215191425735.png" alt="在这里插入图片描述"></p>
+          <h2 id="1. 返回JSON"><a class="header-anchor" href="#1. 返回JSON" aria-hidden="true">¶</a> 1. 返回JSON</h2>
+<ol>
+<li>
+<p>加入Jar包：<br>
+<img src="/2020/01/05/（六）SpringMVC学习笔记-返回JSON/20190215191425735.png" alt="在这里插入图片描述"></p>
 </li>
-<li><p>编写目标方法，使其返回 JSON 对应的对象或集合，并在在方法上添加 @ResponseBody 注解。具体代码如下：</p>
+<li>
+<p>编写目标方法，使其返回 JSON 对应的对象或集合，并在在方法上添加 @ResponseBody 注解。具体代码如下：</p>
  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 返回 JSON 对应的对象或集合</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/testJackson"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">testJackson</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> User(<span class="number">100</span>, <span class="string">"aa"</span>, <span class="string">"abc123"</span>, <span class="keyword">true</span>, <span class="number">1001.2</span>, <span class="keyword">new</span> Date(), <span class="string">"shoto@gmail.com"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>
           <!--noindex-->
           
@@ -656,8 +661,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-简单示例"><a href="#1-简单示例" class="headerlink" title="1. 简单示例"></a>1. 简单示例</h3><p>下面先演示一个<strong>示例</strong>：</p>
-<p>1.首先需要在src目录下编写三个国际化资源文件。<br><img src="/2020/01/05/（七）SpringMVC学习笔记-国际化/2019021614590829.png" alt="在这里插入图片描述"><br>i18n_en_US.properties(i18n.properties)和i18n_zh_CN.properties内容分别如下所示：<br><img src="/2020/01/05/（七）SpringMVC学习笔记-国际化/20190216150051234.png" alt="在这里插入图片描述"><br><img src="/2020/01/05/（七）SpringMVC学习笔记-国际化/20190216150143184.png" alt="在这里插入图片描述"></p>
+          <h3 id="1. 简单示例"><a class="header-anchor" href="#1. 简单示例" aria-hidden="true">¶</a> 1. 简单示例</h3>
+<p>下面先演示一个<strong>示例</strong>：</p>
+<p>1.首先需要在src目录下编写三个国际化资源文件。<br>
+<img src="/2020/01/05/（七）SpringMVC学习笔记-国际化/2019021614590829.png" alt="在这里插入图片描述"><br>
+i18n_en_US.properties(i18n.properties)和i18n_zh_CN.properties内容分别如下所示：<br>
+<img src="/2020/01/05/（七）SpringMVC学习笔记-国际化/20190216150051234.png" alt="在这里插入图片描述"><br>
+<img src="/2020/01/05/（七）SpringMVC学习笔记-国际化/20190216150143184.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -792,7 +802,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1-导入Jar包"><a href="#1-导入Jar包" class="headerlink" title="1. 导入Jar包"></a>1. 导入Jar包</h3><p><img src="/2020/01/05/（一）SpringMVC学习笔记-HelloWorld/20190210104203251.png" alt="在这里插入图片描述"><br>注意：除了日志相关的包和Spring的基本jar包和aop包外，还<strong>需要web和webmvc的jar包。</strong></p>
+          <h3 id="1. 导入Jar包"><a class="header-anchor" href="#1. 导入Jar包" aria-hidden="true">¶</a> 1. 导入Jar包</h3>
+<p><img src="/2020/01/05/（一）SpringMVC学习笔记-HelloWorld/20190210104203251.png" alt="在这里插入图片描述"><br>
+注意：除了日志相关的包和Spring的基本jar包和aop包外，还<strong>需要web和webmvc的jar包。</strong></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1065,7 +1077,9 @@
 
       
           <p>本文基于SpringMVC的<a href="https://blog.csdn.net/weixin_40374341/article/details/86891498" target="_blank" rel="noopener">helloworld</a>项目来讲解演示。</p>
-<h1 id="1-映射请求"><a href="#1-映射请求" class="headerlink" title="1. 映射请求"></a>1. 映射请求</h1><h2 id="1-1-RequestMapping-映射请求"><a href="#1-1-RequestMapping-映射请求" class="headerlink" title="1.1 @RequestMapping 映射请求"></a>1.1 @RequestMapping 映射请求</h2><p>Spring MVC 使用 @RequestMapping 注解为控制器指定可以处理哪些 <strong>URL 请求</strong>，其在控制器的类定义及方法定义处都可标注。</p>
+<h1 id="1. 映射请求"><a class="header-anchor" href="#1. 映射请求" aria-hidden="true">¶</a> 1. 映射请求</h1>
+<h2 id="1.1 @RequestMapping 映射请求"><a class="header-anchor" href="#1.1 @RequestMapping 映射请求" aria-hidden="true">¶</a> 1.1 @RequestMapping 映射请求</h2>
+<p>Spring MVC 使用 @RequestMapping 注解为控制器指定可以处理哪些 <strong>URL 请求</strong>，其在控制器的类定义及方法定义处都可标注。</p>
 <ul>
 <li><strong>类定义处</strong>：提供初步的请求映射信息，相对于 WEB 应用的根目录；</li>
 <li><strong>方法处</strong>：提供进一步的细分映射信息，相对于类定义处的 URL。若类定义处未标注 @RequestMapping，则方法处标记的 URL 相对于WEB 应用的根目录。</li>
@@ -1204,7 +1218,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-自定义拦截器"><a href="#1-自定义拦截器" class="headerlink" title="1. 自定义拦截器"></a>1. 自定义拦截器</h2><p>假如我们在访问有些网页的时候可能会提示无权访问，因为我们的访问请求会被拦截器拦截到，并给我们显示无权访问的提示页面。下面我们使用SpringMVC来演示一下自定义拦截器的使用。</p>
+          <h2 id="1. 自定义拦截器"><a class="header-anchor" href="#1. 自定义拦截器" aria-hidden="true">¶</a> 1. 自定义拦截器</h2>
+<p>假如我们在访问有些网页的时候可能会提示无权访问，因为我们的访问请求会被拦截器拦截到，并给我们显示无权访问的提示页面。下面我们使用SpringMVC来演示一下自定义拦截器的使用。</p>
 <p>Spring MVC可以使用拦截器对请求进行拦截处理，用户可以自定义拦截器来实现特定的功能，自定义的拦截器必须实现<strong>HandlerInterceptor接口</strong>。</p>
           <!--noindex-->
           
@@ -1341,7 +1356,8 @@
 
       
           <p>Spring MVC 通过 <strong>HandlerExceptionResolver</strong> 处理程序的异常，包括 <strong>Handler 映射</strong>、<strong>数据绑定</strong>以及<strong>目标方法执行时发生的异常</strong>。</p>
-<p>其中HandlerExceptionResolver的实现类如下图所示：<br><img src="/2020/01/05/（十）SpringMVC学习笔记-异常处理/20190216200116116.png" alt="在这里插入图片描述"></p>
+<p>其中HandlerExceptionResolver的实现类如下图所示：<br>
+<img src="/2020/01/05/（十）SpringMVC学习笔记-异常处理/20190216200116116.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1476,7 +1492,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1-运行流程图"><a href="#1-运行流程图" class="headerlink" title="1. 运行流程图"></a>1. 运行流程图</h2><p><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103536894.png" alt="在这里插入图片描述"></p>
+          <h2 id="1. 运行流程图"><a class="header-anchor" href="#1. 运行流程图" aria-hidden="true">¶</a> 1. 运行流程图</h2>
+<p><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103536894.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1775,12 +1792,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

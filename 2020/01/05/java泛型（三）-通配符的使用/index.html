@@ -398,31 +398,29 @@
 <li>下边界限定通配符，形式&lt; ? super Number&gt;    //用Number举例</li>
 </ul>
 <a id="more"></a>
-
-<h3 id="1-泛型中的-？通配符"><a href="#1-泛型中的-？通配符" class="headerlink" title="1. 泛型中的 ？通配符"></a>1. 泛型中的 ？通配符</h3><p>如果定义一个方法，该方法用于打印出任意参数化类型的集合中的所有数据，如果这样写：</p>
+<h3 id="1. 泛型中的 ？通配符"><a class="header-anchor" href="#1. 泛型中的 ？通配符" aria-hidden="true">¶</a> 1. 泛型中的 ？通配符</h3>
+<p>如果定义一个方法，该方法用于打印出任意参数化类型的集合中的所有数据，如果这样写：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">publicclass GernericTest &#123;</span><br><span class="line">    <span class="function">publicstaticvoid <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        List&lt;Integer&gt; listInteger = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        List&lt;String&gt; listString = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        printCollection(listInteger);</span><br><span class="line">        printCollection(listString);    </span><br><span class="line">    &#125; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printCollection</span><span class="params">(Collection&lt;Object&gt; collection)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(Object obj:collection) &#123;</span><br><span class="line">            System.out.println(obj);</span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>语句 printCollection(listInteger); 报如下错误：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">The method <span class="title">printCollection</span><span class="params">(Collection&lt;Object&gt;)</span> in the type GernericTest is not applicable <span class="keyword">for</span> the <span class="title">arguments</span> <span class="params">(List&lt;Integer&gt;)</span></span></span><br></pre></td></tr></table></figure>
-
 <p>这是因为泛型的参数是不考虑继承关系的所以就直接报错。</p>
 <p>这时就得用 ？通配符：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">publicclass GernericTest &#123;</span><br><span class="line">    <span class="function">publicstaticvoid <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        List&lt;Integer&gt; listInteger = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</span><br><span class="line">        List&lt;String&gt; listString = <span class="keyword">new</span> ArrayList&lt;String&gt;();</span><br><span class="line">        printCollection(listInteger);</span><br><span class="line">        printCollection(listString);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function">publicstaticvoid <span class="title">printCollection</span><span class="params">(Collection&lt;?&gt; collection)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(Object obj:collection) &#123;</span><br><span class="line">            System.out.println(obj);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在方法 public static void printCollection(Collection&lt;?&gt; collection){…} 中不能出现与参数类型有关的方法比如 collection.add(); </p>
+<p>在方法 public static void printCollection(Collection&lt;?&gt; collection){…} 中不能出现与参数类型有关的方法比如 collection.add();</p>
 <p>因为程序调用这个方法的时候传入的参数不知道是什么类型的，但是可以调用与参数类型无关的方法比如 collection.size();</p>
 <p><strong>总结</strong>：使用 ? 通配符可以引用其他各种参数化的类型，? 通配符定义的变量的主要用作引用，可以调用与参数化无关的方法，不能调用与参数化有关的方法。</p>
-<h3 id="2-泛型中的-通配符的扩展"><a href="#2-泛型中的-通配符的扩展" class="headerlink" title="2. 泛型中的 ? 通配符的扩展"></a>2. 泛型中的 ? 通配符的扩展</h3><h4 id="2-1-界定通配符的上边界"><a href="#2-1-界定通配符的上边界" class="headerlink" title="2.1 界定通配符的上边界"></a>2.1 界定通配符的上边界</h4><p>Vector&lt;? extends 类型1&gt; x = new Vector&lt;类型2&gt;();</p>
+<h3 id="2. 泛型中的 ? 通配符的扩展"><a class="header-anchor" href="#2. 泛型中的 ? 通配符的扩展" aria-hidden="true">¶</a> 2. 泛型中的 ? 通配符的扩展</h3>
+<h4 id="2.1 界定通配符的上边界"><a class="header-anchor" href="#2.1 界定通配符的上边界" aria-hidden="true">¶</a> 2.1 界定通配符的上边界</h4>
+<p>Vector&lt;? extends 类型1&gt; x = new Vector&lt;类型2&gt;();</p>
 <p>类型1指定一个数据类型，那么<strong>类型2就只能是类型1或者是类型1的子类</strong>。例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector&lt;? extends Number&gt; x = <span class="keyword">new</span> Vector&lt;Integer&gt;();<span class="comment">//这是正确的</span></span><br><span class="line">Vector&lt;? extends Number&gt; x = <span class="keyword">new</span> Vector&lt;String&gt;();<span class="comment">//这是错误的</span></span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-界定通配符的下边界"><a href="#2-2-界定通配符的下边界" class="headerlink" title="2.2 界定通配符的下边界"></a>2.2 界定通配符的下边界</h4><p>Vector&lt;? super 类型1&gt; x = new Vector&lt;类型2&gt;();</p>
+<h4 id="2.2 界定通配符的下边界"><a class="header-anchor" href="#2.2 界定通配符的下边界" aria-hidden="true">¶</a> 2.2 界定通配符的下边界</h4>
+<p>Vector&lt;? super 类型1&gt; x = new Vector&lt;类型2&gt;();</p>
 <p>类型1指定一个数据类型，那么<strong>类型2就只能是类型1或者是类型1的父类</strong>。例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Vector&lt;? <span class="keyword">super</span> Integer&gt; x = <span class="keyword">new</span> Vector&lt;Number&gt;();<span class="comment">//这是正确的</span></span><br><span class="line">Vector&lt;? <span class="keyword">super</span> Integer&gt; x = <span class="keyword">new</span> Vector&lt;Byte&gt;();<span class="comment">//这是错误的</span></span><br></pre></td></tr></table></figure>
-
 <p><strong>提示</strong>：限定通配符总是包括自己。</p>
 <p><a href="https://blog.csdn.net/LonelyRoamer/article/details/7927212" target="_blank" rel="noopener">原文链接</a>，侵删。</p>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -522,7 +520,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-泛型中的-？通配符"><span class="nav-text">1. 泛型中的 ？通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-泛型中的-通配符的扩展"><span class="nav-text">2. 泛型中的 ? 通配符的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-界定通配符的上边界"><span class="nav-text">2.1 界定通配符的上边界</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-界定通配符的下边界"><span class="nav-text">2.2 界定通配符的下边界</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1. 泛型中的 ？通配符"><span class="nav-text">¶ 1. 泛型中的 ？通配符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2. 泛型中的 ? 通配符的扩展"><span class="nav-text">¶ 2. 泛型中的 ? 通配符的扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2.1 界定通配符的上边界"><span class="nav-text">¶ 2.1 界定通配符的上边界</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2.2 界定通配符的下边界"><span class="nav-text">¶ 2.2 界定通配符的下边界</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -620,12 +618,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

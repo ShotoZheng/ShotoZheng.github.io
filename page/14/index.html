@@ -510,7 +510,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>740</span>
+              <span>928</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -534,7 +534,10 @@
 
       
           <p>有很多算法在结构上是递归的：为了解决一个给定的问题，算法要一次或多次地递归调用其自身来解决相关的问题。这些算法通常采用分治策略：将原问题划分成n个规模较小而结构与原问题相似的子问题；递归地解决这些子问题，然后再合并其结果，就得到原问题的解。</p>
-<p>分治算法在每一层递归上都有三个步骤：<br><strong>分解（Divide）</strong>：将原问题分解成一系列子问题；<br><strong>解决（Conquer）</strong>：递归地解各子问题。若子问题足够小，则直接求解；<br><strong>合并（Combine）</strong>：将子问题的结果合并成原问题的解。</p>
+<p>分治算法在每一层递归上都有三个步骤：<br>
+<strong>分解（Divide）</strong>：将原问题分解成一系列子问题；<br>
+<strong>解决（Conquer）</strong>：递归地解各子问题。若子问题足够小，则直接求解；<br>
+<strong>合并（Combine）</strong>：将子问题的结果合并成原问题的解。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -661,7 +664,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.5k</span>
+              <span>4.7k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -684,8 +687,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为”1”、”2”、”3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为”1234321”，所以返回7。</p>
-<p>面对字符串”a131b”，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符是否相等，然后记录回文子串长度。比如当前遍历到的字符为a，只有右边有字符，所以回文子串”a”的长度为1；当遍历到的字符为1时，左右两边的字符分别为’a’和’3’不相等，所以回文子串”1”的长度为1；当遍历到的字符为3时，左右两边的字符都为’1’，记录下长度，然后继续向两边比较，此时‘a’和’b’不相等，所以回文子串”131”的长度为3。。。</p>
+          <p>首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为&quot;1&quot;、“2”、“3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为&quot;1234321&quot;，所以返回7。</p>
+<p>面对字符串&quot;a131b&quot;，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符是否相等，然后记录回文子串长度。比如当前遍历到的字符为a，只有右边有字符，所以回文子串&quot;a&quot;的长度为1；当遍历到的字符为1时，左右两边的字符分别为’a’和’3’不相等，所以回文子串&quot;1&quot;的长度为1；当遍历到的字符为3时，左右两边的字符都为’1’，记录下长度，然后继续向两边比较，此时‘a’和’b’不相等，所以回文子串&quot;131&quot;的长度为3。。。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -835,18 +838,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定一个<code>不含有重复值</code>的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。</p>
-<h5 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述:"></a>输入描述:</h5><blockquote>
-<p>第一行输入一个数字 n，表示数组 arr 的长度。<br>以下一行输出 n个数字，表示数组的值。</p>
+          <h5 id="题目描述"><a class="header-anchor" href="#题目描述" aria-hidden="true">¶</a> 题目描述</h5>
+<p>给定一个<code>不含有重复值</code>的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。</p>
+<h5 id="输入描述:"><a class="header-anchor" href="#输入描述:" aria-hidden="true">¶</a> 输入描述:</h5>
+<blockquote>
+<p>第一行输入一个数字 n，表示数组 arr 的长度。<br>
+以下一行输出 n个数字，表示数组的值。</p>
 </blockquote>
-<h5 id="输出描述"><a href="#输出描述" class="headerlink" title="输出描述:"></a>输出描述:</h5><blockquote>
+<h5 id="输出描述:"><a class="header-anchor" href="#输出描述:" aria-hidden="true">¶</a> 输出描述:</h5>
+<blockquote>
 <p>输出n行，每行两个数字 L 和 R，如果不存在，则值为-1，下标从0开始。</p>
 </blockquote>
-<h5 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h5><blockquote>
-<p>输入<br>7<br>3 4 1 5 6 2 7</p>
+<h5 id="示例1"><a class="header-anchor" href="#示例1" aria-hidden="true">¶</a> 示例1</h5>
+<blockquote>
+<p>输入<br>
+7<br>
+3 4 1 5 6 2 7</p>
 </blockquote>
 <blockquote>
-<p>输出<br>-1 2<br>0 2<br>-1 -1<br>2 5<br>3 5<br>2 -1<br>5 -1</p>
+<p>输出<br>
+-1 2<br>
+0 2<br>
+-1 -1<br>
+2 5<br>
+3 5<br>
+2 -1<br>
+5 -1</p>
 </blockquote>
           <!--noindex-->
           
@@ -997,7 +1014,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h5 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h5><p>给定一个<code>可能含有重复值</code>的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。</p>
+          <h5 id="题目描述"><a class="header-anchor" href="#题目描述" aria-hidden="true">¶</a> 题目描述</h5>
+<p>给定一个<code>可能含有重复值</code>的数组 arr，找到每一个 i 位置左边和右边离 i 位置最近且值比 arr[i] 小的位置。返回所有位置相应的信息。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1157,7 +1175,6 @@
 <p>字典树是一种树形结构，优点是利用字符串的公共前缀来节约存储空间，比如加入“abc”、“abcd”、“adb”、“b”、“bcd”、“efg”、“hik”之后，字典树如下图所示，其中橙色节点表示一个终止节点。</p>
 <div align="center"><img src="/2019/09/09/2019-9-9-字典树的实现/1568022512381.png"></div>
 字典树的基本性质如下：
-
 <ul>
 <li>根节点没有字符路径。除根节点外，每一个节点都被一个字符路径找到；</li>
 <li>从根节点出发到任何一个节点，如果将沿途经过的字符连接起来，一定为某个加入过的字符串的前缀；</li>
@@ -1289,7 +1306,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>771</span>
+              <span>779</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1312,7 +1329,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：<br><img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870243.png" alt><br>我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中<strong>离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。</strong></p>
+          <p>先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：<br>
+<img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870243.png" alt><br>
+我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中<strong>离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。</strong></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1462,8 +1481,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="一、结构"><a href="#一、结构" class="headerlink" title="一、结构"></a>一、结构</h3><p>并查集由一群集合构成，最开始时所有元素各自单独构成一个集合。比如，有一批元素arr = [a, b, c, d, e]，我们需要将这一批元素初始化成单个元素的集合，即a单独构成一个集合，b单独构成一个集合。其中并查集中的单个集合结构如下所示：<br> <div align="center"><img src="/2019/09/09/2019-9-9-并查集的实现/1568037829388.png"></div></p>
-<p> 当集合中只有一个元素时，这个元素的father为自己，也就是这个集合的<strong>代表节点</strong>。当一个集合有多个节点时，代表节点为集合中某节点的father指向其自己的节点，比如下图的节点a。<br>  <div align="center"><img src="/2019/09/09/2019-9-9-并查集的实现/1568037829396.png"></div></p>
+          <h3 id="一、结构"><a class="header-anchor" href="#一、结构" aria-hidden="true">¶</a> 一、结构</h3>
+<p>并查集由一群集合构成，最开始时所有元素各自单独构成一个集合。比如，有一批元素arr = [a, b, c, d, e]，我们需要将这一批元素初始化成单个元素的集合，即a单独构成一个集合，b单独构成一个集合。其中并查集中的单个集合结构如下所示：</p>
+ <div align="center"><img src="/2019/09/09/2019-9-9-并查集的实现/1568037829388.png"></div>
+<p>当集合中只有一个元素时，这个元素的father为自己，也就是这个集合的<strong>代表节点</strong>。当一个集合有多个节点时，代表节点为集合中某节点的father指向其自己的节点，比如下图的节点a。</p>
+  <div align="center"><img src="/2019/09/09/2019-9-9-并查集的实现/1568037829396.png"></div>
 <p>我们使用哈希表来保存所有并查集所有集合的所有元素的father信息，记为fatherMap。比如，哈希表fatherMap中的某一条记录会为(当前节点，father节点)。也就是key为当前节点，而value为当前节点的father节点。</p>
 <p>另外，我们使用另外一个哈希表rankMap来保存一个集合中的元素个数，即集合的大小rank。且只有一个集合的代表节点的rank信息才有效。rankMap的某条记录为（代表节点，集合节点数）。上图中集合的rank为6，并记录在代表节点a对应的valuer中。</p>
           <!--noindex-->
@@ -1615,7 +1637,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h6 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h6><p>给定数组 arr 和整数 num，共返回有多少个子数组满足如下情况：<br>max(arr[i…j]) - min(arr[i…j]) &lt;= num<br>max(arr[i…j])表示子数组arr[i…j]中的最大值，min[arr[i…j])表示子数组arr[i…j]中的最小值。</p>
+          <h6 id="题目描述"><a class="header-anchor" href="#题目描述" aria-hidden="true">¶</a> 题目描述</h6>
+<p>给定数组 arr 和整数 num，共返回有多少个子数组满足如下情况：<br>
+max(arr[i…j]) - min(arr[i…j]) &lt;= num<br>
+max(arr[i…j])表示子数组arr[i…j]中的最大值，min[arr[i…j])表示子数组arr[i…j]中的最小值。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1742,7 +1767,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>1.6k</span>
+              <span>1.7k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1752,7 +1777,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
           
 
@@ -1765,7 +1790,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h6 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h6><p>有一个整型数组arr和一个大小为w的窗口从数组的最左边滑到最右边，窗口每次向右边滑一个位置，求每一种窗口状态下的最大值。（如果数组长度为n，窗口大小为w，则一共产生n-w+1个窗口的最大值）</p>
+          <h6 id="题目描述"><a class="header-anchor" href="#题目描述" aria-hidden="true">¶</a> 题目描述</h6>
+<p>有一个整型数组arr和一个大小为w的窗口从数组的最左边滑到最右边，窗口每次向右边滑一个位置，求每一种窗口状态下的最大值。（如果数组长度为n，窗口大小为w，则一共产生n-w+1个窗口的最大值）</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1929,12 +1955,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">815k</span>
+    <span title="站点总字数">819k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:21</span>
+    <span title="站点阅读时长">12:24</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
