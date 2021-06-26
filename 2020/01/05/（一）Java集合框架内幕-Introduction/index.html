@@ -58,18 +58,18 @@
   };
 </script>
 
-  <meta name="description" content="¶ Java Collections Framework Internals ¶ Authors    Name Weibo Id Blog Mail     李豪 @计算所的小鼠标 CarpenterLee hooleeucas@163.com    ¶ Introduction 关于*C++标准模板库(Standard Template Library, STL)的书籍和资料有很多，关于Jav">
+  <meta name="description" content="Java Collections Framework InternalsAuthors   Name Weibo Id Blog Mail    李豪 @计算所的小鼠标 CarpenterLee hooleeucas@163.com   Introduction关于C++标准模板库(Standard Template Library, STL)的书籍和资料有很多，关于Java集合框架(Java C">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（一）Java集合框架内幕-Introduction">
 <meta property="og:url" content="https://ShotoZheng.github.io/2020/01/05/（一）Java集合框架内幕-Introduction/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="¶ Java Collections Framework Internals ¶ Authors    Name Weibo Id Blog Mail     李豪 @计算所的小鼠标 CarpenterLee hooleeucas@163.com    ¶ Introduction 关于*C++标准模板库(Standard Template Library, STL)的书籍和资料有很多，关于Jav">
+<meta property="og:description" content="Java Collections Framework InternalsAuthors   Name Weibo Id Blog Mail    李豪 @计算所的小鼠标 CarpenterLee hooleeucas@163.com   Introduction关于C++标准模板库(Standard Template Library, STL)的书籍和资料有很多，关于Java集合框架(Java C">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2020-01-05T00:34:19.566Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（一）Java集合框架内幕-Introduction">
-<meta name="twitter:description" content="¶ Java Collections Framework Internals ¶ Authors    Name Weibo Id Blog Mail     李豪 @计算所的小鼠标 CarpenterLee hooleeucas@163.com    ¶ Introduction 关于*C++标准模板库(Standard Template Library, STL)的书籍和资料有很多，关于Jav">
+<meta name="twitter:description" content="Java Collections Framework InternalsAuthors   Name Weibo Id Blog Mail    李豪 @计算所的小鼠标 CarpenterLee hooleeucas@163.com   Introduction关于C++标准模板库(Standard Template Library, STL)的书籍和资料有很多，关于Java集合框架(Java C">
   <link rel="canonical" href="https://ShotoZheng.github.io/2020/01/05/（一）Java集合框架内幕-Introduction/">
 
 
@@ -368,7 +368,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>873</span>
+              <span>863</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -391,32 +391,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="Java Collections Framework Internals"><a class="header-anchor" href="#Java Collections Framework Internals" aria-hidden="true">¶</a> Java Collections Framework Internals</h1>
-<h1 id="Authors"><a class="header-anchor" href="#Authors" aria-hidden="true">¶</a> Authors</h1>
-<table>
+        <h1 id="Java-Collections-Framework-Internals"><a href="#Java-Collections-Framework-Internals" class="headerlink" title="Java Collections Framework Internals"></a>Java Collections Framework Internals</h1><h1 id="Authors"><a href="#Authors" class="headerlink" title="Authors"></a>Authors</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Weibo Id</th>
-<th style="text-align:left">Blog</th>
-<th style="text-align:left">Mail</th>
+<th align="left">Name</th>
+<th align="left">Weibo Id</th>
+<th align="left">Blog</th>
+<th align="left">Mail</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">李豪</td>
-<td style="text-align:left"><a href="http://weibo.com/icttinymouse" target="_blank" rel="noopener">@计算所的小鼠标</a></td>
-<td style="text-align:left"><a href="http://www.cnblogs.com/CarpenterLee/" target="_blank" rel="noopener">CarpenterLee</a></td>
-<td style="text-align:left"><a href="mailto:hooleeucas@163.com" target="_blank" rel="noopener">hooleeucas@163.com</a></td>
+<tbody><tr>
+<td align="left">李豪</td>
+<td align="left"><a href="http://weibo.com/icttinymouse" target="_blank" rel="noopener">@计算所的小鼠标</a></td>
+<td align="left"><a href="http://www.cnblogs.com/CarpenterLee/" target="_blank" rel="noopener">CarpenterLee</a></td>
+<td align="left"><a href="mailto:hooleeucas@163.com" target="_blank" rel="noopener">hooleeucas@163.com</a></td>
 </tr>
-</tbody>
-</table>
-<h1 id="Introduction"><a class="header-anchor" href="#Introduction" aria-hidden="true">¶</a> Introduction</h1>
-<p>关于*C++标准模板库(Standard Template Library, STL)<em>的书籍和资料有很多，关于</em>Java集合框架(Java Collections Framework, JCF)*的资料却很少，甚至很难找到一本专门介绍它的书籍，这给Java学习者们带来不小的麻烦。我深深的不解其中的原因。<strong>虽然JCF设计参考了STL，但其定位不是Java版的STL，而是要实现一个精简紧凑的容器框架</strong>，对STL的介绍自然不能替代对JCF的介绍。</p>
+</tbody></table>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>关于<em>C++标准模板库(Standard Template Library, STL)</em>的书籍和资料有很多，关于<em>Java集合框架(Java Collections Framework, JCF)</em>的资料却很少，甚至很难找到一本专门介绍它的书籍，这给Java学习者们带来不小的麻烦。我深深的不解其中的原因。<strong>虽然JCF设计参考了STL，但其定位不是Java版的STL，而是要实现一个精简紧凑的容器框架</strong>，对STL的介绍自然不能替代对JCF的介绍。</p>
 <p>本系列文章主要从<strong>数据结构和算法</strong>层面分析JCF中List, Set, Map, Stack, Queue等典型容器，<strong>结合生动图解和源代码，帮助读者对Java集合框架建立清晰而深入的理解</strong>。本文并不特意介绍Java的语言特性，但会在需要的时候做出简洁的解释。</p>
 <a id="more"></a>
-<h1 id="Contents"><a class="header-anchor" href="#Contents" aria-hidden="true">¶</a> Contents</h1>
-<p>具体内容安排如下：</p>
+
+<h1 id="Contents"><a href="#Contents" class="headerlink" title="Contents"></a>Contents</h1><p>具体内容安排如下：</p>
 <ol>
 <li><a href="https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/1-Overview.md" target="_blank" rel="noopener">Overview</a> 对Java Collections Framework，以及Java语言特性做出基本介绍。</li>
 <li><a href="https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/2-ArrayList.md" target="_blank" rel="noopener">ArrayList</a> 结合源码对<em>ArrayList</em>进行讲解。</li>
@@ -429,7 +424,7 @@
 <li><a href="https://github.com/CarpenterLee/JCFInternals/blob/master/markdown/9-WeakHashMap.md" target="_blank" rel="noopener">WeakHashMap</a> 对<em>WeakHashMap</em>做出基本介绍。</li>
 </ol>
 <p><a href="https://github.com/CarpenterLee/JCFInternals" target="_blank" rel="noopener">原文地址</a></p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
     </div>
 
     
@@ -529,7 +524,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java Collections Framework Internals"><span class="nav-text">¶ Java Collections Framework Internals</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authors"><span class="nav-text">¶ Authors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-text">¶ Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contents"><span class="nav-text">¶ Contents</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Collections-Framework-Internals"><span class="nav-text">Java Collections Framework Internals</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Authors"><span class="nav-text">Authors</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction"><span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Contents"><span class="nav-text">Contents</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -627,12 +622,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

@@ -381,8 +381,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. Lambda 表达式入门"><a class="header-anchor" href="#1. Lambda 表达式入门" aria-hidden="true">¶</a> 1. Lambda 表达式入门</h2>
-<p>Lambda 表达式支持将代码块作为方法参数， Lambda 表达式允许使用更简洁的代码来创建只有一个抽象方法的接口（这种接口被称为函数式接口）的实例。</p>
+          <h2 id="1-Lambda-表达式入门"><a href="#1-Lambda-表达式入门" class="headerlink" title="1. Lambda 表达式入门"></a>1. Lambda 表达式入门</h2><p>Lambda 表达式支持将代码块作为方法参数， Lambda 表达式允许使用更简洁的代码来创建只有一个抽象方法的接口（这种接口被称为函数式接口）的实例。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -648,7 +647,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>19k</span>
+              <span>18k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -671,8 +670,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. Java泛型的实现方法：类型擦除"><a class="header-anchor" href="#1. Java泛型的实现方法：类型擦除" aria-hidden="true">¶</a> 1. Java泛型的实现方法：类型擦除</h2>
-<p>前面已经说了，Java 的泛型是伪泛型。为什么说 Java 的泛型是伪泛型呢？因为，在编译期间，所有的泛型信息都会被擦除掉。正确理解泛型概念的首要前提是理解类型擦出（type erasure）。</p>
+          <h2 id="1-Java泛型的实现方法：类型擦除"><a href="#1-Java泛型的实现方法：类型擦除" class="headerlink" title="1. Java泛型的实现方法：类型擦除"></a>1. Java泛型的实现方法：类型擦除</h2><p>前面已经说了，Java 的泛型是伪泛型。为什么说 Java 的泛型是伪泛型呢？因为，在编译期间，所有的泛型信息都会被擦除掉。正确理解泛型概念的首要前提是理解类型擦出（type erasure）。</p>
 <p>Java 中的泛型基本上都是在<strong>编译器</strong>这个层次来实现的。在生成的 Java 字节码中是不包含泛型中的类型信息的。<strong>使用泛型的时候加上的类型参数，会在编译器编译的时候去掉。这个过程就称为类型擦除。</strong></p>
 <p>如在代码中定义的 List&lt;object&gt; 和 List&lt;String&gt; 等类型，在编译后都会变成 List。JVM 看到的只是 List，而由泛型附加的类型信息对 JVM 来说是不可见的。Java 编译器会在编译时尽可能的发现可能出错的地方，但是仍然无法避免在运行时刻出现类型转换异常的情况。类型擦除也是 Java 的泛型实现方法与 C++ 模版机制实现方式之间的重要区别。</p>
           <!--noindex-->
@@ -816,8 +814,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. 泛型的基本概念"><a class="header-anchor" href="#1. 泛型的基本概念" aria-hidden="true">¶</a> 1. 泛型的基本概念</h2>
-<p><strong>泛型的定义</strong>：泛型是 JDK 1.5 的一项新特性，它的本质是参数化类型（Parameterized Type）的应用，也就是说所操作的数据类型被指定为一个参数，在用到的时候再指定具体的类型。这种参数类型可以用在类、接口和方法的创建，分别称为泛型类、泛型接口和泛型方法。</p>
+          <h2 id="1-泛型的基本概念"><a href="#1-泛型的基本概念" class="headerlink" title="1. 泛型的基本概念"></a>1. 泛型的基本概念</h2><p><strong>泛型的定义</strong>：泛型是 JDK 1.5 的一项新特性，它的本质是参数化类型（Parameterized Type）的应用，也就是说所操作的数据类型被指定为一个参数，在用到的时候再指定具体的类型。这种参数类型可以用在类、接口和方法的创建，分别称为泛型类、泛型接口和泛型方法。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -959,8 +956,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. 阻塞与非阻塞"><a class="header-anchor" href="#1. 阻塞与非阻塞" aria-hidden="true">¶</a> 1. 阻塞与非阻塞</h2>
-<p>传统的 IO 流都是阻塞式的。也就是说，当一个线程调用 read() 或 write()时，该线程被阻塞，直到有一些数据被读取或写入，该线程在此期间不能执行其他任务。因此，在完成网络通信进行 IO 操作时，由于线程会阻塞，所以服务器端必须为每个客户端都提供一个独立的线程进行处理，当服务器端需要处理大量客户端时，性能急剧下降。</p>
+          <h2 id="1-阻塞与非阻塞"><a href="#1-阻塞与非阻塞" class="headerlink" title="1. 阻塞与非阻塞"></a>1. 阻塞与非阻塞</h2><p>传统的 IO 流都是阻塞式的。也就是说，当一个线程调用 read() 或 write()时，该线程被阻塞，直到有一些数据被读取或写入，该线程在此期间不能执行其他任务。因此，在完成网络通信进行 IO 操作时，由于线程会阻塞，所以服务器端必须为每个客户端都提供一个独立的线程进行处理，当服务器端需要处理大量客户端时，性能急剧下降。</p>
 <p>Java NIO 是非阻塞模式的。当线程从某通道进行读写数据时，若没有数据可用时，该线程可以进行其他任务。线程通常将非阻塞 IO 的空闲时间用于在其他通道上执行 IO 操作，所以单独的线程可以管理多个输入和输出通道。因此， NIO 可以让服务器端使用一个或有限几个线程来同时处理连接到服务器端的所有客户端。</p>
           <!--noindex-->
           
@@ -1103,8 +1099,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="1. 通道的概念"><a class="header-anchor" href="#1. 通道的概念" aria-hidden="true">¶</a> 1. 通道的概念</h3>
-<p>通道（Channel）：由 java.nio.channels 包定义的。 Channel 表示 IO 源与目标打开的连接。Channel 类似于传统的“流”。只不过 Channel本身不能直接访问数据， Channel 只能与Buffer 进行交互。</p>
+          <h3 id="1-通道的概念"><a href="#1-通道的概念" class="headerlink" title="1. 通道的概念"></a>1. 通道的概念</h3><p>通道（Channel）：由 java.nio.channels 包定义的。 Channel 表示 IO 源与目标打开的连接。Channel 类似于传统的“流”。只不过 Channel本身不能直接访问数据， Channel 只能与Buffer 进行交互。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1246,8 +1241,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. Java NIO 简介"><a class="header-anchor" href="#1. Java NIO 简介" aria-hidden="true">¶</a> 1. Java NIO 简介</h1>
-<p>Java NIO（New IO） 是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同， <strong>NIO支持面向缓冲区（Buffer）的、基于通道（Channel）的IO操作。</strong> NIO能以更加高效的方式进行文件的读写操作，并且是<strong>非阻塞IO</strong>。</p>
+          <h1 id="1-Java-NIO-简介"><a href="#1-Java-NIO-简介" class="headerlink" title="1. Java NIO 简介"></a>1. Java NIO 简介</h1><p> Java NIO（New IO） 是从Java 1.4版本开始引入的一个新的IO API，可以替代标准的Java IO API。NIO与原来的IO有同样的作用和目的，但是使用的方式完全不同， <strong>NIO支持面向缓冲区（Buffer）的、基于通道（Channel）的IO操作。</strong> NIO能以更加高效的方式进行文件的读写操作，并且是<strong>非阻塞IO</strong>。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1389,8 +1383,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p>在Java集合框架系列文章的最后，笔者打算介绍一个特殊的成员：<em>WeakHashMap</em>，从名字可以看出它是某种 <em>Map</em>。它的特殊之处在于 <em>WeakHashMap</em> 里的<code>entry</code>可能会被GC自动删除，即使程序员没有调用<code>remove()</code>或者<code>clear()</code>方法。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p>在Java集合框架系列文章的最后，笔者打算介绍一个特殊的成员：<em>WeakHashMap<em>，从名字可以看出它是某种 *Map</em>。它的特殊之处在于 *WeakHashMap</em> 里的<code>entry</code>可能会被GC自动删除，即使程序员没有调用<code>remove()</code>或者<code>clear()</code>方法。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1532,8 +1525,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p>前面以Java <em>ArrayDeque</em>为例讲解了<em>Stack</em>和<em>Queue</em>，其实还有一种特殊的队列叫做<em>PriorityQueue</em>，即优先队列。<strong>优先队列的作用是能保证每次取出的元素都是队列中权值最小的</strong>（Java的优先队列每次取最小元素，C++的优先队列每次取最大元素）。这里牵涉到了大小关系，<strong>元素大小的评判可以通过元素本身的自然顺序（<em>natural ordering</em>），也可以通过构造时传入的比较器</strong>（<em>Comparator</em>，类似于C++的仿函数）。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p>前面以Java <em>ArrayDeque</em>为例讲解了<em>Stack</em>和<em>Queue</em>，其实还有一种特殊的队列叫做<em>PriorityQueue</em>，即优先队列。<strong>优先队列的作用是能保证每次取出的元素都是队列中权值最小的</strong>（Java的优先队列每次取最小元素，C++的优先队列每次取最大元素）。这里牵涉到了大小关系，<strong>元素大小的评判可以通过元素本身的自然顺序（<em>natural ordering</em>），也可以通过构造时传入的比较器</strong>（<em>Comparator</em>，类似于C++的仿函数）。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1675,8 +1667,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p>如果你已看过前面关于<em>HashSet</em>和<em>HashMap</em>，以及<em>TreeSet</em>和<em>TreeMap</em>的讲解，一定能够想到本文将要讲解的<em>LinkedHashSet</em>和<em>LinkedHashMap</em>其实也是一回事。<em>LinkedHashSet</em>和<em>LinkedHashMap</em>在Java里也有着相同的实现，前者仅仅是对后者做了一层包装，也就是说<em><em><em>LinkedHashSet</em>里面有一个</em>LinkedHashMap</em>（适配器模式）**。因此本文将重点分析<em>LinkedHashMap</em>。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p>如果你已看过前面关于<em>HashSet</em>和<em>HashMap</em>，以及<em>TreeSet</em>和<em>TreeMap</em>的讲解，一定能够想到本文将要讲解的<em>LinkedHashSet</em>和<em>LinkedHashMap</em>其实也是一回事。<em>LinkedHashSet</em>和<em>LinkedHashMap</em>在Java里也有着相同的实现，前者仅仅是对后者做了一层包装，也就是说<strong><em>LinkedHashSet</em>里面有一个<em>LinkedHashMap</em>（适配器模式）</strong>。因此本文将重点分析<em>LinkedHashMap</em>。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1840,12 +1831,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

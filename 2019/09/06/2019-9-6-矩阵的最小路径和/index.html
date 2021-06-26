@@ -381,7 +381,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.7k</span>
+              <span>2.6k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -409,8 +409,8 @@
 <p><img src="/2019/09/06/2019-9-6-矩阵的最小路径和/1567745854978.png" alt="1567745854978"></p>
 <p>其中路径1，3，1，0，6，1，0是所有路径中路径和最小的，所以返回12。</p>
 <a id="more"></a>
-<h3 id="一、暴力递归"><a class="header-anchor" href="#一、暴力递归" aria-hidden="true">¶</a> 一、暴力递归</h3>
-<p>下面我们使用递归的方法来处理这个问题。假设现在矩阵matrix有点a(i,j)，我们要求得点a(i,j)到矩阵右下角的点b的路径和，需遵循如下规律：</p>
+
+<h3 id="一、暴力递归"><a href="#一、暴力递归" class="headerlink" title="一、暴力递归"></a>一、暴力递归</h3><p>下面我们使用递归的方法来处理这个问题。假设现在矩阵matrix有点a(i,j)，我们要求得点a(i,j)到矩阵右下角的点b的路径和，需遵循如下规律：</p>
 <ol>
 <li>要求得点a(i,j)到点b的路径和，首先要求得点a的<strong>右边的点</strong>到点b的路径和right，以及点a<strong>下面的点</strong>到点b之间的路径和down。那么最后点a到点b的路径和记为min{right, down} + a(i, j)；</li>
 <li>当点a(i, j)到达最后一行时，它已经不能向下移动而只能向右移动，其路径和为点a加上其右边的点到点b的路径和；</li>
@@ -418,17 +418,18 @@
 </ol>
 <p>下面是求矩阵最小路径和的递归代码，具体如下所示。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 包含大量重复计算</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMinPathCore1</span><span class="params">(<span class="keyword">int</span>[][] matrix, <span class="keyword">int</span> row, <span class="keyword">int</span> col, <span class="keyword">int</span> rows, <span class="keyword">int</span> cols)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (row == rows - <span class="number">1</span> &amp;&amp; col == cols - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> matrix[row][col];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (row == rows - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> matrix[row][col] + getMinPathCore1(matrix, row, col + <span class="number">1</span>, rows, cols);</span><br><span class="line">    <span class="keyword">if</span> (col == cols - <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> matrix[row][col] + getMinPathCore1(matrix, row + <span class="number">1</span>, col, rows, cols);</span><br><span class="line">    <span class="keyword">int</span> right = getMinPathCore1(matrix, row, col + <span class="number">1</span>, rows, cols);</span><br><span class="line">    <span class="keyword">int</span> down = getMinPathCore1(matrix, row + <span class="number">1</span>, col, rows, cols);</span><br><span class="line">    <span class="keyword">return</span> matrix[row][col] + Math.min(right, down);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMinPath1</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (matrix == <span class="keyword">null</span> || matrix.length == <span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> getMinPathCore1(matrix, <span class="number">0</span>, <span class="number">0</span>, matrix.length, matrix[<span class="number">0</span>].length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>分析如上递归代码，我们会发现有许多重复的计算，比如下面递归过程中有1 -&gt; 3 -&gt; 1 -&gt; …和1-&gt; 8 - &gt; 1 - &gt; …等多条路径。显然从（1,1）到右下角的路径和被计算了多次。</p>
 <p><img src="/2019/09/06/2019-9-6-矩阵的最小路径和/1568357928027.png" alt="1567745854978"></p>
 <p>为了处理这种效果很差的递归，下面我们介绍经典动态规划方法。</p>
-<h3 id="二、动态规划"><a class="header-anchor" href="#二、动态规划" aria-hidden="true">¶</a> 二、动态规划</h3>
-<p>动态规划从暴力递归中来，它会将每一个子问题的解记录下来，避免重复计算。对于上面的矩阵matrix，我们创建一个同等大小的矩阵dp，其中dp[i][j]的值表示从左上角（即(0,0)）位置走到(i, j)位置的最小路径和。显然对应于矩阵matrix第一行的元素来说，只能从(0,0)向右走到(0,j)，所以dp矩阵的第一行的元素dp[0][j]即为matrix[0][0…j]的和，dp矩阵的第一列同理。因此以题目的例子来说，dp矩阵的第一行和第一列的值如下：</p>
+<h3 id="二、动态规划"><a href="#二、动态规划" class="headerlink" title="二、动态规划"></a>二、动态规划</h3><p>动态规划从暴力递归中来，它会将每一个子问题的解记录下来，避免重复计算。对于上面的矩阵matrix，我们创建一个同等大小的矩阵dp，其中dp[i][j]的值表示从左上角（即(0,0)）位置走到(i, j)位置的最小路径和。显然对应于矩阵matrix第一行的元素来说，只能从(0,0)向右走到(0,j)，所以dp矩阵的第一行的元素dp[0][j]即为matrix[0][0…j]的和，dp矩阵的第一列同理。因此以题目的例子来说，dp矩阵的第一行和第一列的值如下：</p>
 <p><img src="/2019/09/06/2019-9-6-矩阵的最小路径和/1567745854981.png" alt="1567745854978"></p>
 <p>除了第一行和第一列的其他位置的元素（i，j），都有上边位置（i - 1，j）和左边位置（i，j - 1）。因为从（0,0）到（i，j）的路径必然经过位置（i - 1, j）或（i，j - 1），所以dp表除了第一行和第一列之外的元素都符合dp[i][j] = min{dp[i - 1][j]，dp[i][j - 1]} + matrix[i][j]。以本题的例子来说，最终生成的dp矩阵如下：</p>
 <p><img src="/2019/09/06/2019-9-6-矩阵的最小路径和/1567745854980.png" alt="1567745854978"></p>
 <p>dp矩阵最右下角的值就是整个问题的答案。具体过程参看如下代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getMinPath2</span><span class="params">(<span class="keyword">int</span>[][] matrix)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (matrix == <span class="keyword">null</span> || matrix.length == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> rows = matrix.length;</span><br><span class="line">    <span class="keyword">int</span> cols = matrix[<span class="number">0</span>].length;</span><br><span class="line">    <span class="keyword">int</span>[][] dp = <span class="keyword">new</span> <span class="keyword">int</span>[rows][cols];</span><br><span class="line">    dp[<span class="number">0</span>][<span class="number">0</span>] = matrix[<span class="number">0</span>][<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; rows; i++) &#123;</span><br><span class="line">        dp[<span class="number">0</span>][i] = dp[<span class="number">0</span>][i - <span class="number">1</span>] + matrix[<span class="number">0</span>][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; cols; j++) &#123;</span><br><span class="line">        dp[j][<span class="number">0</span>] = dp[j - <span class="number">1</span>][<span class="number">0</span>] + matrix[j][<span class="number">0</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; rows; i++) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; cols; j++) &#123;</span><br><span class="line">            dp[i][j] = Math.min(dp[i - <span class="number">1</span>][j], dp[i][j - <span class="number">1</span>]) + matrix[i][j];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//printMatrix(dp);//for test</span></span><br><span class="line">    <span class="keyword">return</span> dp[rows - <span class="number">1</span>][cols - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
+
     </div>
 
     
@@ -524,7 +525,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、暴力递归"><span class="nav-text">¶ 一、暴力递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、动态规划"><span class="nav-text">¶ 二、动态规划</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#一、暴力递归"><span class="nav-text">一、暴力递归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二、动态规划"><span class="nav-text">二、动态规划</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -622,12 +623,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

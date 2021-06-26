@@ -368,7 +368,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>924</span>
+              <span>918</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -393,23 +393,20 @@
       
         <p>java 中的instanceof 运算符是用来在运行时指出对象是否是特定类的一个实例。instanceof通过返回一个布尔值来指出，这个对象是否是这个特定类或者是它的子类的一个实例。</p>
 <a id="more"></a>
-<h5 id="1. 用法"><a class="header-anchor" href="#1. 用法" aria-hidden="true">¶</a> 1. 用法</h5>
-<pre><code>boolean result = object instanceof class
-</code></pre>
-<h5 id="2. 说明"><a class="header-anchor" href="#2. 说明" aria-hidden="true">¶</a> 2. 说明</h5>
-<p>如果 object 是 class 的一个实例，则 instanceof 运算符返回 true。如果 object 不是指定类的一个实例，或者 object 是 null，则编译出错。<strong>class可以是object对象的父类，自身类，子类，当class是object对象的子类时返回false。</strong></p>
-<h5 id="3. 示例"><a class="header-anchor" href="#3. 示例" aria-hidden="true">¶</a> 3. 示例</h5>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person类构造函数加载了。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="1-用法"><a href="#1-用法" class="headerlink" title="1. 用法"></a>1. 用法</h5><pre><code>boolean result = object instanceof class</code></pre><h5 id="2-说明"><a href="#2-说明" class="headerlink" title="2. 说明"></a>2. 说明</h5><p>如果 object 是 class 的一个实例，则 instanceof 运算符返回 true。如果 object 不是指定类的一个实例，或者 object 是 null，则编译出错。<strong>class可以是object对象的父类，自身类，子类，当class是object对象的子类时返回false。</strong></p>
+<h5 id="3-示例"><a href="#3-示例" class="headerlink" title="3. 示例"></a>3. 示例</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Person类构造函数加载了。。"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Tom</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tom</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Tom类构造函数加载了"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Person p = <span class="keyword">new</span> Person();</span><br><span class="line">        Tom tom = <span class="keyword">new</span> Tom(); </span><br><span class="line">        System.out.println(p <span class="keyword">instanceof</span> Tom); <span class="comment">//false</span></span><br><span class="line">        System.out.println(tom <span class="keyword">instanceof</span> Person);	<span class="comment">//true</span></span><br><span class="line"><span class="comment">//		System.out.println(p instanceof Object);	//编译出错</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>输出结果</p>
 <pre><code>Person类构造函数加载了。。
 Person类构造函数加载了。。
 Tom类构造函数加载了
 false
-true
-</code></pre>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+true</code></pre>
     </div>
 
     
@@ -509,7 +506,7 @@ true
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1. 用法"><span class="nav-text">¶ 1. 用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2. 说明"><span class="nav-text">¶ 2. 说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3. 示例"><span class="nav-text">¶ 3. 示例</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-用法"><span class="nav-text">1. 用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-说明"><span class="nav-text">2. 说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-示例"><span class="nav-text">3. 示例</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -607,12 +604,12 @@ true
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

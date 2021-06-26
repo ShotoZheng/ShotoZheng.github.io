@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="¶ 1. 运行流程图">
+  <meta name="description" content="1. 运行流程图">
 <meta name="keywords" content="SpringMVC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（十一）SpringMVC学习笔记-SpringMVC运行流程">
 <meta property="og:url" content="https://ShotoZheng.github.io/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="¶ 1. 运行流程图">
+<meta property="og:description" content="1. 运行流程图">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103536894.png">
 <meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217101019787.png">
@@ -85,7 +85,7 @@
 <meta property="og:updated_time" content="2020-01-05T08:06:24.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（十一）SpringMVC学习笔记-SpringMVC运行流程">
-<meta name="twitter:description" content="¶ 1. 运行流程图">
+<meta name="twitter:description" content="1. 运行流程图">
 <meta name="twitter:image" content="https://shotozheng.github.io/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103536894.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/">
 
@@ -401,62 +401,35 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1. 运行流程图"><a class="header-anchor" href="#1. 运行流程图" aria-hidden="true">¶</a> 1. 运行流程图</h2>
-<p><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103536894.png" alt="在这里插入图片描述"></p>
+        <h2 id="1-运行流程图"><a href="#1-运行流程图" class="headerlink" title="1. 运行流程图"></a>1. 运行流程图</h2><p><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103536894.png" alt="在这里插入图片描述"></p>
 <a id="more"></a>
-<h2 id="2. HelloWorld"><a class="header-anchor" href="#2. HelloWorld" aria-hidden="true">¶</a> 2. HelloWorld</h2>
-<p>我们再次来编写一个HelloWorld项目，具体步骤如下所示：</p>
+
+<h2 id="2-HelloWorld"><a href="#2-HelloWorld" class="headerlink" title="2. HelloWorld"></a>2. HelloWorld</h2><p>我们再次来编写一个HelloWorld项目，具体步骤如下所示：</p>
 <ol>
-<li>加入如下的jar包<br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217101019787.png" alt="在这里插入图片描述"></li>
-<li>在web.xml中配置DispatcherServlet，并拦截所有。</li>
-<li>在MVC配置文件applicationContext-mvc.xml中配置&lt;context:component-scan&gt;和视图解析器InternalResourceViewResolver。</li>
+<li><p>加入如下的jar包<br> <img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217101019787.png" alt="在这里插入图片描述"></p>
+</li>
+<li><p>在web.xml中配置DispatcherServlet，并拦截所有。</p>
+</li>
+<li><p>在MVC配置文件applicationContext-mvc.xml中配置&lt;context:component-scan&gt;和视图解析器InternalResourceViewResolver。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 扫描指定包下的注解 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.shoto.springmvc"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置视图解析器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/views/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在WEB-INF目录创建views目录，并编写success.jsp成功页面。</p>
+</li>
+<li><p>在处理器类HelloWorld中定义如下方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/helloWorld"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">helloWorld</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
 </ol>
-  <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 扫描指定包下的注解 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">context:component-scan</span> <span class="attr">base-package</span>=<span class="string">"com.shoto.springmvc"</span>/&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">&lt;!-- 配置视图解析器 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.springframework.web.servlet.view.InternalResourceViewResolver"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"prefix"</span> <span class="attr">value</span>=<span class="string">"/WEB-INF/views/"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"suffix"</span> <span class="attr">value</span>=<span class="string">".jsp"</span>&gt;</span><span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<ol start="4">
-<li>在WEB-INF目录创建views目录，并编写success.jsp成功页面。</li>
-<li>在处理器类HelloWorld中定义如下方法。</li>
-</ol>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/helloWorld"</span>)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">helloWorld</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"success"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3. 运行流程详解"><a class="header-anchor" href="#3. 运行流程详解" aria-hidden="true">¶</a> 3. 运行流程详解</h2>
-<h3 id="3.1 子流程一"><a class="header-anchor" href="#3.1 子流程一" aria-hidden="true">¶</a> 3.1 子流程一</h3>
-<p>当我使用http://localhost:8080/SpringMVC_6/helloWorld2进行请求时，因为此时SpringMVC不存在helloWorld2映射，且在未配置&lt;mvc:default-servlet-handler/&gt;的情况下，此时控制台与打印如下信息并且给出404页面（<strong>上述运行流程图黑线部分</strong>）：</p>
+<h2 id="3-运行流程详解"><a href="#3-运行流程详解" class="headerlink" title="3. 运行流程详解"></a>3. 运行流程详解</h2><h3 id="3-1-子流程一"><a href="#3-1-子流程一" class="headerlink" title="3.1 子流程一"></a>3.1 子流程一</h3><p>当我使用<a href="http://localhost:8080/SpringMVC_6/helloWorld2进行请求时，因为此时SpringMVC不存在helloWorld2映射，且在未配置&lt;mvc:default-servlet-handler/&gt;的情况下，此时控制台与打印如下信息并且给出404页面（**上述运行流程图黑线部分**）：" target="_blank" rel="noopener">http://localhost:8080/SpringMVC_6/helloWorld2进行请求时，因为此时SpringMVC不存在helloWorld2映射，且在未配置&lt;mvc:default-servlet-handler/&gt;的情况下，此时控制台与打印如下信息并且给出404页面（**上述运行流程图黑线部分**）：</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">警告: No mapping found for HTTP request with URI [/SpringMVC_6/helloWorld2] in DispatcherServlet with name &apos;springDispatcherServlet&apos;</span><br></pre></td></tr></table></figure>
-<h3 id="3.2 子流程二"><a class="header-anchor" href="#3.2 子流程二" aria-hidden="true">¶</a> 3.2 子流程二</h3>
-<p>现在我们在MVC配置文件中配置&lt;mvc:default-servlet-handler/&gt;和&lt;mvc:annotation-driven/&gt;，并在WebContent目录在创建一个hello.html文件（目标资源），此时使用http://localhost:8080/SpringMVC_6/hello.html是响应成功的（<strong>上述运行流程图绿线部分</strong>）。</p>
-<h3 id="3.3 子流程三"><a class="header-anchor" href="#3.3 子流程三" aria-hidden="true">¶</a> 3.3 子流程三</h3>
-<p>当SpringMVC中存在对应的映射时，首先会按如下顺序依次执行。（<strong>上述运行流程图红线部分</strong>）。</p>
-<p><strong>1. 通过HandlerMapping获取HandlerExecutionChain对象</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217102629539.png" alt="在这里插入图片描述"><br>
-HandlerExecutionChain由Handler对象和拦截器组成。<br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103015801.png" alt="在这里插入图片描述"><br>
-HandlerMapping定义了请求和Handler对象之间的映射。</p>
-<p><strong>2. 获取HandlerAdapter适配器</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103204177.png" alt="在这里插入图片描述"><br>
-HandlerAdapter适配器会进行参数的绑定，数据校验和格式化等等操作。</p>
-<p><strong>3.  调用拦截器的 preHandle方法</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103648994.png" alt="在这里插入图片描述"><br>
-<strong>4. 调用目标Handler的目标方法得到ModelAndView对象</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103801202.png" alt="在这里插入图片描述"><br>
-<strong>5. 调用拦截器的postHandle方法</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103906851.png" alt="在这里插入图片描述"><br>
-<strong>6. 调用processDispatchResult判断是否存在异常</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104151393.png" alt="在这里插入图片描述"><br>
-<strong>7. 在没有异常的情况下，调用render方法中的resolveViewName解析视图。</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104315757.png" alt="在这里插入图片描述"><br>
-<strong>8. 由ViewResolver组件根据ModelAndView对象得到实际的View</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104453667.png" alt="在这里插入图片描述"><br>
-<strong>9. 调用render方法，最后由InternalResourceView类的renderMergedOutputModel方法渲染视图，并进行跳转操作</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104812389.png" alt="在这里插入图片描述"><br>
-<strong>10. 调用triggerAfterCompletion方法，执行拦截器的afterCompletion方法</strong><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217105045542.png" alt="在这里插入图片描述"><br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217105138801.png" alt="在这里插入图片描述"></p>
-<h3 id="3.4 子流程四"><a class="header-anchor" href="#3.4 子流程四" aria-hidden="true">¶</a> 3.4 子流程四</h3>
-<p>调用processDispatchResult判断存在异常后（上述运行流程图蓝线部分），由HandlerExceptionResolver组件处理异常，得到新的ModelAndView对象。<br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/2019021710543324.png" alt="在这里插入图片描述"><br>
-processHandlerException方法中会使用异常解析器进行异常的解析。<br>
-<img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217105603638.png" alt="在这里插入图片描述"></p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
+<h3 id="3-2-子流程二"><a href="#3-2-子流程二" class="headerlink" title="3.2 子流程二"></a>3.2 子流程二</h3><p>现在我们在MVC配置文件中配置&lt;mvc:default-servlet-handler/&gt;和&lt;mvc:annotation-driven/&gt;，并在WebContent目录在创建一个hello.html文件（目标资源），此时使用<a href="http://localhost:8080/SpringMVC_6/hello.html是响应成功的（**上述运行流程图绿线部分**）。" target="_blank" rel="noopener">http://localhost:8080/SpringMVC_6/hello.html是响应成功的（**上述运行流程图绿线部分**）。</a></p>
+<h3 id="3-3-子流程三"><a href="#3-3-子流程三" class="headerlink" title="3.3 子流程三"></a>3.3 子流程三</h3><p>当SpringMVC中存在对应的映射时，首先会按如下顺序依次执行。（<strong>上述运行流程图红线部分</strong>）。</p>
+<p><strong>1. 通过HandlerMapping获取HandlerExecutionChain对象</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217102629539.png" alt="在这里插入图片描述"><br>HandlerExecutionChain由Handler对象和拦截器组成。<br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103015801.png" alt="在这里插入图片描述"><br>HandlerMapping定义了请求和Handler对象之间的映射。</p>
+<p><strong>2. 获取HandlerAdapter适配器</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103204177.png" alt="在这里插入图片描述"><br>HandlerAdapter适配器会进行参数的绑定，数据校验和格式化等等操作。</p>
+<p><strong>3.  调用拦截器的 preHandle方法</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103648994.png" alt="在这里插入图片描述"><br><strong>4. 调用目标Handler的目标方法得到ModelAndView对象</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103801202.png" alt="在这里插入图片描述"><br><strong>5. 调用拦截器的postHandle方法</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217103906851.png" alt="在这里插入图片描述"><br><strong>6. 调用processDispatchResult判断是否存在异常</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104151393.png" alt="在这里插入图片描述"><br><strong>7. 在没有异常的情况下，调用render方法中的resolveViewName解析视图。</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104315757.png" alt="在这里插入图片描述"><br><strong>8. 由ViewResolver组件根据ModelAndView对象得到实际的View</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104453667.png" alt="在这里插入图片描述"><br><strong>9. 调用render方法，最后由InternalResourceView类的renderMergedOutputModel方法渲染视图，并进行跳转操作</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217104812389.png" alt="在这里插入图片描述"><br><strong>10. 调用triggerAfterCompletion方法，执行拦截器的afterCompletion方法</strong><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217105045542.png" alt="在这里插入图片描述"><br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217105138801.png" alt="在这里插入图片描述"></p>
+<h3 id="3-4-子流程四"><a href="#3-4-子流程四" class="headerlink" title="3.4 子流程四"></a>3.4 子流程四</h3><p>调用processDispatchResult判断存在异常后（上述运行流程图蓝线部分），由HandlerExceptionResolver组件处理异常，得到新的ModelAndView对象。<br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/2019021710543324.png" alt="在这里插入图片描述"><br>processHandlerException方法中会使用异常解析器进行异常的解析。<br><img src="/2020/01/05/（十一）SpringMVC学习笔记-SpringMVC运行流程/20190217105603638.png" alt="在这里插入图片描述"></p>
+
     </div>
 
     
@@ -556,7 +529,7 @@ processHandlerException方法中会使用异常解析器进行异常的解析。
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1. 运行流程图"><span class="nav-text">¶ 1. 运行流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2. HelloWorld"><span class="nav-text">¶ 2. HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3. 运行流程详解"><span class="nav-text">¶ 3. 运行流程详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3.1 子流程一"><span class="nav-text">¶ 3.1 子流程一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3.2 子流程二"><span class="nav-text">¶ 3.2 子流程二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3.3 子流程三"><span class="nav-text">¶ 3.3 子流程三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3.4 子流程四"><span class="nav-text">¶ 3.4 子流程四</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-运行流程图"><span class="nav-text">1. 运行流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HelloWorld"><span class="nav-text">2. HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-运行流程详解"><span class="nav-text">3. 运行流程详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-子流程一"><span class="nav-text">3.1 子流程一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-子流程二"><span class="nav-text">3.2 子流程二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-子流程三"><span class="nav-text">3.3 子流程三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-子流程四"><span class="nav-text">3.4 子流程四</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -654,12 +627,12 @@ processHandlerException方法中会使用异常解析器进行异常的解析。
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

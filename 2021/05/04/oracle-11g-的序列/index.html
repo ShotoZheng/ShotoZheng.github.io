@@ -58,18 +58,18 @@
   };
 </script>
 
-  <meta name="description" content="¶ 1. 含义 序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。 ¶ 2. 创建序列 使用CREATE SEQUENCE语句创建序列，创建示例如下所示： 1234567create sequence stu_seqstart with 1 -- 从 1 开始，可选，默认为1increment by 1 -- 每次增加 1，支持正负数，可选，默认为1maxvalue 2000">
+  <meta name="description" content="1. 含义序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。 2. 创建序列使用CREATE SEQUENCE语句创建序列，创建示例如下所示： 1234567create sequence stu_seqstart with 1 -- 从 1 开始，可选，默认为1increment by 1 -- 每次增加 1，支持正负数，可选，默认为1maxvalue 2000 -- 序列最">
 <meta name="keywords" content="Oracle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="oracle 11g 的序列">
 <meta property="og:url" content="https://ShotoZheng.github.io/2021/05/04/oracle-11g-的序列/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="¶ 1. 含义 序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。 ¶ 2. 创建序列 使用CREATE SEQUENCE语句创建序列，创建示例如下所示： 1234567create sequence stu_seqstart with 1 -- 从 1 开始，可选，默认为1increment by 1 -- 每次增加 1，支持正负数，可选，默认为1maxvalue 2000">
+<meta property="og:description" content="1. 含义序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。 2. 创建序列使用CREATE SEQUENCE语句创建序列，创建示例如下所示： 1234567create sequence stu_seqstart with 1 -- 从 1 开始，可选，默认为1increment by 1 -- 每次增加 1，支持正负数，可选，默认为1maxvalue 2000 -- 序列最">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2021-05-04T06:56:44.899Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="oracle 11g 的序列">
-<meta name="twitter:description" content="¶ 1. 含义 序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。 ¶ 2. 创建序列 使用CREATE SEQUENCE语句创建序列，创建示例如下所示： 1234567create sequence stu_seqstart with 1 -- 从 1 开始，可选，默认为1increment by 1 -- 每次增加 1，支持正负数，可选，默认为1maxvalue 2000">
+<meta name="twitter:description" content="1. 含义序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。 2. 创建序列使用CREATE SEQUENCE语句创建序列，创建示例如下所示： 1234567create sequence stu_seqstart with 1 -- 从 1 开始，可选，默认为1increment by 1 -- 每次增加 1，支持正负数，可选，默认为1maxvalue 2000 -- 序列最">
   <link rel="canonical" href="https://ShotoZheng.github.io/2021/05/04/oracle-11g-的序列/">
 
 
@@ -384,25 +384,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="1. 含义"><a class="header-anchor" href="#1. 含义" aria-hidden="true">¶</a> 1. 含义</h3>
-<p>序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。</p>
-<h3 id="2. 创建序列"><a class="header-anchor" href="#2. 创建序列" aria-hidden="true">¶</a> 2. 创建序列</h3>
-<p>使用CREATE SEQUENCE语句创建序列，创建示例如下所示：</p>
+        <h3 id="1-含义"><a href="#1-含义" class="headerlink" title="1. 含义"></a>1. 含义</h3><p>序列是用于生成唯一、连续序号的对象，序列可以是升序的，也可以是降序的。</p>
+<h3 id="2-创建序列"><a href="#2-创建序列" class="headerlink" title="2. 创建序列"></a>2. 创建序列</h3><p>使用CREATE SEQUENCE语句创建序列，创建示例如下所示：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">sequence</span> stu_seq</span><br><span class="line"><span class="keyword">start</span> <span class="keyword">with</span> <span class="number">1</span> <span class="comment">-- 从 1 开始，可选，默认为1</span></span><br><span class="line"><span class="keyword">increment</span> <span class="keyword">by</span> <span class="number">1</span> <span class="comment">-- 每次增加 1，支持正负数，可选，默认为1</span></span><br><span class="line">maxvalue <span class="number">2000</span> <span class="comment">-- 序列最大数，可选</span></span><br><span class="line"><span class="keyword">minvalue</span> <span class="number">1</span> <span class="comment">--序列最小值，可选，默认为1</span></span><br><span class="line"><span class="keyword">nocycle</span> <span class="comment">-- 序列不循环，即取到最大值不再从起始值继续开始，可选，默认不循环</span></span><br><span class="line"><span class="keyword">cache</span> <span class="number">10</span>; <span class="comment">-- 指定内存中预先分配的序号数。缓存 10 条序列值，避免取序列时 oracle 都要计算获取一次，可选，默认20</span></span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
-<h3 id="3. 查询序列信息"><a class="header-anchor" href="#3. 查询序列信息" aria-hidden="true">¶</a> 3. 查询序列信息</h3>
-<p>普通用户可以通过查询 user_sequences 表来查询序列定义信息，具体示例如下所示：</p>
+
+<h3 id="3-查询序列信息"><a href="#3-查询序列信息" class="headerlink" title="3. 查询序列信息"></a>3. 查询序列信息</h3><p>普通用户可以通过查询 user_sequences 表来查询序列定义信息，具体示例如下所示：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select * from user_sequences where sequence_name = 'STU_SEQ';</span><br><span class="line"></span><br><span class="line">SEQUENCE_NAME                   MIN_VALUE  MAX_VALUE INCREMENT_BY CYCLE_FLAG ORDER_FLAG CACHE_SIZE LAST_NUMBER</span><br><span class="line"><span class="comment">------------------------------ ---------- ---------- ------------ ---------- ---------- ---------- -----------</span></span><br><span class="line">STU_SEQ                                 1       2000            1 N          N                  10           1</span><br></pre></td></tr></table></figure>
-<h3 id="4. 使用序列"><a class="header-anchor" href="#4. 使用序列" aria-hidden="true">¶</a> 4. 使用序列</h3>
-<p>通过序列的伪列来访问序列的值，NEXTVAL 返回序列的下一个值，CURRVAL 返回序列的当前值。第一次使用序列中的值的时候，要使用 NEXTVAL。</p>
+
+<h3 id="4-使用序列"><a href="#4-使用序列" class="headerlink" title="4. 使用序列"></a>4. 使用序列</h3><p>通过序列的伪列来访问序列的值，NEXTVAL 返回序列的下一个值，CURRVAL 返回序列的当前值。第一次使用序列中的值的时候，要使用 NEXTVAL。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; select stu_seq.nextval from dual;</span><br><span class="line"></span><br><span class="line">   NEXTVAL</span><br><span class="line"><span class="comment">----------</span></span><br><span class="line">         1</span><br></pre></td></tr></table></figure>
-<h3 id="5. 修改序列"><a class="header-anchor" href="#5. 修改序列" aria-hidden="true">¶</a> 5. 修改序列</h3>
-<p>使用ALTER SEQUENCE语句修改序列，但是不能更改序列的START WITH参数。具体示例如下：</p>
+
+<h3 id="5-修改序列"><a href="#5-修改序列" class="headerlink" title="5. 修改序列"></a>5. 修改序列</h3><p>使用ALTER SEQUENCE语句修改序列，但是不能更改序列的START WITH参数。具体示例如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">SQL&gt; alter sequence stu_seq maxvalue 5000 cycle;</span><br><span class="line"></span><br><span class="line">Sequence altered</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SQL&gt; select * from user_sequences;</span><br><span class="line"></span><br><span class="line">SEQUENCE_NAME                   MIN_VALUE  MAX_VALUE INCREMENT_BY CYCLE_FLAG ORDER_FLAG CACHE_SIZE LAST_NUMBER</span><br><span class="line"><span class="comment">------------------------------ ---------- ---------- ------------ ---------- ---------- ---------- -----------</span></span><br><span class="line">STU_SEQ                                 1       5000            1 Y          N                  10           2</span><br></pre></td></tr></table></figure>
-<h3 id="6. 删除序列"><a class="header-anchor" href="#6. 删除序列" aria-hidden="true">¶</a> 6. 删除序列</h3>
-<p>使用DROP SEQUENCE语句删除序列，具体示例如下：</p>
+
+<h3 id="6-删除序列"><a href="#6-删除序列" class="headerlink" title="6. 删除序列"></a>6. 删除序列</h3><p>使用DROP SEQUENCE语句删除序列，具体示例如下：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">sequence</span> stu_seq;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
     </div>
 
     
@@ -502,7 +500,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1. 含义"><span class="nav-text">¶ 1. 含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2. 创建序列"><span class="nav-text">¶ 2. 创建序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3. 查询序列信息"><span class="nav-text">¶ 3. 查询序列信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4. 使用序列"><span class="nav-text">¶ 4. 使用序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5. 修改序列"><span class="nav-text">¶ 5. 修改序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6. 删除序列"><span class="nav-text">¶ 6. 删除序列</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-含义"><span class="nav-text">1. 含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建序列"><span class="nav-text">2. 创建序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-查询序列信息"><span class="nav-text">3. 查询序列信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-使用序列"><span class="nav-text">4. 使用序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-修改序列"><span class="nav-text">5. 修改序列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-删除序列"><span class="nav-text">6. 删除序列</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -600,12 +598,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

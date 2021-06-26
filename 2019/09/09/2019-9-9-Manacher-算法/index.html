@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为&amp;quot;1&amp;quot;、“2”、“3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为&amp;quot;1234321&amp;quot;，所以返回7。 面对字符串&amp;quot;a131b&amp;quot;，我们寻找字符串中回文子串的最直观的想法也许是在遍历字">
+  <meta name="description" content="首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为”1”、”2”、”3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为”1234321”，所以返回7。 面对字符串”a131b”，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Manacher 算法">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/09/09/2019-9-9-Manacher-算法/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为&amp;quot;1&amp;quot;、“2”、“3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为&amp;quot;1234321&amp;quot;，所以返回7。 面对字符串&amp;quot;a131b&amp;quot;，我们寻找字符串中回文子串的最直观的想法也许是在遍历字">
+<meta property="og:description" content="首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为”1”、”2”、”3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为”1234321”，所以返回7。 面对字符串”a131b”，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-Manacher-算法/1568040046161.png">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-Manacher-算法/1568040046162.png">
@@ -77,7 +77,7 @@
 <meta property="og:updated_time" content="2020-01-01T12:17:02.497Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Manacher 算法">
-<meta name="twitter:description" content="首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为&amp;quot;1&amp;quot;、“2”、“3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为&amp;quot;1234321&amp;quot;，所以返回7。 面对字符串&amp;quot;a131b&amp;quot;，我们寻找字符串中回文子串的最直观的想法也许是在遍历字">
+<meta name="twitter:description" content="首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为”1”、”2”、”3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为”1234321”，所以返回7。 面对字符串”a131b”，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符">
 <meta name="twitter:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-Manacher-算法/1568040046161.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/09/09/2019-9-9-Manacher-算法/">
 
@@ -385,7 +385,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.7k</span>
+              <span>4.5k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -408,40 +408,27 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为&quot;1&quot;、“2”、“3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为&quot;1234321&quot;，所以返回7。</p>
-<p>面对字符串&quot;a131b&quot;，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符是否相等，然后记录回文子串长度。比如当前遍历到的字符为a，只有右边有字符，所以回文子串&quot;a&quot;的长度为1；当遍历到的字符为1时，左右两边的字符分别为’a’和’3’不相等，所以回文子串&quot;1&quot;的长度为1；当遍历到的字符为3时，左右两边的字符都为’1’，记录下长度，然后继续向两边比较，此时‘a’和’b’不相等，所以回文子串&quot;131&quot;的长度为3。。。</p>
+        <p>首先我们先来看一个题：给定一个字符串str，返回str中最长回文子串的长度。比如str = “123”，其中的最长回文子串为”1”、”2”、”3”，所以返回1。又比如str = “abc1234321ab”，其中的最长回文子串为”1234321”，所以返回7。</p>
+<p>面对字符串”a131b”，我们寻找字符串中回文子串的最直观的想法也许是在遍历字符串的过程中，以当前字符为中心，向两边“扩”来对比两边的字符是否相等，然后记录回文子串长度。比如当前遍历到的字符为a，只有右边有字符，所以回文子串”a”的长度为1；当遍历到的字符为1时，左右两边的字符分别为’a’和’3’不相等，所以回文子串”1”的长度为1；当遍历到的字符为3时，左右两边的字符都为’1’，记录下长度，然后继续向两边比较，此时‘a’和’b’不相等，所以回文子串”131”的长度为3。。。</p>
 <a id="more"></a>
-<p>但是我们会发现这种方法并不适用于偶数长度的字符串，比如字符串&quot;y1221p&quot;就无法像上面的方法一样求得最大回文子串&quot;1221&quot;的长度为4。</p>
-<p>解决的办法是在字符串的两边和字符之间添加字符，比如添加字符&quot;#&quot;，当然也可以其他任意一种字符，读者可以自行尝试。对于字符串&quot;1221&quot;添加完字符后就变为&quot;#1#2#2#1#&quot;，此时我们上面的寻找最长回文子串长度的方法可以运用于偶数字符串和奇数字符串中，不过<code>添加完字符后的字符串所统计出来的回文子串长度是没添加字符前的字符串的两倍</code>。</p>
+<p>但是我们会发现这种方法并不适用于偶数长度的字符串，比如字符串”y1221p”就无法像上面的方法一样求得最大回文子串”1221”的长度为4。</p>
+<p>解决的办法是在字符串的两边和字符之间添加字符，比如添加字符”#”，当然也可以其他任意一种字符，读者可以自行尝试。对于字符串”1221”添加完字符后就变为”#1#2#2#1#”，此时我们上面的寻找最长回文子串长度的方法可以运用于偶数字符串和奇数字符串中，不过<code>添加完字符后的字符串所统计出来的回文子串长度是没添加字符前的字符串的两倍</code>。</p>
 <p>上面的方法的时间复杂度为O(n^2)，下面我们使用Manacher算法来达到O(N)时间复杂度的实现。</p>
 <p>首先我们需要明白三个概念：</p>
 <ul>
-<li><strong>回文半径数组pArr</strong>：回文半径数组就是用于存储回文子串的半径长度的数组。比如字符串&quot;#c#a#b#a#c#&quot;，其回文半径数组就为[1，2，1，2，1，6，1，2，1，2，1]。</li>
-<li><strong>最右回文半径指针pR</strong>：该指针每次都会指向当前或之前回文子串最右边字符的下一个字符。如果当前回文子串的最右字符超出了之前回文子串的pR的范围，即当前回文子串的最右字符比pR所指向的字符更右，那么pR就更新为当前回文子串最右边字符的下一个字符，否则就不变。下面我们以字符串&quot;#a#b#a#&quot;为例，来看一下pR指针的移动过程。观察下图，cur表示遍历到的当前字符。<br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046161.png" alt><br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046162.png" alt><br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046164.png" alt><br>
-后面的过程中pR不再移动，cur一直往右移动，直到等于字符串长度停下。</li>
-<li><strong>回文子串中心指针index</strong>：回文子串中心指针是随着pR变化的，也就是pR改变时，index也会变化。观察上图，当cur指向第一个字符’#‘时，pR发生改变并指向了’a’，此时回文中心指针index指向当前回文子串&quot;#“的中心位置，即cur指向的位置。当cur指向第二个字符’a’时，pR发生改变并指向了字符’b’，此时回文中心指针index指向当前回文子串”#a#&quot;的中心位置，同样也是cur指向的位置，后面的同理。</li>
+<li><strong>回文半径数组pArr</strong>：回文半径数组就是用于存储回文子串的半径长度的数组。比如字符串”#c#a#b#a#c#”，其回文半径数组就为[1，2，1，2，1，6，1，2，1，2，1]。</li>
+<li><strong>最右回文半径指针pR</strong>：该指针每次都会指向当前或之前回文子串最右边字符的下一个字符。如果当前回文子串的最右字符超出了之前回文子串的pR的范围，即当前回文子串的最右字符比pR所指向的字符更右，那么pR就更新为当前回文子串最右边字符的下一个字符，否则就不变。下面我们以字符串”#a#b#a#”为例，来看一下pR指针的移动过程。观察下图，cur表示遍历到的当前字符。<br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046161.png" alt><br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046162.png" alt><br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046164.png" alt><br>后面的过程中pR不再移动，cur一直往右移动，直到等于字符串长度停下。</li>
+<li><strong>回文子串中心指针index</strong>：回文子串中心指针是随着pR变化的，也就是pR改变时，index也会变化。观察上图，当cur指向第一个字符’#’时，pR发生改变并指向了’a’，此时回文中心指针index指向当前回文子串”#”的中心位置，即cur指向的位置。当cur指向第二个字符’a’时，pR发生改变并指向了字符’b’，此时回文中心指针index指向当前回文子串”#a#”的中心位置，同样也是cur指向的位置，后面的同理。</li>
 </ul>
 <p>在理解了上面的三个概念之后，我们再来看在遍历的过程中当前指针i可能会面临如下两种情况：</p>
-<p><strong>第一种情况</strong>：观察下图，[L…pR-1]是回文子串，index为回文子串的中心指针。此时当前指针i在pR的右边时（包括pR），我们就像普通解法一样，从i位置字符开始向左右两边开始“扩”，即以当前字符为中心寻找其最大的回文子串半径长度。<br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046165.png" alt><br>
-<strong>第二种情况</strong>是i在pR指针左边，如下图所示：<br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046166.png" alt><br>
-此时可以又可以分为下面三种子情况：</p>
-<p><strong>情况1</strong>：观察下图，i’是i关于index对称的位置，且i’已经有其对应的回文子串半径值pArr[i’]。假如以i’为中心的回文子串（下图左边蓝色区域）包含于大回文子串[L…pR-1]中，那么我们可以直接得出i的回文半径即为i’的回文半径值。<br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046168.png" alt><br>
-这个很好证明，因为[L…index-1]与[index + 1…pR - 1]关于index对称，那么上图中蓝色与绿色区域的字符串也关于index对称，又因为蓝色区域是回文子串，那么自然绿色区域也是回文子串，他们长度相等，所以回文半径也相等。</p>
-<p><strong>情况2</strong>：观察下图，i’是i关于index对称的位置。假如以i’为中心的回文子串（下图左边蓝色区域）的左边界超过了最大回文子串[L…pR-1]的左边界，那么我们可以直接得出i的回文半径即为i到pR的距离的长度pR - i。<br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046172.png" alt><br>
-我们同样可以证明这个结论是正确的。观察上图，[L…pR-1]是回文子串，X和Y关于i’对称并相等，Y与X’关于index对称并相等，X与Y’关于index对称并相等，那么就有X=Y=X’≠Y’，所以以i为中心的回文子串的即为上图中的绿色区域，其半径等于i到pR的距离pR - i。</p>
-<p><strong>情况3</strong>：观察下图，i’是i关于index对称的位置。此时以i’为中心的回文子串（下图左边蓝色区域）的左边界刚好与最大回文子串[L…pR-1]的左边界重合，那么此时i为中心的回文半径<code>至少</code>等于i’的回文半径。<br>
-<img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046176.png" alt><br>
-当然，i为中心的回文半径可能更大，比如上图中，X如果等于Y那么以i为中心的回文半径长度+1。由于无法向上面两种情况一样直接得出以i为中心的回文半径长度，那么需要X和Y位置开始向两边&quot;扩&quot;以寻找更大的回文子串半径长度。</p>
+<p><strong>第一种情况</strong>：观察下图，[L…pR-1]是回文子串，index为回文子串的中心指针。此时当前指针i在pR的右边时（包括pR），我们就像普通解法一样，从i位置字符开始向左右两边开始“扩”，即以当前字符为中心寻找其最大的回文子串半径长度。<br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046165.png" alt><br><strong>第二种情况</strong>是i在pR指针左边，如下图所示：<br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046166.png" alt><br>此时可以又可以分为下面三种子情况：</p>
+<p><strong>情况1</strong>：观察下图，i’是i关于index对称的位置，且i’已经有其对应的回文子串半径值pArr[i’]。假如以i’为中心的回文子串（下图左边蓝色区域）包含于大回文子串[L…pR-1]中，那么我们可以直接得出i的回文半径即为i’的回文半径值。<br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046168.png" alt><br>这个很好证明，因为[L..index-1]与[index + 1…pR - 1]关于index对称，那么上图中蓝色与绿色区域的字符串也关于index对称，又因为蓝色区域是回文子串，那么自然绿色区域也是回文子串，他们长度相等，所以回文半径也相等。</p>
+<p><strong>情况2</strong>：观察下图，i’是i关于index对称的位置。假如以i’为中心的回文子串（下图左边蓝色区域）的左边界超过了最大回文子串[L…pR-1]的左边界，那么我们可以直接得出i的回文半径即为i到pR的距离的长度pR - i。<br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046172.png" alt><br>我们同样可以证明这个结论是正确的。观察上图，[L…pR-1]是回文子串，X和Y关于i’对称并相等，Y与X’关于index对称并相等，X与Y’关于index对称并相等，那么就有X=Y=X’≠Y’，所以以i为中心的回文子串的即为上图中的绿色区域，其半径等于i到pR的距离pR - i。</p>
+<p><strong>情况3</strong>：观察下图，i’是i关于index对称的位置。此时以i’为中心的回文子串（下图左边蓝色区域）的左边界刚好与最大回文子串[L…pR-1]的左边界重合，那么此时i为中心的回文半径<code>至少</code>等于i’的回文半径。<br><img src="/2019/09/09/2019-9-9-Manacher-算法/1568040046176.png" alt><br>当然，i为中心的回文半径可能更大，比如上图中，X如果等于Y那么以i为中心的回文半径长度+1。由于无法向上面两种情况一样直接得出以i为中心的回文半径长度，那么需要X和Y位置开始向两边”扩”以寻找更大的回文子串半径长度。</p>
 <p>综合上述分析，其具体代码实现如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Manacher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//该方法将形如"abccba"的字符串转为形如"#a#b#c#c#b#a#"</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">char</span>[] manacherString(String str) &#123;</span><br><span class="line">        <span class="keyword">char</span>[] chs = str.toCharArray();</span><br><span class="line">        <span class="keyword">char</span>[] charArr = <span class="keyword">new</span> <span class="keyword">char</span>[<span class="number">2</span> * str.length() + <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>; i &lt; charArr.length; i++) &#123;</span><br><span class="line">            charArr[i] = (i &amp; <span class="number">1</span>) == <span class="number">0</span> ? <span class="string">'#'</span> : chs[j++];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> charArr;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxLcpsLength</span><span class="params">(String str)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (str == <span class="keyword">null</span> || str.length() == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="comment">// 获取源字符数组</span></span><br><span class="line">        <span class="keyword">char</span>[] charArr = manacherString(str);</span><br><span class="line">        <span class="comment">// 定义一个回文半径长数组pArr</span></span><br><span class="line">        <span class="keyword">int</span>[] pArr = <span class="keyword">new</span> <span class="keyword">int</span>[charArr.length];</span><br><span class="line">        <span class="comment">// 定义最右回文指针，每次都指向当前回文子串的最右字符的下一个字符</span></span><br><span class="line">        <span class="keyword">int</span> pR = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 定义当前回文子串的回文中心节点坐标</span></span><br><span class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 记录最大回文半径值</span></span><br><span class="line">        <span class="keyword">int</span> max = Integer.MIN_VALUE;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; charArr.length; i++) &#123;</span><br><span class="line">            <span class="comment">// 先根据i是否在pR左边来给pArr[i]一个初始值，然后再根据实际情况，</span></span><br><span class="line">            <span class="comment">// 即是否需要从i往外扩来增大pArr[i]的值</span></span><br><span class="line">            <span class="comment">/*</span></span><br><span class="line"><span class="comment">             * 1. 如果i在pR的右边，那么先给pArr[i]赋值1,即半径大小至少等于自己本身的长度</span></span><br><span class="line"><span class="comment">             * 2. 如果i在pR的左边，那么i关于index的对称点i'的半径值为pArr[2 * index - i]，</span></span><br><span class="line"><span class="comment">             * 2.1 如果i'的左半径超过以index为中心的回文子串的左边界，那么其pArr[i]至少为pArr[2 * index - i]。</span></span><br><span class="line"><span class="comment">             * 2.2 如果i'的左半径没有超过以index为中心的回文子串的左边界，那么其pArr[i]为pR - i。</span></span><br><span class="line"><span class="comment">             * 2.3 如果i'的左半径与以index为中心的回文子串的左边界重合，那么其pArr[i]为pArr[2 * index - i]。</span></span><br><span class="line"><span class="comment">             */</span></span><br><span class="line">            pArr[i] = i &lt; pR ? Math.min(pArr[<span class="number">2</span> * index - i], pR - i) : <span class="number">1</span>;</span><br><span class="line">            <span class="comment">// 下面两个循环条件分别表示在从i向两边扩时的最右边界和最左边界</span></span><br><span class="line">            <span class="keyword">while</span> (i + pArr[i] &lt; charArr.length &amp;&amp; i - pArr[i] &gt; -<span class="number">1</span>) &#123;</span><br><span class="line">                <span class="comment">//比较当前左右半径的外面的字符是否相等，相等则半径加1</span></span><br><span class="line">                <span class="keyword">if</span> (charArr[i - pArr[i]] == charArr[i + pArr[i]]) &#123;<span class="comment">//1和2.1会执行</span></span><br><span class="line">                    pArr[i]++;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">break</span>;<span class="comment">//2.2和2.3的情况会执行</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="comment">// 更改最右回文指针，每次都指向当前i为中心回文子串的最右字符的下一个字符</span></span><br><span class="line">            <span class="comment">// 更改当前回文子串的回文中心节点坐标</span></span><br><span class="line">            <span class="keyword">if</span> (i + pArr[i] &gt; pR) &#123;</span><br><span class="line">                pR = i + pArr[i];</span><br><span class="line">                index = i;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//更新最大回文子串长度</span></span><br><span class="line">            max = Math.max(max, pArr[i]);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> max - <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// for test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        System.out.println(maxLcpsLength(<span class="string">"olocbadebcolo"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
+
     </div>
 
     
@@ -637,12 +624,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

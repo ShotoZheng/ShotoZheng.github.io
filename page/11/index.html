@@ -381,8 +381,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="一、概述"><a class="header-anchor" href="#一、概述" aria-hidden="true">¶</a> 一、概述</h3>
-<p>Java中的线程池是运用场景最多的并发框架，几乎所有需要异步或并发执行任务的程序都可以使用线程池。线程池内部提供了一个线程队列，队列中保存着所有等待状态的线程，在开发过程中，合理地使用线程池能够带来以下3个好处：</p>
+          <h3 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h3><p>Java中的线程池是运用场景最多的并发框架，几乎所有需要异步或并发执行任务的程序都可以使用线程池。线程池内部提供了一个线程队列，队列中保存着所有等待状态的线程，在开发过程中，合理地使用线程池能够带来以下3个好处：</p>
 <p>第一：<strong>降低资源消耗</strong>。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。</p>
 <p>第二：<strong>提高响应速度</strong>。当任务到达时，任务可以不需要等到线程创建就能立即执行。</p>
 <p>第三：<strong>提高线程的可管理性</strong>。线程是稀缺资源，如果无限制地创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一分配、调优和监控。</p>
@@ -527,9 +526,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="一、概述"><a class="header-anchor" href="#一、概述" aria-hidden="true">¶</a> 一、概述</h3>
-<p>Fork/Join 框架：就是在必要的情况下，将一个大任务，进行拆分(fork)成若干个小任务（拆到不可再拆时），再将一个个的小任务运算的结果进行 join 汇总。<br>
-<img src="/2020/01/01/Fork-Join框架/20190710171656452.png" alt></p>
+          <h3 id="一、概述"><a href="#一、概述" class="headerlink" title="一、概述"></a>一、概述</h3><p>Fork/Join 框架：就是在必要的情况下，将一个大任务，进行拆分(fork)成若干个小任务（拆到不可再拆时），再将一个个的小任务运算的结果进行 join 汇总。<br><img src="/2020/01/01/Fork-Join框架/20190710171656452.png" alt></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -783,7 +780,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.1k</span>
+              <span>4k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -806,11 +803,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="模式介绍"><a class="header-anchor" href="#模式介绍" aria-hidden="true">¶</a> 模式介绍</h2>
-<p>所谓类的单例设计模式，就是采取一定的方法保证<code>在整个的软件系统中， 对某个类只能存在一个对象实例</code>，并且该类只提供一个取得其对象实例的方法(静态方法)。</p>
+          <h2 id="模式介绍"><a href="#模式介绍" class="headerlink" title="模式介绍"></a>模式介绍</h2><p>所谓类的单例设计模式，就是采取一定的方法保证<code>在整个的软件系统中， 对某个类只能存在一个对象实例</code>，并且该类只提供一个取得其对象实例的方法(静态方法)。</p>
 <p>比如 Hibernate 的 SessionFactory， 它充当数据存储源的代理， 并负责创建 Session 对象。SessionFactory 并不是轻量级的， 一般情况下， 一个项目通常只需要一个 SessionFactory 就够，这是就会使用到单例模式。</p>
-<h2 id="七种单例模式"><a class="header-anchor" href="#七种单例模式" aria-hidden="true">¶</a> 七种单例模式</h2>
-<p>单例模式有七种方式之多，分别为 饿汉式(静态常量)、饿汉式（静态代码块）、懒汉式(线程不安全)、懒汉式(线程安全， 同步方法)、双重检查、静态内部类和枚举。</p>
+<h2 id="七种单例模式"><a href="#七种单例模式" class="headerlink" title="七种单例模式"></a>七种单例模式</h2><p>单例模式有七种方式之多，分别为 饿汉式(静态常量)、饿汉式（静态代码块）、懒汉式(线程不安全)、懒汉式(线程安全， 同步方法)、双重检查、静态内部类和枚举。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -946,9 +941,7 @@
 
       
           <p>设计模式原则，其实就是程序员在编程时，应当遵守的原则，也是各种设计模式的基础。</p>
-<h2 id="一、单一职责原则"><a class="header-anchor" href="#一、单一职责原则" aria-hidden="true">¶</a> 一、单一职责原则</h2>
-<h3 id="基本介绍"><a class="header-anchor" href="#基本介绍" aria-hidden="true">¶</a> 基本介绍</h3>
-<p>单一职责原则是对类来说的， <strong>即一个类应该只负责一项职责</strong>。 如类 A 负责两个不同职责： 职责 1， 职责 2。 当职责 1 需求变更而改变 A 时， 可能造成职责 2 执行错误， 所以需要将类 A 的粒度分解为 A1， A2。</p>
+<h2 id="一、单一职责原则"><a href="#一、单一职责原则" class="headerlink" title="一、单一职责原则"></a>一、单一职责原则</h2><h3 id="基本介绍"><a href="#基本介绍" class="headerlink" title="基本介绍"></a>基本介绍</h3><p>单一职责原则是对类来说的， <strong>即一个类应该只负责一项职责</strong>。 如类 A 负责两个不同职责： 职责 1， 职责 2。 当职责 1 需求变更而改变 A 时， 可能造成职责 2 执行错误， 所以需要将类 A 的粒度分解为 A1， A2。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1067,7 +1060,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>6k</span>
+              <span>5.9k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1203,7 +1196,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.5k</span>
+              <span>4.4k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1228,11 +1221,7 @@
       
           <p>Redis中存储数据是通过key-value存储的，对于value的类型有：String类型、Hash类型、List类型、Set类型和SortedSet（zset）类型。</p>
 <p>在redis中的命令语句中，命令是忽略大小写的，而key是不忽略大小写的。下面介绍一下这些数据结构的使用及其应用。</p>
-<h2 id="一、String 类型"><a class="header-anchor" href="#一、String 类型" aria-hidden="true">¶</a> 一、String 类型</h2>
-<h3 id="1. 命令"><a class="header-anchor" href="#1. 命令" aria-hidden="true">¶</a> 1. 命令</h3>
-<h4 id="1.1 赋值"><a class="header-anchor" href="#1.1 赋值" aria-hidden="true">¶</a> 1.1 赋值</h4>
-<p><em>语法：SET key value</em><br>
-<img src="/2020/01/01/Redis-数据类型及命令/20190707145501449.png" alt="在这里插入图片描述"></p>
+<h2 id="一、String-类型"><a href="#一、String-类型" class="headerlink" title="一、String 类型"></a>一、String 类型</h2><h3 id="1-命令"><a href="#1-命令" class="headerlink" title="1. 命令"></a>1. 命令</h3><h4 id="1-1-赋值"><a href="#1-1-赋值" class="headerlink" title="1.1 赋值"></a>1.1 赋值</h4><p><em>语法：SET key value</em><br><img src="/2020/01/01/Redis-数据类型及命令/20190707145501449.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1367,8 +1356,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="一、Jedis 介绍"><a class="header-anchor" href="#一、Jedis 介绍" aria-hidden="true">¶</a> 一、Jedis 介绍</h3>
-<p>Redis不仅支持使用命令来操作，现在许多主流的语言都有客户端支持，比如java、C、C#、C++、php、Node.js、Go等。</p>
+          <h3 id="一、Jedis-介绍"><a href="#一、Jedis-介绍" class="headerlink" title="一、Jedis 介绍"></a>一、Jedis 介绍</h3><p>Redis不仅支持使用命令来操作，现在许多主流的语言都有客户端支持，比如java、C、C#、C++、php、Node.js、Go等。 </p>
 <p>在 Java 的官方网站里列一些Java的客户端，有Jedis、Redisson、Jredis、JDBC-Redis 等，其中官方推荐使用Jedis和Redisson。 在企业中用的最多的就是Jedis。</p>
 <p>Jedis同样也是托管在github上，地址：<a href="https://github.com/xetorthio/jedis" target="_blank" rel="noopener">https://github.com/xetorthio/jedis</a></p>
           <!--noindex-->
@@ -1482,7 +1470,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>5.1k</span>
+              <span>5k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1505,11 +1493,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>日志是应用软件中不可缺少的部分，Apache 的开源项目 log4j 是一个功能强大的日志组件，提供方便的日志记录。在 apache 网站：<a href="http://jakarta.apache.org/log4j" target="_blank" rel="noopener">jakarta.apache.org/log4j</a> 可以免费下载到 Log4j 最新版本的软件包。</p>
-<h2 id="一、入门实例"><a class="header-anchor" href="#一、入门实例" aria-hidden="true">¶</a> 一、入门实例</h2>
-<p>1.新建一个 Java 工程，导入包 log4j-1.2.17.jar，整个工程最终目录如下：<br>
-<img src="/2020/01/01/Log4J-的使用/20190327111924438.png" alt="在这里插入图片描述"><br>
-2.src 同级创建并设置 log4j.properties，具体内容如下所示：</p>
+          <p>日志是应用软件中不可缺少的部分，Apache 的开源项目 log4j 是一个功能强大的日志组件，提供方便的日志记录。在 apache 网站：jakarta.apache.org/log4j 可以免费下载到 Log4j 最新版本的软件包。</p>
+<h2 id="一、入门实例"><a href="#一、入门实例" class="headerlink" title="一、入门实例"></a>一、入门实例</h2><p>1.新建一个 Java 工程，导入包 log4j-1.2.17.jar，整个工程最终目录如下：<br><img src="/2020/01/01/Log4J-的使用/20190327111924438.png" alt="在这里插入图片描述"><br>2.src 同级创建并设置 log4j.properties，具体内容如下所示：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1645,7 +1630,7 @@
 
       
           <p>该网站可以搜索获取pom.xml中的依赖坐标配置 <a href="https://mvnrepository.com/artifact/junit/junit/4.12" target="_blank" rel="noopener">点击进入</a></p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
         
       
     </div>
@@ -1800,12 +1785,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

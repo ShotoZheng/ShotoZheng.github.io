@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="¶ 1. 文章标题 目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
+  <meta name="description" content="1. 文章标题目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
 <meta name="keywords" content="Hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo Markdown 注意事项">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/11/24/Hexo-Markdown注意事项/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="¶ 1. 文章标题 目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
+<meta property="og:description" content="1. 文章标题目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E9%94%99%E8%AF%AF.jpg">
 <meta property="og:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/1574582056125.png">
@@ -72,7 +72,7 @@
 <meta property="og:updated_time" content="2021-05-04T03:32:30.411Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo Markdown 注意事项">
-<meta name="twitter:description" content="¶ 1. 文章标题 目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
+<meta name="twitter:description" content="1. 文章标题目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构： 12345# 一级标题## 二级标题### 三级标题#### 四级标题...">
 <meta name="twitter:image" content="https://shotozheng.github.io/2019/11/24/Hexo-Markdown注意事项/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E9%94%99%E8%AF%AF.jpg">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/11/24/Hexo-Markdown注意事项/">
 
@@ -373,7 +373,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.9k</span>
+              <span>3.8k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -383,7 +383,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>4 分钟</span>
+              <span>3 分钟</span>
             </span>
           
 
@@ -396,48 +396,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="1. 文章标题"><a class="header-anchor" href="#1. 文章标题" aria-hidden="true">¶</a> 1. 文章标题</h2>
-<p>目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构：</p>
+        <h2 id="1-文章标题"><a href="#1-文章标题" class="headerlink" title="1. 文章标题"></a>1. 文章标题</h2><p>目前 Hexo 建议使用顺序的文章标题，也就是使用如下格式的标题结构：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">## 二级标题</span><br><span class="line">### 三级标题</span><br><span class="line">#### 四级标题</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <p>简单地说就是文章标题建议使用由大号标题到小号标题过渡而不要出现跨级的标题结构，比如下面的标题结构：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># 一级标题</span><br><span class="line">### 三级标题</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
 <p>因为这样可能会出现如下的错误显示，所以只要遵循这种标题格式即可。</p>
 <p><img src="/2019/11/24/Hexo-Markdown注意事项/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E9%94%99%E8%AF%AF.jpg" alt="文章目录错误"></p>
-<h2 id="2. 文章头格式"><a class="header-anchor" href="#2. 文章头格式" aria-hidden="true">¶</a> 2. 文章头格式</h2>
-<p><code>front-matter</code> 的基本格式示例如下：</p>
+<h2 id="2-文章头格式"><a href="#2-文章头格式" class="headerlink" title="2. 文章头格式"></a>2. 文章头格式</h2><p><code>front-matter</code> 的基本格式示例如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 文章标题</span><br><span class="line">top: false 是否文章置顶</span><br><span class="line">mathjax: false 是否开启数学公式支持 </span><br><span class="line">date: 日期时间</span><br><span class="line">author: 作者名</span><br><span class="line">password: 文章阅读密码，前提是在主题的 config.yml 中激活了 verifyPassword 选项</span><br><span class="line">summary: 文章摘要，自定义的文章摘要内容</span><br><span class="line">tags: 表示文章标签，格式：[标签1, 标签2, ]</span><br><span class="line">categories: 表示文章分类，格式：[分类1, 分类2, ]</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
 <p>需要注意的是，上述的<code>title: 文章标题</code> 之间必须使用空格隔开，其他的也一样，否则 Hexo 运行时会报错。</p>
-<h2 id="3. 显示阅读全文"><a class="header-anchor" href="#3. 显示阅读全文" aria-hidden="true">¶</a> 3. 显示阅读全文</h2>
-<p>Hexo 首页默认是会显示每篇文章的全部内容的，为了更为合理的浏览首页的内容，我们无需显示整篇文章，而是增添一个<code>阅读全文</code>的按钮，并只在首页显示文章指定的部分内容，若要查看该篇文章则只需点击阅读全文即可。</p>
+<h2 id="3-显示阅读全文"><a href="#3-显示阅读全文" class="headerlink" title="3. 显示阅读全文"></a>3. 显示阅读全文</h2><p>Hexo 首页默认是会显示每篇文章的全部内容的，为了更为合理的浏览首页的内容，我们无需显示整篇文章，而是增添一个<code>阅读全文</code>的按钮，并只在首页显示文章指定的部分内容，若要查看该篇文章则只需点击阅读全文即可。</p>
 <p>因此我们可以在文章的某个位置增加如下语句，那么位于该语句之前的文章内容则会显示在首页，而不是简单地显示全文。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+
 <p>添加后的显示如下所示：</p>
 <p><img src="/2019/11/24/Hexo-Markdown注意事项/1574582056125.png" alt="阅读全文"></p>
-<h2 id="4. 文本高亮"><a class="header-anchor" href="#4. 文本高亮" aria-hidden="true">¶</a> 4. 文本高亮</h2>
-<p>本人的 Hexo 系统并支持如下的文本高亮的 Markdown 语法：</p>
+<h2 id="4-文本高亮"><a href="#4-文本高亮" class="headerlink" title="4. 文本高亮"></a>4. 文本高亮</h2><p>本人的 Hexo 系统并支持如下的文本高亮的 Markdown 语法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&apos;&apos;&apos;高亮文本&apos;&apos;&apos;</span><br><span class="line">==高亮文本==</span><br></pre></td></tr></table></figure>
+
 <p>其中三个单引号`的高亮语法会导致显示格式错误，而两个等号=的高亮语法则无高亮效果。目前支持的高亮语法则是：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`高亮文本`</span><br></pre></td></tr></table></figure>
-<h2 id="5. Latex 公式"><a class="header-anchor" href="#5. Latex 公式" aria-hidden="true">¶</a> 5. Latex 公式</h2>
-<p>数学公式的默认定界符是<code>$...$</code>（对于行内公式），以及<code>$$...$$</code>(对于块级公式）。例如，质能守恒方程如下所示：</p>
-<p>行内公式： <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>E</mi><mo>=</mo><mi>m</mi><msup><mi>c</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">E = mc^2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base textstyle uncramped"><span class="mord mathit" style="margin-right:0.05764em;">E</span><span class="mrel">=</span><span class="mord mathit">m</span><span class="mord"><span class="mord mathit">c</span><span class="vlist"><span style="top:-0.363em;margin-right:0.05em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle uncramped"><span class="mord mathrm">2</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span></span></span></span></p>
+
+<h2 id="5-Latex-公式"><a href="#5-Latex-公式" class="headerlink" title="5. Latex 公式"></a>5. Latex 公式</h2><p>数学公式的默认定界符是<code>$...$</code>（对于行内公式），以及<code>$$...$$</code>(对于块级公式）。例如，质能守恒方程如下所示：</p>
+<p>行内公式： $E = mc^2$ </p>
 <p>块内公式： $$E = mc^2$$</p>
 <p>例如如下块级公式：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$$\Delta_A(\lambda)=\det(\lambda I-A)$$</span><br></pre></td></tr></table></figure>
-<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Δ</mi><mi>A</mi></msub><mo>(</mo><mi>λ</mi><mo>)</mo><mo>=</mo><mi>det</mi><mo>(</mo><mi>λ</mi><mi>I</mi><mo>−</mo><mi>A</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\Delta_A(\lambda)=\det(\lambda I-A)
-</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base displaystyle textstyle uncramped"><span class="mord"><span class="mord mathrm">Δ</span><span class="vlist"><span style="top:0.15em;margin-right:0.05em;margin-left:0em;"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span><span class="reset-textstyle scriptstyle cramped"><span class="mord mathit">A</span></span></span><span class="baseline-fix"><span class="fontsize-ensurer reset-size5 size5"><span style="font-size:0em;">​</span></span>​</span></span></span><span class="mopen">(</span><span class="mord mathit">λ</span><span class="mclose">)</span><span class="mrel">=</span><span class="mop">det</span><span class="mopen">(</span><span class="mord mathit">λ</span><span class="mord mathit" style="margin-right:0.07847em;">I</span><span class="mbin">−</span><span class="mord mathit">A</span><span class="mclose">)</span></span></span></span></span></p>
-<h2 id="6. 文字增加背景色块"><a class="header-anchor" href="#6. 文字增加背景色块" aria-hidden="true">¶</a> 6. 文字增加背景色块</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=&quot;inline-blue&quot;&gt; 站点配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-purple&quot;&gt; 主题配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-yellow&quot;&gt; 站点配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-green&quot;&gt; 主题配置文件 &lt;/span&gt;</span><br></pre></td></tr></table></figure>
-<p>效果如下所示：<br>
-<span id="inline-blue"> 站点配置文件 </span><br>
-<span id="inline-purple"> 主题配置文件 </span><br>
-<span id="inline-yellow"> 站点配置文件 </span><br>
-<span id="inline-green"> 主题配置文件 </span></p>
-<h2 id="7. 在文档中增加图标, Font Awesome 提供图标"><a class="header-anchor" href="#7. 在文档中增加图标, Font Awesome 提供图标" aria-hidden="true">¶</a> 7. 在文档中增加图标, <a href="https://link.zhihu.com/?target=http%3A//fontawesome.dashgame.com/" target="_blank" rel="noopener">Font Awesome</a> 提供图标</h2>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class=&quot;fa fa-pencil&quot;&gt;郑松涛&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+
+<p>$$\Delta_A(\lambda)=\det(\lambda I-A)$$</p>
+<h2 id="6-文字增加背景色块"><a href="#6-文字增加背景色块" class="headerlink" title="6. 文字增加背景色块"></a>6. 文字增加背景色块</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;span id=&quot;inline-blue&quot;&gt; 站点配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-purple&quot;&gt; 主题配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-yellow&quot;&gt; 站点配置文件 &lt;/span&gt;</span><br><span class="line">&lt;span id=&quot;inline-green&quot;&gt; 主题配置文件 &lt;/span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>效果如下所示：<br><span id="inline-blue"> 站点配置文件 </span><br><span id="inline-purple"> 主题配置文件 </span><br><span id="inline-yellow"> 站点配置文件 </span><br><span id="inline-green"> 主题配置文件 </span></p>
+<h2 id="7-在文档中增加图标-Font-Awesome-提供图标"><a href="#7-在文档中增加图标-Font-Awesome-提供图标" class="headerlink" title="7. 在文档中增加图标, Font Awesome 提供图标"></a>7. 在文档中增加图标, <a href="https://link.zhihu.com/?target=http%3A//fontawesome.dashgame.com/" target="_blank" rel="noopener">Font Awesome</a> 提供图标</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class=&quot;fa fa-pencil&quot;&gt;郑松涛&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+
 <p>显示效果：<i class="fa fa-pencil">郑松涛</i></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;list-group&quot;&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-home fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Home&lt;/a&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-book fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Library&lt;/a&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-pencil fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Applications&lt;/a&gt;</span><br><span class="line">  &lt;a class=&quot;list-group-item&quot; href=&quot;#&quot;&gt;&lt;i class=&quot;fa fa-cog fa-fw&quot;&gt;&lt;/i&gt;&amp;nbsp; Settings&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
 <p>显示效果：</p>
 <div class="list-group">
 <a class="list-group-item" href="#"><i class="fa fa-home fa-fw"></i>&nbsp; Home</a>
@@ -445,16 +444,14 @@
 <a class="list-group-item" href="#"><i class="fa fa-pencil fa-fw"></i>&nbsp; Applications</a>
 <a class="list-group-item" href="#"><i class="fa fa-cog fa-fw"></i>&nbsp; Settings</a>
 </div>
+
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;i class=&quot;fa fa-spinner fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-circle-o-notch fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-refresh fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-cog fa-spin&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;i class=&quot;fa fa-spinner fa-pulse&quot;&gt;&lt;/i&gt;</span><br></pre></td></tr></table></figure>
+
 <p>显示效果：</p>
-<p><i class="fa fa-spinner fa-spin">旋转</i><br>
-<i class="fa fa-circle-o-notch fa-spin">旋转</i><br>
-<i class="fa fa-refresh fa-spin">旋转</i><br>
-<i class="fa fa-cog fa-spin">旋转</i><br>
-<i class="fa fa-spinner fa-pulse">旋转</i></p>
-<h2 id="8. mermaid 支持"><a class="header-anchor" href="#8. mermaid 支持" aria-hidden="true">¶</a> 8. mermaid 支持</h2>
-<p>使用 mermaid 该插件可以画甘特图和时序图等图标，但是使用语法并非标准的 Markdown 语法，并不友好。Hexo 支持的命令为：</p>
+<p><i class="fa fa-spinner fa-spin">旋转</i><br><i class="fa fa-circle-o-notch fa-spin">旋转</i><br><i class="fa fa-refresh fa-spin">旋转</i><br><i class="fa fa-cog fa-spin">旋转</i><br><i class="fa fa-spinner fa-pulse">旋转</i></p>
+<h2 id="8-mermaid-支持"><a href="#8-mermaid-支持" class="headerlink" title="8. mermaid 支持"></a>8. mermaid 支持</h2><p>使用 mermaid 该插件可以画甘特图和时序图等图标，但是使用语法并非标准的 Markdown 语法，并不友好。Hexo 支持的命令为：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;% mermaid %&#125; ... &#123;% endmermaid %&#125;</span><br></pre></td></tr></table></figure>
+
 <p>效果图如下所示：</p>
 <pre class="mermaid" style="text-align: center;">
             
@@ -478,6 +475,7 @@
     压力测试                               :after a1  , 20h
     测试报告                               : 48h
           </pre>
+
 <pre class="mermaid" style="text-align: center;">
             
              
@@ -491,12 +489,14 @@ conditionB--yes-->opB[读入用户信息]
 conditionB--no-->inputA
 opB-->en(登录)
           </pre>
-<h2 id="9. 自定义图片样式"><a class="header-anchor" href="#9. 自定义图片样式" aria-hidden="true">¶</a> 9. 自定义图片样式</h2>
-<div>
-	<img src="/2019/11/24/Hexo-Markdown注意事项/文章目录错误.jpg" style="margin-left: 20px; width: 200px; height: 300px">
+
+<h2 id="9-自定义图片样式"><a href="#9-自定义图片样式" class="headerlink" title="9. 自定义图片样式"></a>9. 自定义图片样式</h2><div>
+    <img src="/2019/11/24/Hexo-Markdown注意事项/文章目录错误.jpg" style="margin-left: 20px; width: 200px; height: 300px">
 </div>
+
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"2019-11-24-Hexo-Markdown注意事项/文章目录错误.jpg"</span> <span class="attr">style</span>=<span class="string">"margin-left: 20px; width: 200px; height: 300px"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
+
     </div>
 
     
@@ -596,7 +596,7 @@ opB-->en(登录)
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1. 文章标题"><span class="nav-text">¶ 1. 文章标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2. 文章头格式"><span class="nav-text">¶ 2. 文章头格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3. 显示阅读全文"><span class="nav-text">¶ 3. 显示阅读全文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4. 文本高亮"><span class="nav-text">¶ 4. 文本高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5. Latex 公式"><span class="nav-text">¶ 5. Latex 公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6. 文字增加背景色块"><span class="nav-text">¶ 6. 文字增加背景色块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7. 在文档中增加图标, Font Awesome 提供图标"><span class="nav-text">¶ 7. 在文档中增加图标, Font Awesome 提供图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8. mermaid 支持"><span class="nav-text">¶ 8. mermaid 支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9. 自定义图片样式"><span class="nav-text">¶ 9. 自定义图片样式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-文章标题"><span class="nav-text">1. 文章标题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-文章头格式"><span class="nav-text">2. 文章头格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-显示阅读全文"><span class="nav-text">3. 显示阅读全文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-文本高亮"><span class="nav-text">4. 文本高亮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-Latex-公式"><span class="nav-text">5. Latex 公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-文字增加背景色块"><span class="nav-text">6. 文字增加背景色块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-在文档中增加图标-Font-Awesome-提供图标"><span class="nav-text">7. 在文档中增加图标, Font Awesome 提供图标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-mermaid-支持"><span class="nav-text">8. mermaid 支持</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-自定义图片样式"><span class="nav-text">9. 自定义图片样式</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -694,12 +694,12 @@ opB-->en(登录)
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

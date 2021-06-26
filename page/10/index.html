@@ -381,8 +381,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p>之所以把<em>HashSet</em>和<em>HashMap</em>放在一起讲解，是因为二者在Java里有着相同的实现，前者仅仅是对后者做了一层包装，也就是说<em><em><em>HashSet</em>里面有一个</em>HashMap</em>（适配器模式）**。因此本文将重点分析<em>HashMap</em>。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p>之所以把<em>HashSet</em>和<em>HashMap</em>放在一起讲解，是因为二者在Java里有着相同的实现，前者仅仅是对后者做了一层包装，也就是说<strong><em>HashSet</em>里面有一个<em>HashMap</em>（适配器模式）</strong>。因此本文将重点分析<em>HashMap</em>。</p>
 <p><em>HashMap</em>实现了<em>Map</em>接口，即允许放入<code>key</code>为<code>null</code>的元素，也允许插入<code>value</code>为<code>null</code>的元素；除该类未实现同步外，其余跟<code>Hashtable</code>大致相同；跟<em>TreeMap</em>不同，该容器不保证元素顺序，根据需要该容器可能会对元素重新哈希，元素的顺序也会被重新打散，因此不同时间迭代同一个<em>HashMap</em>的顺序可能会不同。</p>
           <!--noindex-->
           
@@ -512,7 +511,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>12 分钟</span>
+              <span>11 分钟</span>
             </span>
           
 
@@ -525,8 +524,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p>之所以把<em>TreeSet</em>和<em>TreeMap</em>放在一起讲解，是因为二者在Java里有着相同的实现，前者仅仅是对后者做了一层包装，也就是说<em><em><em>TreeSet</em>里面有一个</em>TreeMap</em>（适配器模式）**。因此本文将重点分析<em>TreeMap</em>。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p>之所以把<em>TreeSet</em>和<em>TreeMap</em>放在一起讲解，是因为二者在Java里有着相同的实现，前者仅仅是对后者做了一层包装，也就是说<strong><em>TreeSet</em>里面有一个<em>TreeMap</em>（适配器模式）</strong>。因此本文将重点分析<em>TreeMap</em>。</p>
 <p>Java <em>TreeMap</em>实现了<em>SortedMap</em>接口，也就是说会按照<code>key</code>的大小顺序对<em>Map</em>中的元素进行排序，<code>key</code>大小的评判可以通过其本身的自然顺序（natural ordering），也可以通过构造时传入的比较器（Comparator）。</p>
 <p><strong><em>TreeMap</em>底层通过红黑树（Red-Black tree）实现</strong>，也就意味着<code>containsKey()</code>, <code>get()</code>, <code>put()</code>, <code>remove()</code>都有着<code>log(n)</code>的时间复杂度。其具体算法实现参照了《算法导论》。</p>
           <!--noindex-->
@@ -647,7 +645,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>4.3k</span>
+              <span>4.2k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -670,8 +668,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 前言"><a class="header-anchor" href="#1. 前言" aria-hidden="true">¶</a> 1. 前言</h1>
-<p>Java里有一个叫做<em>Stack</em>的类，却没有叫做<em>Queue</em>的类（它是个接口名字）。当需要使用栈时，Java已不推荐使用<em>Stack</em>，而是推荐使用更高效的<em>ArrayDeque</em>；既然<em>Queue</em>只是一个接口，当需要使用队列时也就首选<em>ArrayDeque</em>了（次选是<em>LinkedList</em>）。</p>
+          <h1 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h1><p>Java里有一个叫做<em>Stack</em>的类，却没有叫做<em>Queue</em>的类（它是个接口名字）。当需要使用栈时，Java已不推荐使用<em>Stack</em>，而是推荐使用更高效的<em>ArrayDeque</em>；既然<em>Queue</em>只是一个接口，当需要使用队列时也就首选<em>ArrayDeque</em>了（次选是<em>LinkedList</em>）。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -790,7 +787,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.6k</span>
+              <span>3.5k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -813,8 +810,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p><em>LinkedList</em>同时实现了<em>List</em>接口和<em>Deque</em>接口，也就是说它既可以看作一个顺序容器，又可以看作一个队列（<em>Queue</em>），同时又可以看作一个栈（<em>Stack</em>）。这样看来，<em>LinkedList</em>简直就是个全能冠军。当你需要使用栈或者队列时，可以考虑使用<em>LinkedList</em>，一方面是因为Java官方已经声明不建议使用<em>Stack</em>类，更遗憾的是，Java里根本没有一个叫做<em>Queue</em>的类（它是个接口名字）。关于栈或队列，现在的首选是<em>ArrayDeque</em>，它有着比<em>LinkedList</em>（当作栈或队列使用时）有着更好的性能。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p><em>LinkedList</em>同时实现了<em>List</em>接口和<em>Deque</em>接口，也就是说它既可以看作一个顺序容器，又可以看作一个队列（<em>Queue</em>），同时又可以看作一个栈（<em>Stack</em>）。这样看来，<em>LinkedList</em>简直就是个全能冠军。当你需要使用栈或者队列时，可以考虑使用<em>LinkedList</em>，一方面是因为Java官方已经声明不建议使用<em>Stack</em>类，更遗憾的是，Java里根本没有一个叫做<em>Queue</em>的类（它是个接口名字）。关于栈或队列，现在的首选是<em>ArrayDeque</em>，它有着比<em>LinkedList</em>（当作栈或队列使用时）有着更好的性能。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -933,7 +929,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.5k</span>
+              <span>2.4k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -956,8 +952,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p><em>ArrayList</em>实现了<em>List</em>接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入<code>null</code>元素，底层通过<strong>数组实现</strong>。除该类未实现同步外，其余跟<em>Vector</em>大致相同。每个<em>ArrayList</em>都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只是编译器提供的语法糖，所以这里的数组是一个Object数组，以便能够容纳任何类型的对象。</p>
+          <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p><em>ArrayList</em>实现了<em>List</em>接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入<code>null</code>元素，底层通过<strong>数组实现</strong>。除该类未实现同步外，其余跟<em>Vector</em>大致相同。每个<em>ArrayList</em>都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只是编译器提供的语法糖，所以这里的数组是一个Object数组，以便能够容纳任何类型的对象。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1099,8 +1094,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 概览"><a class="header-anchor" href="#1. 概览" aria-hidden="true">¶</a> 1. 概览</h1>
-<p>容器，就是可以容纳其他Java对象的对象。*Java Collections Framework（JCF）*为Java开发者提供了通用的容器，其始于JDK 1.2，优点是：</p>
+          <h1 id="1-概览"><a href="#1-概览" class="headerlink" title="1. 概览"></a>1. 概览</h1><p>容器，就是可以容纳其他Java对象的对象。<em>Java Collections Framework（JCF）</em>为Java开发者提供了通用的容器，其始于JDK 1.2，优点是：</p>
 <ul>
 <li>降低编程难度</li>
 <li>提高程序性能</li>
@@ -1228,7 +1222,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>873</span>
+              <span>863</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1251,28 +1245,23 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Java Collections Framework Internals"><a class="header-anchor" href="#Java Collections Framework Internals" aria-hidden="true">¶</a> Java Collections Framework Internals</h1>
-<h1 id="Authors"><a class="header-anchor" href="#Authors" aria-hidden="true">¶</a> Authors</h1>
-<table>
+          <h1 id="Java-Collections-Framework-Internals"><a href="#Java-Collections-Framework-Internals" class="headerlink" title="Java Collections Framework Internals"></a>Java Collections Framework Internals</h1><h1 id="Authors"><a href="#Authors" class="headerlink" title="Authors"></a>Authors</h1><table>
 <thead>
 <tr>
-<th style="text-align:left">Name</th>
-<th style="text-align:left">Weibo Id</th>
-<th style="text-align:left">Blog</th>
-<th style="text-align:left">Mail</th>
+<th align="left">Name</th>
+<th align="left">Weibo Id</th>
+<th align="left">Blog</th>
+<th align="left">Mail</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:left">李豪</td>
-<td style="text-align:left"><a href="http://weibo.com/icttinymouse" target="_blank" rel="noopener">@计算所的小鼠标</a></td>
-<td style="text-align:left"><a href="http://www.cnblogs.com/CarpenterLee/" target="_blank" rel="noopener">CarpenterLee</a></td>
-<td style="text-align:left"><a href="mailto:hooleeucas@163.com" target="_blank" rel="noopener">hooleeucas@163.com</a></td>
+<tbody><tr>
+<td align="left">李豪</td>
+<td align="left"><a href="http://weibo.com/icttinymouse" target="_blank" rel="noopener">@计算所的小鼠标</a></td>
+<td align="left"><a href="http://www.cnblogs.com/CarpenterLee/" target="_blank" rel="noopener">CarpenterLee</a></td>
+<td align="left"><a href="mailto:hooleeucas@163.com" target="_blank" rel="noopener">hooleeucas@163.com</a></td>
 </tr>
-</tbody>
-</table>
-<h1 id="Introduction"><a class="header-anchor" href="#Introduction" aria-hidden="true">¶</a> Introduction</h1>
-<p>关于*C++标准模板库(Standard Template Library, STL)<em>的书籍和资料有很多，关于</em>Java集合框架(Java Collections Framework, JCF)*的资料却很少，甚至很难找到一本专门介绍它的书籍，这给Java学习者们带来不小的麻烦。我深深的不解其中的原因。<strong>虽然JCF设计参考了STL，但其定位不是Java版的STL，而是要实现一个精简紧凑的容器框架</strong>，对STL的介绍自然不能替代对JCF的介绍。</p>
+</tbody></table>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>关于<em>C++标准模板库(Standard Template Library, STL)</em>的书籍和资料有很多，关于<em>Java集合框架(Java Collections Framework, JCF)</em>的资料却很少，甚至很难找到一本专门介绍它的书籍，这给Java学习者们带来不小的麻烦。我深深的不解其中的原因。<strong>虽然JCF设计参考了STL，但其定位不是Java版的STL，而是要实现一个精简紧凑的容器框架</strong>，对STL的介绍自然不能替代对JCF的介绍。</p>
 <p>本系列文章主要从<strong>数据结构和算法</strong>层面分析JCF中List, Set, Map, Stack, Queue等典型容器，<strong>结合生动图解和源代码，帮助读者对Java集合框架建立清晰而深入的理解</strong>。本文并不特意介绍Java的语言特性，但会在需要的时候做出简洁的解释。</p>
           <!--noindex-->
           
@@ -1415,10 +1404,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>原文作者：chenssy<br>
-出处：<a href="http://www.cnblogs.com/chenssy/p/3495238.html" target="_blank" rel="noopener">http://www.cnblogs.com/chenssy/p/3495238.html</a></p>
+          <p>原文作者：chenssy<br>出处：<a href="http://www.cnblogs.com/chenssy/p/3495238.html" target="_blank" rel="noopener">http://www.cnblogs.com/chenssy/p/3495238.html</a></p>
 <hr>
-<p>在编写java程序时，我们最常用的除了八种基本数据类型，String对象外还有一个集合类，在我们的程序中到处充斥着集合类的身影！java中集合大家族的成员实在是太丰富了，有常用的ArrayList、HashMap、HashSet，也有不常用的Stack、Queue，有线程安全的Vector、HashTable，也有线程不安全的LinkedList、TreeMap等等！</p>
+<p> 在编写java程序时，我们最常用的除了八种基本数据类型，String对象外还有一个集合类，在我们的程序中到处充斥着集合类的身影！java中集合大家族的成员实在是太丰富了，有常用的ArrayList、HashMap、HashSet，也有不常用的Stack、Queue，有线程安全的Vector、HashTable，也有线程不安全的LinkedList、TreeMap等等！</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1868,12 +1856,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

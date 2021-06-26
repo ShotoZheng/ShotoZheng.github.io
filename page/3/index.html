@@ -351,7 +351,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>3.9k</span>
+              <span>3.8k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -361,7 +361,7 @@
               
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
               
-              <span>4 分钟</span>
+              <span>3 分钟</span>
             </span>
           
 
@@ -374,8 +374,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. 高水位线"><a class="header-anchor" href="#1. 高水位线" aria-hidden="true">¶</a> 1. 高水位线</h2>
-<p>高水位线（high-water mark，HWM）是一个很有趣的概念，但是也是一个非常重要的概念。顾名思义，高水位线有点类型于水文监测站里测水深度的标杆一样，当水涨的时候，水位线随之上升，并在标杆留下一个水印痕，这个水印痕就是高水位线。</p>
+          <h2 id="1-高水位线"><a href="#1-高水位线" class="headerlink" title="1. 高水位线"></a>1. 高水位线</h2><p>高水位线（high-water mark，HWM）是一个很有趣的概念，但是也是一个非常重要的概念。顾名思义，高水位线有点类型于水文监测站里测水深度的标杆一样，当水涨的时候，水位线随之上升，并在标杆留下一个水印痕，这个水印痕就是高水位线。</p>
 <p>在数据库中，上述比喻很恰当。如果把表想象成一个平面结构，或者想象成从左到右依次排开的一系列块，高水位线就是包含了数据的最右边的块。如下图所示：</p>
 <p><img src="/2021/05/04/oracle-11g-的表/20201018111926511.png" alt="在这里插入图片描述"></p>
           <!--noindex-->
@@ -512,8 +511,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. 完整性简介"><a class="header-anchor" href="#1. 完整性简介" aria-hidden="true">¶</a> 1. 完整性简介</h2>
-<p>定义：就是正确性、准确性，包含三种：实体完整性、参照完整性、用户自定义完整性。Oracle中主要通过约束、触发器、过程函数实现的。维护数据的完整性，有not null、unique、check、primary key、foreign key五种。not null 只能在列内定义，其他4种约束可以在列定义结束后，在表内定义。</p>
+          <h2 id="1-完整性简介"><a href="#1-完整性简介" class="headerlink" title="1. 完整性简介"></a>1. 完整性简介</h2><p>定义：就是正确性、准确性，包含三种：实体完整性、参照完整性、用户自定义完整性。Oracle中主要通过约束、触发器、过程函数实现的。维护数据的完整性，有not null、unique、check、primary key、foreign key五种。not null 只能在列内定义，其他4种约束可以在列定义结束后，在表内定义。</p>
 <p>需要说明的是：当使用 unique 唯一约束时，根据NULL的定义，NULL表示的是<strong>未知</strong>，因此<strong>两个NULL比较的结果既不相等，也不不等</strong>，<strong>结果仍然是未知</strong>。根据这个定义，多个NULL值的存在应该不违反唯一约束。</p>
           <!--noindex-->
           
@@ -626,7 +624,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.5k</span>
+              <span>2.4k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -649,9 +647,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="1. 用户"><a class="header-anchor" href="#1. 用户" aria-hidden="true">¶</a> 1. 用户</h1>
-<h2 id="1.1 默认用户"><a class="header-anchor" href="#1.1 默认用户" aria-hidden="true">¶</a> 1.1 默认用户</h2>
-<ul>
+          <h1 id="1-用户"><a href="#1-用户" class="headerlink" title="1. 用户"></a>1. 用户</h1><h2 id="1-1-默认用户"><a href="#1-1-默认用户" class="headerlink" title="1.1 默认用户"></a>1.1 默认用户</h2><ul>
 <li>SYS：数据库中所有数据字典表和视图都存储在 SYS 模式中。SYS 用户主要用来维护系统信息和管理实例；</li>
 <li>SYSTEM：SYSTEM 是默认的系统管理员，该用户拥有 Oracle 管理工具使用的内部表和视图。<strong>通常通过 SYSTEM 用户管理数据库用户、权限和存储等</strong>；</li>
 <li>SCOTT：SCOTT 用户是 Oracle 数据库的一个示范账户，在数据库安装时创建。</li>
@@ -790,17 +786,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. SQL 的执行顺序"><a class="header-anchor" href="#1. SQL 的执行顺序" aria-hidden="true">¶</a> 1. SQL 的执行顺序</h2>
-<ul>
-<li>
-<p>常见的select、from、where的顺序：1, from 2, where 3, select</p>
+          <h2 id="1-SQL-的执行顺序"><a href="#1-SQL-的执行顺序" class="headerlink" title="1. SQL 的执行顺序"></a>1. SQL 的执行顺序</h2><ul>
+<li><p>常见的select、from、where的顺序：1, from 2, where 3, select</p>
 </li>
-<li>
-<p>完整的select、from、where、group by、having、order by的顺序：1, from 2, where 3, group by 4,having 5, select 6, order by</p>
+<li><p>完整的select、from、where、group by、having、order by的顺序：1, from 2, where 3, group by 4,having 5, select 6, order by</p>
 </li>
 </ul>
-<h2 id="2. EXISTS 的使用"><a class="header-anchor" href="#2. EXISTS 的使用" aria-hidden="true">¶</a> 2. EXISTS 的使用</h2>
-<p>EXISTS用来判断查询所得的结果中，是否有满足条件的纪录存在。存在返回 true， 否则返回 false。</p>
+<h2 id="2-EXISTS-的使用"><a href="#2-EXISTS-的使用" class="headerlink" title="2. EXISTS 的使用"></a>2. EXISTS 的使用</h2><p>EXISTS用来判断查询所得的结果中，是否有满足条件的纪录存在。存在返回 true， 否则返回 false。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> *　<span class="keyword">from</span> student <span class="keyword">where</span> <span class="keyword">exists</span>(<span class="keyword">select</span> * <span class="keyword">from</span> address <span class="keyword">where</span> zz=<span class="string">'郑州'</span>);</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
@@ -936,20 +928,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. SQL 简介"><a class="header-anchor" href="#1. SQL 简介" aria-hidden="true">¶</a> 1. SQL 简介</h2>
-<p>SQL 支持下列类别的命令：</p>
+          <h2 id="1-SQL-简介"><a href="#1-SQL-简介" class="headerlink" title="1. SQL 简介"></a>1. SQL 简介</h2><p>SQL 支持下列类别的命令：</p>
 <ul>
-<li>
-<p>数据定义语言（DDL）：create, alter, drop</p>
+<li><p>数据定义语言（DDL）：create, alter, drop</p>
 </li>
-<li>
-<p>数据操纵语言（DML）：insert,  delete,  update,  select</p>
+<li><p>数据操纵语言（DML）：insert,  delete,  update,  select</p>
 </li>
-<li>
-<p>事务控制语言（TCL）: commit, rollback, savepoint</p>
+<li><p>事务控制语言（TCL）: commit, rollback, savepoint</p>
 </li>
-<li>
-<p>数据控制语言（DCL）: grant, revoke</p>
+<li><p>数据控制语言（DCL）: grant, revoke</p>
 </li>
 </ul>
           <!--noindex-->
@@ -1214,7 +1201,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>6.3k</span>
+              <span>6.2k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -1237,16 +1224,13 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. JS 基础学习"><a class="header-anchor" href="#1. JS 基础学习" aria-hidden="true">¶</a> 1. JS 基础学习</h2>
-<blockquote>
-<p>学习资料：<a href="https://www.w3school.com.cn/js/index.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/js/index.asp</a></p>
+          <h2 id="1-JS-基础学习"><a href="#1-JS-基础学习" class="headerlink" title="1. JS 基础学习"></a>1. JS 基础学习</h2><blockquote>
+<p>  学习资料：<a href="https://www.w3school.com.cn/js/index.asp" target="_blank" rel="noopener">https://www.w3school.com.cn/js/index.asp</a></p>
 </blockquote>
-<h3 id="1.1 JS 函数"><a class="header-anchor" href="#1.1 JS 函数" aria-hidden="true">¶</a> 1.1 JS 函数</h3>
-<blockquote>
-<p>JavaScript 函数是被设计为执行特定任务的代码块，会在某代码调用它时被执行。</p>
+<h3 id="1-1-JS-函数"><a href="#1-1-JS-函数" class="headerlink" title="1.1 JS 函数"></a>1.1 JS 函数</h3><blockquote>
+<p>  JavaScript 函数是被设计为执行特定任务的代码块，会在某代码调用它时被执行。</p>
 </blockquote>
-<h4 id="1.1.1 实例"><a class="header-anchor" href="#1.1.1 实例" aria-hidden="true">¶</a> 1.1.1 实例</h4>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params">p1, p2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p1 * p2;              <span class="comment">// 该函数返回 p1 和 p2 的乘积</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="1-1-1-实例"><a href="#1-1-1-实例" class="headerlink" title="1.1.1 实例"></a>1.1.1 实例</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myFunction</span>(<span class="params">p1, p2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> p1 * p2;              <span class="comment">// 该函数返回 p1 和 p2 的乘积</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1389,14 +1373,12 @@
 
       
           <blockquote>
-<p>官方文档地址：<a href="https://www.layui.com/doc/base/modules.html" target="_blank" rel="noopener">https://www.layui.com/doc/base/modules.html</a></p>
+<p>  官方文档地址：<a href="https://www.layui.com/doc/base/modules.html" target="_blank" rel="noopener">https://www.layui.com/doc/base/modules.html</a></p>
 </blockquote>
-<h2 id="1. 引入方式"><a class="header-anchor" href="#1. 引入方式" aria-hidden="true">¶</a> 1. 引入方式</h2>
-<h3 id="1.1 预先加载方法"><a class="header-anchor" href="#1.1 预先加载方法" aria-hidden="true">¶</a> 1.1 预先加载方法</h3>
-<blockquote>
-<p>推荐使用方式</p>
+<h2 id="1-引入方式"><a href="#1-引入方式" class="headerlink" title="1. 引入方式"></a>1. 引入方式</h2><h3 id="1-1-预先加载方法"><a href="#1-1-预先加载方法" class="headerlink" title="1.1 预先加载方法"></a>1.1 预先加载方法</h3><blockquote>
+<p>  推荐使用方式</p>
 </blockquote>
-<p>Layui的模块加载采用核心的 *layui.use(mods, callback)*方法，当你的JS 需要用到Layui模块的时候，我们更推荐你采用预先加载，因为这样可以避免到处写layui.use的麻烦。你应该在最外层如此定义：</p>
+<p>Layui的模块加载采用核心的 <em>layui.use(mods, callback)</em>方法，当你的JS 需要用到Layui模块的时候，我们更推荐你采用预先加载，因为这样可以避免到处写layui.use的麻烦。你应该在最外层如此定义：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1531,8 +1513,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. Solr 简介"><a class="header-anchor" href="#1. Solr 简介" aria-hidden="true">¶</a> 1. Solr 简介</h2>
-<p>Solr 是一个独立的企业级搜索应用服务器，它对外提供类似于 web-service 的 API接口。用户可以通过 http 请求，向搜索引擎服务器提交一定格式的 XML 文件，生成索引。也可以通过 Http Get 操作提出查找请求，并得到  XML 或者 JSON 格式的返回结果。<strong>本文以使用 solr 全文搜索服务来实现站内搜索的功能。</strong></p>
+          <h2 id="1-Solr-简介"><a href="#1-Solr-简介" class="headerlink" title="1. Solr 简介"></a>1. Solr 简介</h2><p>Solr 是一个独立的企业级搜索应用服务器，它对外提供类似于 web-service 的 API接口。用户可以通过 http 请求，向搜索引擎服务器提交一定格式的 XML 文件，生成索引。也可以通过 Http Get 操作提出查找请求，并得到  XML 或者 JSON 格式的返回结果。<strong>本文以使用 solr 全文搜索服务来实现站内搜索的功能。</strong></p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1682,8 +1663,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="1. 介绍"><a class="header-anchor" href="#1. 介绍" aria-hidden="true">¶</a> 1. 介绍</h2>
-<p>PySpider 是一个基于 Python 的爬虫框架，也就是使用该框架需要懂得一定的 Python 语言。关于 PySpider 的中文文档可以访问 <a href="https://www.cntofu.com/book/156/index.html" target="_blank" rel="noopener">pyspider中文文档</a>。</p>
+          <h2 id="1-介绍"><a href="#1-介绍" class="headerlink" title="1. 介绍"></a>1. 介绍</h2><p>PySpider 是一个基于 Python 的爬虫框架，也就是使用该框架需要懂得一定的 Python 语言。关于 PySpider 的中文文档可以访问 <a href="https://www.cntofu.com/book/156/index.html" target="_blank" rel="noopener">pyspider中文文档</a>。</p>
 <p>我们可以在 PySpider 提供的界面上编写和运行 Python 脚本，同时也支持 MySQL, MongoDB, Redis, SQLite, Elasticsearch各种数据库引擎。本文档将实现将 v2ex 中爬取的数据存放在 MySQL 数据库中。下面就先开始从 PySpider 的环境安装开始吧。</p>
           <!--noindex-->
           
@@ -1848,12 +1828,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

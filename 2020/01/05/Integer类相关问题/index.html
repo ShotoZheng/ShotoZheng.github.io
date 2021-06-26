@@ -395,15 +395,19 @@
 <p>下面记录几个问题</p>
 <p>问题一：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Integer num1 = <span class="keyword">new</span> Integer(<span class="number">40</span>);</span><br><span class="line">Integer num2 = <span class="number">40</span>;	<span class="comment">//自动装箱，相当于Integer num2 = new Integer(40);</span></span><br><span class="line"><span class="keyword">int</span> num3 = <span class="number">40</span>;</span><br><span class="line"></span><br><span class="line">System.out.println(num1 == num2);	<span class="comment">//false</span></span><br><span class="line"><span class="comment">//在进行比较的时候，num1自动拆箱为inty类型的40，即相当于int num1 = 40;</span></span><br><span class="line">System.out.println(num1 == num3);  <span class="comment">//true </span></span><br><span class="line">System.out.println(num2 == num3);  <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+
 <a id="more"></a>
+
 <p>第一个输出为false，是因为num1与num2比较的是两个对象的地址，故为false。</p>
 <p>问题二：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer num1 = <span class="number">127</span>, num2 = <span class="number">127</span>, num3 = <span class="number">128</span>, num4 = <span class="number">128</span>;</span><br><span class="line">        </span><br><span class="line">System.out.println(num1 == num2);	<span class="comment">//true</span></span><br><span class="line">System.out.println(num3 == num4);	<span class="comment">//false</span></span><br></pre></td></tr></table></figure>
+
 <p>首先需要注意的是 num1、 num2、 num3、 num4 四个变量都是 Integer 对象引用，所以==运算比较的不是值而是引用。</p>
 <p>当我们给一个 Integer 对象赋一个 int 值的时候，会调用 Integer 类的静态方法 valueOf，valueOf的源码如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">  * Returns an &#123;<span class="doctag">@code</span> Integer&#125; instance representing the specified</span></span><br><span class="line"><span class="comment">   * &#123;<span class="doctag">@code</span> int&#125; value.  If a new &#123;<span class="doctag">@code</span> Integer&#125; instance is not</span></span><br><span class="line"><span class="comment">   * required, this method should generally be used in preference to</span></span><br><span class="line"><span class="comment">   * the constructor &#123;<span class="doctag">@link</span> #Integer(int)&#125;, as this method is likely</span></span><br><span class="line"><span class="comment">   * to yield significantly better space and time performance by</span></span><br><span class="line"><span class="comment">   * caching frequently requested values.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * This method will always cache values in the range -128 to 127,</span></span><br><span class="line"><span class="comment">   * inclusive, and may cache other values outside of this range.</span></span><br><span class="line"><span class="comment">   *</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@param</span>  i an &#123;<span class="doctag">@code</span> int&#125; value.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@return</span> an &#123;<span class="doctag">@code</span> Integer&#125; instance representing &#123;<span class="doctag">@code</span> i&#125;.</span></span><br><span class="line"><span class="comment">   * <span class="doctag">@since</span>  1.5</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title">valueOf</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high)</span><br><span class="line">          <span class="keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Integer(i);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
 <p>简单的说，如果整型字面量的值在-128 到 127 之间，那么不会 new 新的 Integer 对象，而是直接引用常量池中的 Integer 对象，所以上面的问题中num1 == num2 的结果是 true，而 num3 == num4 的结果是 false。</p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
     </div>
 
     
@@ -599,12 +603,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

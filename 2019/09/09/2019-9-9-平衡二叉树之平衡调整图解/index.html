@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：  我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。">
+  <meta name="description" content="先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。">
 <meta name="keywords" content="数据结构与算法">
 <meta property="og:type" content="article">
 <meta property="og:title" content="平衡二叉树之平衡调整图解">
 <meta property="og:url" content="https://ShotoZheng.github.io/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：  我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。">
+<meta property="og:description" content="先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870243.png">
 <meta property="og:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568601856130.png">
@@ -74,7 +74,7 @@
 <meta property="og:updated_time" content="2020-01-01T12:19:29.747Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="平衡二叉树之平衡调整图解">
-<meta name="twitter:description" content="先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：  我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。">
+<meta name="twitter:description" content="先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。">
 <meta name="twitter:image" content="https://shotozheng.github.io/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870243.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/">
 
@@ -382,7 +382,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>779</span>
+              <span>771</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -405,25 +405,14 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：<br>
-<img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870243.png" alt><br>
-我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中<strong>离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。</strong></p>
+        <p>先看一个平衡二叉树创建的例子。假设现在表中关键字序列为（13，24，37），具体的平衡二叉树创建过程如下图所示：<br><img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870243.png" alt><br>我们可以发现结点37的插入导致二叉树的根结点13的平衡因子变为-2，此时二叉树没有达到平衡状态。其中<strong>离插入结点最近且平衡因子绝对值超过1的祖先结点，以该结点为根的子树称为最小不平衡树， 我们可将重新平衡的范围局限于这颗树或子树。</strong></p>
 <a id="more"></a>
 <p>一般情况下，假设最小不平衡树的根结点为A，则失去平衡后进行调整的规律可归纳为以下四种情况。</p>
-<h3 id="1. LL型"><a class="header-anchor" href="#1. LL型" aria-hidden="true">¶</a> 1. LL型</h3>
-<p>由于在<strong>A左子树根结点的左子树</strong>上插入结点C，A的平衡因子由1增至2，致使以A为根的子树失去平衡，则需要进行一次<strong>向右的顺时针旋转操作</strong>，如下图所示。<br>
-<img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568601856130.png" alt></p>
-<h3 id="2. RR型"><a class="header-anchor" href="#2. RR型" aria-hidden="true">¶</a> 2. RR型</h3>
-<p>由于在<strong>A的右子树根结点的右子树</strong>上插入结点C，A的平衡因子由-1变为-2，致使以A为根结点的子树失去平衡，则需进行一次<strong>向左的逆时针旋转操作</strong>，如下图所示。<br>
-<img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870244.png" alt></p>
-<h3 id="3. LR型"><a class="header-anchor" href="#3. LR型" aria-hidden="true">¶</a> 3. LR型</h3>
-<p>由于在<strong>A的左子树根结点的右子树</strong>上插入结点，A的平衡因子由1增至2，致使以A为根结点的子树失去平衡，则需要进行<strong>二次旋转</strong>操作。第一次<strong>对B及其右子树进行逆时针旋转</strong>，C转上去成为B的根，这时变成了LL型，所以第二次进行<strong>LL型的顺时针旋转</strong>即可恢复平衡。如果C原来有左子树，则调整C的左子树为B的右子树，如下图所示。<br>
-<img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870245.png" alt></p>
-<h3 id="4. RL型"><a class="header-anchor" href="#4. RL型" aria-hidden="true">¶</a> 4. RL型</h3>
-<p>由于在<strong>A的右子树根结点的左子树</strong>上插入结点，A的平衡因子由-1变为-2，致使以A为根结点的子树失去平衡，则旋转方法和LR型相对称，也需进行<strong>两次旋转</strong>，<strong>第一次对B及其左子树进行顺时针右旋</strong>，C转上去成为B的根，这时变成了RR型，再<strong>进行RR型的逆时针左旋</strong>，如下图所示。<br>
-<img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870247.png" alt><br>
-综上，LL型与RR型对称，LR型和RL型对称。我们可以由中序遍历（左-&gt;根-&gt;右）所得关键字序列自小到大有序来证明平衡调整的正确；另外，平衡二叉树的深度在插入结点前和插入结点并平衡调整之后是相同的。</p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+<h3 id="1-LL型"><a href="#1-LL型" class="headerlink" title="1. LL型"></a>1. LL型</h3><p>由于在<strong>A左子树根结点的左子树</strong>上插入结点C，A的平衡因子由1增至2，致使以A为根的子树失去平衡，则需要进行一次<strong>向右的顺时针旋转操作</strong>，如下图所示。<br><img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568601856130.png" alt></p>
+<h3 id="2-RR型"><a href="#2-RR型" class="headerlink" title="2. RR型"></a>2. RR型</h3><p>由于在<strong>A的右子树根结点的右子树</strong>上插入结点C，A的平衡因子由-1变为-2，致使以A为根结点的子树失去平衡，则需进行一次<strong>向左的逆时针旋转操作</strong>，如下图所示。<br><img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870244.png" alt></p>
+<h3 id="3-LR型"><a href="#3-LR型" class="headerlink" title="3. LR型"></a>3. LR型</h3><p>由于在<strong>A的左子树根结点的右子树</strong>上插入结点，A的平衡因子由1增至2，致使以A为根结点的子树失去平衡，则需要进行<strong>二次旋转</strong>操作。第一次<strong>对B及其右子树进行逆时针旋转</strong>，C转上去成为B的根，这时变成了LL型，所以第二次进行<strong>LL型的顺时针旋转</strong>即可恢复平衡。如果C原来有左子树，则调整C的左子树为B的右子树，如下图所示。<br><img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870245.png" alt></p>
+<h3 id="4-RL型"><a href="#4-RL型" class="headerlink" title="4. RL型"></a>4. RL型</h3><p>由于在<strong>A的右子树根结点的左子树</strong>上插入结点，A的平衡因子由-1变为-2，致使以A为根结点的子树失去平衡，则旋转方法和LR型相对称，也需进行<strong>两次旋转</strong>，<strong>第一次对B及其左子树进行顺时针右旋</strong>，C转上去成为B的根，这时变成了RR型，再<strong>进行RR型的逆时针左旋</strong>，如下图所示。<br><img src="/2019/09/09/2019-9-9-平衡二叉树之平衡调整图解/1568039870247.png" alt><br>综上，LL型与RR型对称，LR型和RL型对称。我们可以由中序遍历（左-&gt;根-&gt;右）所得关键字序列自小到大有序来证明平衡调整的正确；另外，平衡二叉树的深度在插入结点前和插入结点并平衡调整之后是相同的。</p>
+
     </div>
 
     
@@ -459,8 +448,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/09/09/2019-9-9-并查集的实现/" rel="next" title="并查集的实现">
-                  <i class="fa fa-chevron-left"></i> 并查集的实现
+                <a href="/2019/09/09/2019-9-9-字典树的实现/" rel="next" title="字典树的实现">
+                  <i class="fa fa-chevron-left"></i> 字典树的实现
                 </a>
               
             </div>
@@ -469,8 +458,8 @@
 
             <div class="post-nav-prev post-nav-item">
               
-                <a href="/2019/09/09/2019-9-9-字典树的实现/" rel="prev" title="字典树的实现">
-                  字典树的实现 <i class="fa fa-chevron-right"></i>
+                <a href="/2019/09/09/2019-9-9-单调栈结构（进阶）/" rel="prev" title="单调栈结构（进阶）">
+                  单调栈结构（进阶） <i class="fa fa-chevron-right"></i>
                 </a>
               
             </div>
@@ -523,7 +512,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1. LL型"><span class="nav-text">¶ 1. LL型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2. RR型"><span class="nav-text">¶ 2. RR型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3. LR型"><span class="nav-text">¶ 3. LR型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4. RL型"><span class="nav-text">¶ 4. RL型</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-LL型"><span class="nav-text">1. LL型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RR型"><span class="nav-text">2. RR型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-LR型"><span class="nav-text">3. LR型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-RL型"><span class="nav-text">4. RL型</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -621,12 +610,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>

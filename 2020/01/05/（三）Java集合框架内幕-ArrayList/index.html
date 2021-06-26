@@ -58,13 +58,13 @@
   };
 </script>
 
-  <meta name="description" content="¶ 1. 总体介绍 ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。除该类未实现同步外，其余跟Vector大致相同。每个ArrayList都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java">
+  <meta name="description" content="1. 总体介绍ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。除该类未实现同步外，其余跟Vector大致相同。每个ArrayList都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="（三）Java集合框架内幕-ArrayList">
 <meta property="og:url" content="https://ShotoZheng.github.io/2020/01/05/（三）Java集合框架内幕-ArrayList/index.html">
 <meta property="og:site_name" content="鱼肚白不是鱼">
-<meta property="og:description" content="¶ 1. 总体介绍 ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。除该类未实现同步外，其余跟Vector大致相同。每个ArrayList都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java">
+<meta property="og:description" content="1. 总体介绍ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。除该类未实现同步外，其余跟Vector大致相同。每个ArrayList都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（三）Java集合框架内幕-ArrayList/20190115143539152.png">
 <meta property="og:image" content="https://shotozheng.github.io/2020/01/05/（三）Java集合框架内幕-ArrayList/20190115143633300.png">
@@ -72,7 +72,7 @@
 <meta property="og:updated_time" content="2020-01-05T00:39:59.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（三）Java集合框架内幕-ArrayList">
-<meta name="twitter:description" content="¶ 1. 总体介绍 ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。除该类未实现同步外，其余跟Vector大致相同。每个ArrayList都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java">
+<meta name="twitter:description" content="1. 总体介绍ArrayList实现了List接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入null元素，底层通过数组实现。除该类未实现同步外，其余跟Vector大致相同。每个ArrayList都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只">
 <meta name="twitter:image" content="https://shotozheng.github.io/2020/01/05/（三）Java集合框架内幕-ArrayList/20190115143539152.png">
   <link rel="canonical" href="https://ShotoZheng.github.io/2020/01/05/（三）Java集合框架内幕-ArrayList/">
 
@@ -372,7 +372,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.5k</span>
+              <span>2.4k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -395,36 +395,33 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="1. 总体介绍"><a class="header-anchor" href="#1. 总体介绍" aria-hidden="true">¶</a> 1. 总体介绍</h1>
-<p><em>ArrayList</em>实现了<em>List</em>接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入<code>null</code>元素，底层通过<strong>数组实现</strong>。除该类未实现同步外，其余跟<em>Vector</em>大致相同。每个<em>ArrayList</em>都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只是编译器提供的语法糖，所以这里的数组是一个Object数组，以便能够容纳任何类型的对象。</p>
+        <h1 id="1-总体介绍"><a href="#1-总体介绍" class="headerlink" title="1. 总体介绍"></a>1. 总体介绍</h1><p><em>ArrayList</em>实现了<em>List</em>接口，是顺序容器，即元素存放的数据与放进去的顺序相同，允许放入<code>null</code>元素，底层通过<strong>数组实现</strong>。除该类未实现同步外，其余跟<em>Vector</em>大致相同。每个<em>ArrayList</em>都有一个容量（capacity），表示底层数组的实际大小，容器内存储元素的个数不能多于当前容量。当向容器中添加元素时，如果容量不足，容器会自动增大底层数组的大小。前面已经提过，Java泛型只是编译器提供的语法糖，所以这里的数组是一个Object数组，以便能够容纳任何类型的对象。</p>
 <a id="more"></a>
+
 <p><img src="/2020/01/05/（三）Java集合框架内幕-ArrayList/20190115143539152.png" alt="在这里插入图片描述"></p>
 <p>size(), isEmpty(), get(), set()方法均能在常数时间内完成，add()方法的时间开销跟插入位置有关，addAll()方法的时间开销跟添加元素的个数成正比。其余方法大都是线性时间。</p>
 <p>为追求效率，ArrayList没有实现同步（synchronized），如果需要多个线程并发访问，用户可以手动同步，也可使用Vector替代。</p>
-<h1 id="2. 方法剖析"><a class="header-anchor" href="#2. 方法剖析" aria-hidden="true">¶</a> 2. 方法剖析</h1>
-<h2 id="2.1 set()"><a class="header-anchor" href="#2.1 set()" aria-hidden="true">¶</a> 2.1 set()</h2>
-<p>既然底层是一个数组<em>ArrayList</em>的<code>set()</code>方法也就变得非常简单，直接对数组的指定位置赋值即可。</p>
+<h1 id="2-方法剖析"><a href="#2-方法剖析" class="headerlink" title="2. 方法剖析"></a>2. 方法剖析</h1><h2 id="2-1-set"><a href="#2-1-set" class="headerlink" title="2.1 set()"></a>2.1 set()</h2><p>既然底层是一个数组<em>ArrayList</em>的<code>set()</code>方法也就变得非常简单，直接对数组的指定位置赋值即可。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">set</span><span class="params">(<span class="keyword">int</span> index, E element)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);<span class="comment">//下标越界检查</span></span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    elementData[index] = element;<span class="comment">//赋值到指定位置，复制的仅仅是引用</span></span><br><span class="line">    <span class="keyword">return</span> oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2.2 get()"><a class="header-anchor" href="#2.2 get()" aria-hidden="true">¶</a> 2.2 get()</h2>
-<p><code>get()</code>方法同样很简单，唯一要注意的是由于底层数组是Object[]，得到元素后需要进行类型转换。</p>
+
+<h2 id="2-2-get"><a href="#2-2-get" class="headerlink" title="2.2 get()"></a>2.2 get()</h2><p><code>get()</code>方法同样很简单，唯一要注意的是由于底层数组是Object[]，得到元素后需要进行类型转换。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    <span class="keyword">return</span> (E) elementData[index];<span class="comment">//注意类型转换</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2.3 add()"><a class="header-anchor" href="#2.3 add()" aria-hidden="true">¶</a> 2.3 add()</h2>
-<p>跟C++ 的<em>vector</em>不同，<em>ArrayList</em>没有<code>push_back()</code>方法，对应的方法是<code>add(E e)</code>，<em>ArrayList</em>也没有<code>insert()</code>方法，对应的方法是<code>add(int index, E e)</code>。这两个方法都是向容器中添加新元素，这可能会导致<em>capacity</em>不足，因此在添加元素之前，都需要进行剩余空间检查，如果需要则自动扩容。扩容操作最终是通过<code>grow()</code>方法完成的。</p>
+
+<h2 id="2-3-add"><a href="#2-3-add" class="headerlink" title="2.3 add()"></a>2.3 add()</h2><p>跟C++ 的<em>vector</em>不同，<em>ArrayList</em>没有<code>push_back()</code>方法，对应的方法是<code>add(E e)</code>，<em>ArrayList</em>也没有<code>insert()</code>方法，对应的方法是<code>add(int index, E e)</code>。这两个方法都是向容器中添加新元素，这可能会导致<em>capacity</em>不足，因此在添加元素之前，都需要进行剩余空间检查，如果需要则自动扩容。扩容操作最终是通过<code>grow()</code>方法完成的。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">grow</span><span class="params">(<span class="keyword">int</span> minCapacity)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> oldCapacity = elementData.length;</span><br><span class="line">    <span class="keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="number">1</span>);<span class="comment">//原来的1.5倍</span></span><br><span class="line">    <span class="keyword">if</span> (newCapacity - minCapacity &lt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = minCapacity;</span><br><span class="line">    <span class="keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="number">0</span>)</span><br><span class="line">        newCapacity = hugeCapacity(minCapacity);</span><br><span class="line">    elementData = Arrays.copyOf(elementData, newCapacity);<span class="comment">//扩展空间并复制</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>由于Java GC自动管理了内存，这里也就不需要考虑源数组释放的问题。</p>
 <p><img src="/2020/01/05/（三）Java集合框架内幕-ArrayList/20190115143633300.png" alt="在这里插入图片描述"></p>
 <p>空间的问题解决后，插入过程就显得非常简单。</p>
 <p><img src="/2020/01/05/（三）Java集合框架内幕-ArrayList/20190115143703471.png" alt="在这里插入图片描述"></p>
 <p><code>add(int index, E e)</code>需要先对元素进行移动，然后完成插入操作，也就意味着该方法有着线性的时间复杂度。</p>
-<h2 id="2.4 addAll()"><a class="header-anchor" href="#2.4 addAll()" aria-hidden="true">¶</a> 2.4 addAll()</h2>
-<p><code>addAll()</code>方法能够一次添加多个元素，根据位置不同也有两个版本，一个是在末尾添加的<code>addAll(Collection&lt;? extends E&gt; c)</code>方法，一个是从指定位置开始插入的<code>addAll(int index, Collection&lt;? extends E&gt; c)</code>方法。跟<code>add()</code>方法类似，在插入之前也需要进行空间检查，如果需要则自动扩容；如果从指定位置插入，也会存在移动元素的情况。<br>
-<code>addAll()</code>的时间复杂度不仅跟插入元素的多少有关，也跟插入的位置相关。</p>
-<h2 id="2.5 remove()"><a class="header-anchor" href="#2.5 remove()" aria-hidden="true">¶</a> 2.5 remove()</h2>
-<p><code>remove()</code>方法也有两个版本，一个是<code>remove(int index)</code>删除指定位置的元素，另一个是<code>remove(Object o)</code>删除第一个满足<code>o.equals(elementData[index])</code>的元素。删除操作是<code>add()</code>操作的逆过程，需要将删除点之后的元素向前移动一个位置。需要注意的是为了让GC起作用，必须显式的为最后一个位置赋<code>null</code>值。</p>
+<h2 id="2-4-addAll"><a href="#2-4-addAll" class="headerlink" title="2.4 addAll()"></a>2.4 addAll()</h2><p><code>addAll()</code>方法能够一次添加多个元素，根据位置不同也有两个版本，一个是在末尾添加的<code>addAll(Collection&lt;? extends E&gt; c)</code>方法，一个是从指定位置开始插入的<code>addAll(int index, Collection&lt;? extends E&gt; c)</code>方法。跟<code>add()</code>方法类似，在插入之前也需要进行空间检查，如果需要则自动扩容；如果从指定位置插入，也会存在移动元素的情况。<br><code>addAll()</code>的时间复杂度不仅跟插入元素的多少有关，也跟插入的位置相关。</p>
+<h2 id="2-5-remove"><a href="#2-5-remove" class="headerlink" title="2.5 remove()"></a>2.5 remove()</h2><p><code>remove()</code>方法也有两个版本，一个是<code>remove(int index)</code>删除指定位置的元素，另一个是<code>remove(Object o)</code>删除第一个满足<code>o.equals(elementData[index])</code>的元素。删除操作是<code>add()</code>操作的逆过程，需要将删除点之后的元素向前移动一个位置。需要注意的是为了让GC起作用，必须显式的为最后一个位置赋<code>null</code>值。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> E <span class="title">remove</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    rangeCheck(index);</span><br><span class="line">    modCount++;</span><br><span class="line">    E oldValue = elementData(index);</span><br><span class="line">    <span class="keyword">int</span> numMoved = size - index - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (numMoved &gt; <span class="number">0</span>)</span><br><span class="line">        System.arraycopy(elementData, index+<span class="number">1</span>, elementData, index, numMoved);</span><br><span class="line">    elementData[--size] = <span class="keyword">null</span>; <span class="comment">//清除该位置的引用，让GC起作用</span></span><br><span class="line">    <span class="keyword">return</span> oldValue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>关于Java GC这里需要特别说明一下，<strong>有了垃圾收集器并不意味着一定不会有内存泄漏</strong>。对象能否被GC的依据是是否还有引用指向它，上面代码中如果不手动赋<code>null</code>值，除非对应的位置被其他元素覆盖，否则原来的对象就一直不会被回收。</p>
 <p><a href="https://github.com/CarpenterLee/JCFInternals" target="_blank" rel="noopener">原文地址</a></p>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.6.0/katex.min.css">
+
     </div>
 
     
@@ -524,7 +521,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1. 总体介绍"><span class="nav-text">¶ 1. 总体介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2. 方法剖析"><span class="nav-text">¶ 2. 方法剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2.1 set()"><span class="nav-text">¶ 2.1 set()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2.2 get()"><span class="nav-text">¶ 2.2 get()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2.3 add()"><span class="nav-text">¶ 2.3 add()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2.4 addAll()"><span class="nav-text">¶ 2.4 addAll()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2.5 remove()"><span class="nav-text">¶ 2.5 remove()</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-总体介绍"><span class="nav-text">1. 总体介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-方法剖析"><span class="nav-text">2. 方法剖析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-set"><span class="nav-text">2.1 set()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-get"><span class="nav-text">2.2 get()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-add"><span class="nav-text">2.3 add()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-addAll"><span class="nav-text">2.4 addAll()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-remove"><span class="nav-text">2.5 remove()</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -622,12 +619,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">819k</span>
+    <span title="站点总字数">815k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:24</span>
+    <span title="站点阅读时长">12:21</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
