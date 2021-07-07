@@ -59,7 +59,7 @@
 </script>
 
   <meta name="description" content="1. SpringBoot 整合1）导入依赖： 12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.redisson&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;redisson&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.12.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;">
-<meta name="keywords" content="SpringBoot,Redis,缓存,分布式锁">
+<meta name="keywords" content="SpringBoot,缓存,Redis,分布式锁,Redisson">
 <meta property="og:type" content="article">
 <meta property="og:title" content="SpringBoot 中 Redisson 的使用">
 <meta property="og:url" content="https://ShotoZheng.github.io/2021/07/05/SpringBoot-中-Redisson-的使用/index.html">
@@ -69,7 +69,7 @@
 <meta property="og:image" content="https://shotozheng.github.io/2021/07/05/SpringBoot-中-Redisson-的使用/image-20210706211909042.png">
 <meta property="og:image" content="https://shotozheng.github.io/2021/07/05/SpringBoot-中-Redisson-的使用/image-20210706212157331.png">
 <meta property="og:image" content="https://shotozheng.github.io/2021/07/05/SpringBoot-中-Redisson-的使用/image-20210706213741379.png">
-<meta property="og:updated_time" content="2021-07-06T13:45:04.430Z">
+<meta property="og:updated_time" content="2021-07-06T14:24:11.895Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SpringBoot 中 Redisson 的使用">
 <meta name="twitter:description" content="1. SpringBoot 整合1）导入依赖： 12345&amp;lt;dependency&amp;gt;    &amp;lt;groupId&amp;gt;org.redisson&amp;lt;/groupId&amp;gt;    &amp;lt;artifactId&amp;gt;redisson&amp;lt;/artifactId&amp;gt;    &amp;lt;version&amp;gt;3.12.0&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;">
@@ -324,7 +324,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-06 21:45:04" itemprop="dateModified" datetime="2021-07-06T21:45:04+08:00">2021-07-06</time>
+                <time title="修改时间：2021-07-06 22:24:11" itemprop="dateModified" datetime="2021-07-06T22:24:11+08:00">2021-07-06</time>
               </span>
             
           
@@ -334,14 +334,14 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/缓存/" itemprop="url" rel="index"><span itemprop="name">缓存</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Redis/Redisson/" itemprop="url" rel="index"><span itemprop="name">Redisson</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/缓存/Redisson/" itemprop="url" rel="index"><span itemprop="name">Redisson</span></a></span>
 
                 
                 
@@ -479,11 +479,13 @@
             
               <a href="/tags/SpringBoot/" rel="tag"><i class="fa fa-tag"></i> SpringBoot</a>
             
-              <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
-            
               <a href="/tags/缓存/" rel="tag"><i class="fa fa-tag"></i> 缓存</a>
             
+              <a href="/tags/Redis/" rel="tag"><i class="fa fa-tag"></i> Redis</a>
+            
               <a href="/tags/分布式锁/" rel="tag"><i class="fa fa-tag"></i> 分布式锁</a>
+            
+              <a href="/tags/Redisson/" rel="tag"><i class="fa fa-tag"></i> Redisson</a>
             
           </div>
         
@@ -493,8 +495,8 @@
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2021/07/04/SpringBoot-分布式项目-Redis-缓存的使用/" rel="next" title="SpringBoot 分布式项目 Redis 缓存的使用">
-                  <i class="fa fa-chevron-left"></i> SpringBoot 分布式项目 Redis 缓存的使用
+                <a href="/2021/07/04/SpringBoot-分布式项目-Redis-缓存的使用/" rel="next" title="Redis 缓存的使用和分布式锁实现">
+                  <i class="fa fa-chevron-left"></i> Redis 缓存的使用和分布式锁实现
                 </a>
               
             </div>
@@ -502,6 +504,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2021/07/06/SpringCache-使用/" rel="prev" title="SpringCache 使用">
+                  SpringCache 使用 <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -571,7 +577,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">149</span>
+          <span class="site-state-item-count">150</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -584,7 +590,7 @@
             <a href="/categories/">
           
         
-        <span class="site-state-item-count">47</span>
+        <span class="site-state-item-count">49</span>
         <span class="site-state-item-name">分类</span>
         </a>
       </div>
@@ -597,7 +603,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">32</span>
+        <span class="site-state-item-count">33</span>
         <span class="site-state-item-name">标签</span>
         </a>
       </div>
@@ -651,12 +657,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">841k</span>
+    <span title="站点总字数">847k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">12:44</span>
+    <span title="站点阅读时长">12:50</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
