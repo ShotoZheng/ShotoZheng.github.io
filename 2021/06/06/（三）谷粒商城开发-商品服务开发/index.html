@@ -78,7 +78,7 @@
 <meta property="og:image" content="https://shotozheng.github.io/2021/06/06/（三）谷粒商城开发-商品服务开发/image-20210703170123920.png">
 <meta property="og:image" content="https://shotozheng.github.io/2021/06/06/（三）谷粒商城开发-商品服务开发/image-20210703165819803.png">
 <meta property="og:image" content="https://shotozheng.github.io/2021/06/06/（三）谷粒商城开发-商品服务开发/image-20210703172813605.png">
-<meta property="og:updated_time" content="2021-07-03T09:53:45.873Z">
+<meta property="og:updated_time" content="2021-07-11T03:33:43.789Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="（三）谷粒商城开发-商品服务开发">
 <meta name="twitter:description" content="1. SpringCloud Alibaba 集成  集成 Nacos 作为注册中心  采用 OpenFeign 方式进行 RPC 操作  集成 Nacos 作为配置中心  采用 SporingCloud Gateway 作为网关，实现路径重写和负载均衡等">
@@ -333,7 +333,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-03 17:53:45" itemprop="dateModified" datetime="2021-07-03T17:53:45+08:00">2021-07-03</time>
+                <time title="修改时间：2021-07-11 11:33:43" itemprop="dateModified" datetime="2021-07-11T11:33:43+08:00">2021-07-11</time>
               </span>
             
           
@@ -389,7 +389,7 @@
               
                 <span class="post-meta-item-text">本文字数：</span>
               
-              <span>2.3k</span>
+              <span>2.6k</span>
             </span>
           
             <span class="post-meta-item" title="阅读时长">
@@ -505,6 +505,14 @@
 <p> SKU 检索商品对象具体如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SkuEsModel</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long skuId;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 上架 spuId */</span></span><br><span class="line">    <span class="keyword">private</span> Long spuId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String skuTitle;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> BigDecimal skuPrice;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String skuImg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long saleCount;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 是否有库存 */</span></span><br><span class="line">    <span class="keyword">private</span> Boolean hasStock;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 热点值 */</span></span><br><span class="line">    <span class="keyword">private</span> Long hotScore;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long brandId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long catalogId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String brandName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String brandImg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String catalogName;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 可被检索 product_attr */</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Attrs&gt; attrs;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * SPU 销售属性 product_attr_value</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Attrs</span> </span>&#123;</span><br><span class="line">        <span class="keyword">private</span> Long attrId;</span><br><span class="line">        <span class="keyword">private</span> String attrName;</span><br><span class="line">        <span class="keyword">private</span> String attrValue;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<h2 id="7-商品详情"><a href="#7-商品详情" class="headerlink" title="7. 商品详情"></a>7. 商品详情</h2><p>商品详情查询步骤如下，其中 skuId  为入参：</p>
+<p>1）通过 skuId 查询<strong>商品基本信息</strong>，并获取 spuId 和 catelogId</p>
+<p>2）通过 spuId 获取<strong>销售属性</strong></p>
+<p>3）通过 spuId 获取<strong>商品介绍信息</strong></p>
+<p>4）通过 spuId 和 catelogId 获取<strong>规格参数信息</strong></p>
+<p>5）通过 skuId 获取<strong>图片信息</strong></p>
+<p>可以发现，1）和 5）都是通过入参 skuId 查询获取对应的信息，而2）、3）和 4）则是需要 1）的执行结果。为了加快执行速度，我们可以采用 CompletFuture 并发编排来执行。即 1) 和 5）并发执行，2）、3）、4）则是在 1）执行完成之后共同并发执行。</p>
+<p>异步编排执行可以参考<a href="https://shotozheng.top/2021/07/10/CompletableFuture-%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92/" target="_blank" rel="noopener">CompletableFuture 异步编排</a></p>
 
     </div>
 
@@ -607,7 +615,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SpringCloud-Alibaba-集成"><span class="nav-text">1. SpringCloud Alibaba 集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-前端了解"><span class="nav-text">2. 前端了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-三级分类开发"><span class="nav-text">3. 三级分类开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-网关路径重写和跨域问题"><span class="nav-text">3.1 网关路径重写和跨域问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-三级分类树查询功能"><span class="nav-text">3.2 三级分类树查询功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-品牌管理开发"><span class="nav-text">4. 品牌管理开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-平台属性"><span class="nav-text">5. 平台属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-商品维护"><span class="nav-text">6. 商品维护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-商品发布"><span class="nav-text">6.1 商品发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-SPU-管理"><span class="nav-text">6.2 SPU 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-商品上架"><span class="nav-text">6.3 商品上架</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-SpringCloud-Alibaba-集成"><span class="nav-text">1. SpringCloud Alibaba 集成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-前端了解"><span class="nav-text">2. 前端了解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-三级分类开发"><span class="nav-text">3. 三级分类开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-网关路径重写和跨域问题"><span class="nav-text">3.1 网关路径重写和跨域问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-三级分类树查询功能"><span class="nav-text">3.2 三级分类树查询功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-品牌管理开发"><span class="nav-text">4. 品牌管理开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-平台属性"><span class="nav-text">5. 平台属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-商品维护"><span class="nav-text">6. 商品维护</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-商品发布"><span class="nav-text">6.1 商品发布</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-SPU-管理"><span class="nav-text">6.2 SPU 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-商品上架"><span class="nav-text">6.3 商品上架</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-商品详情"><span class="nav-text">7. 商品详情</span></a></li></ol></div>
         
       </div>
       <!--/noindex-->
@@ -705,7 +713,7 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">858k</span>
+    <span title="站点总字数">859k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
