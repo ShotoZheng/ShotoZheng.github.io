@@ -276,6 +276,161 @@
   
   
   <div class="post-block home">
+    <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2021/07/12/（五）谷粒商城开发-认证服务开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="郑松涛">
+      <meta itemprop="description" content="积跬步，至千里">
+      <meta itemprop="image" content="/images/kanieki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鱼肚白不是鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+            
+            <a href="/2021/07/12/（五）谷粒商城开发-认证服务开发/" class="post-title-link" itemprop="url">（五）谷粒商城开发-认证服务开发</a>
+          
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2021-07-12 22:29:21" itemprop="dateCreated datePublished" datetime="2021-07-12T22:29:21+08:00">2021-07-12</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-14 23:35:41" itemprop="dateModified" datetime="2021-07-14T23:35:41+08:00">2021-07-14</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/项目/" itemprop="url" rel="index"><span itemprop="name">项目</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/项目/谷粒商城/" itemprop="url" rel="index"><span itemprop="name">谷粒商城</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/07/12/（五）谷粒商城开发-认证服务开发/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2021/07/12/（五）谷粒商城开发-认证服务开发/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>1.9k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-用户注册"><a href="#1-用户注册" class="headerlink" title="1. 用户注册"></a>1. 用户注册</h2><h3 id="1-1-发送验证码"><a href="#1-1-发送验证码" class="headerlink" title="1.1 发送验证码"></a>1.1 发送验证码</h3><ul>
+<li><input checked disabled type="checkbox"> 使用 Redis 缓存存储指定生存时间验证码，其中手机号为 key，值的时间戳 + 验证码。时间戳的作用用于实现用户执行时间内不能重复发送验证码；</li>
+<li><input checked disabled type="checkbox"> 验证码的发送采阿里云第三方服务实现，传入指定手机号和验证码；</li>
+<li><input checked disabled type="checkbox"> 缓存中的验证码未过期且与用户的验证码相互匹配，且此时支持再次发送验证码，那么再次调用第三方服务发送验证码；</li>
+<li><input checked disabled type="checkbox"> 缓存中的验证码已经过期，那么生成新的验证码并调用第三方服务发送验证码。</li>
+</ul>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2021/07/12/（五）谷粒商城开发-认证服务开发/" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+    </div>
+      <footer class="post-footer">
+          <div class="post-eof"></div>
+        
+      </footer>
+  </div>
+  
+  
+  
+  </article>
+
+    
+        <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block home">
     <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2021/07/10/CompletableFuture-异步编排/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1599,161 +1754,6 @@
   </article>
 
     
-        <article itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block home">
-    <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2021/06/06/（三）谷粒商城开发-商品服务开发/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="郑松涛">
-      <meta itemprop="description" content="积跬步，至千里">
-      <meta itemprop="image" content="/images/kanieki.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="鱼肚白不是鱼">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2021/06/06/（三）谷粒商城开发-商品服务开发/" class="post-title-link" itemprop="url">（三）谷粒商城开发-商品服务开发</a>
-          
-        </h1>
-
-        <div class="post-meta">
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              
-                
-              
-
-              <time title="创建时间：2021-06-06 08:53:40" itemprop="dateCreated datePublished" datetime="2021-06-06T08:53:40+08:00">2021-06-06</time>
-            </span>
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-07-11 11:33:43" itemprop="dateModified" datetime="2021-07-11T11:33:43+08:00">2021-07-11</time>
-              </span>
-            
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/项目/" itemprop="url" rel="index"><span itemprop="name">项目</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/项目/谷粒商城/" itemprop="url" rel="index"><span itemprop="name">谷粒商城</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-        
-      
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2021/06/06/（三）谷粒商城开发-商品服务开发/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2021/06/06/（三）谷粒商城开发-商品服务开发/" itemprop="commentCount"></span></a>
-  </span>
-  
-  
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">本文字数：</span>
-              
-              <span>2.6k</span>
-            </span>
-          
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              
-              <span>2 分钟</span>
-            </span>
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-SpringCloud-Alibaba-集成"><a href="#1-SpringCloud-Alibaba-集成" class="headerlink" title="1. SpringCloud Alibaba 集成"></a>1. SpringCloud Alibaba 集成</h2><ul>
-<li><input checked disabled type="checkbox"> 集成 Nacos 作为注册中心</li>
-<li><input checked disabled type="checkbox"> 采用 OpenFeign 方式进行 RPC 操作</li>
-<li><input checked disabled type="checkbox"> 集成 Nacos 作为配置中心</li>
-<li><input checked disabled type="checkbox"> 采用 SporingCloud Gateway 作为网关，实现路径重写和负载均衡等</li>
-</ul>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2021/06/06/（三）谷粒商城开发-商品服务开发/" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <div>
-    
-    </div>
-      <footer class="post-footer">
-          <div class="post-eof"></div>
-        
-      </footer>
-  </div>
-  
-  
-  
-  </article>
-
-    
   </div>
 
   
@@ -1806,7 +1806,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">152</span>
+          <span class="site-state-item-count">153</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1886,12 +1886,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">859k</span>
+    <span title="站点总字数">861k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">13:01</span>
+    <span title="站点阅读时长">13:02</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
