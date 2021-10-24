@@ -66,7 +66,7 @@
 <meta property="og:site_name" content="鱼肚白不是鱼">
 <meta property="og:description" content="之前的文章中也提到了，Stream 的核心在于 Collectors，即对处理后的数据进行收集。Collectors 提供了非常多且强大的 API，可以将最终的数据收集成 List、Set、Map，甚至是更复杂的结构 (这三者的嵌套组合)。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2021-10-16T03:13:05.558Z">
+<meta property="og:updated_time" content="2021-10-16T03:17:29.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="玩转Java8Stream（三、Collectors收集器）">
 <meta name="twitter:description" content="之前的文章中也提到了，Stream 的核心在于 Collectors，即对处理后的数据进行收集。Collectors 提供了非常多且强大的 API，可以将最终的数据收集成 List、Set、Map，甚至是更复杂的结构 (这三者的嵌套组合)。">
@@ -309,7 +309,7 @@
                 
               
 
-              <time title="创建时间：2021-10-16 11:11:04 / 修改时间：11:13:05" itemprop="dateCreated datePublished" datetime="2021-10-16T11:11:04+08:00">2021-10-16</time>
+              <time title="创建时间：2021-10-16 11:11:04 / 修改时间：11:17:29" itemprop="dateCreated datePublished" datetime="2021-10-16T11:11:04+08:00">2021-10-16</time>
             </span>
           
             
@@ -469,7 +469,7 @@
 
 <p>3）Collectors.mapping() 可以自定义要收集的字段。</p>
 <p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// List&lt;String&gt;</span></span><br><span class="line">Stream.of(studentA,studentB,studentC)</span><br><span class="line">    .collect(Collectors.mapping(Student::getName,Collectors.toList()));</span><br></pre></td></tr></table></figure>
 
 <p>4）Collectors.collectingAndThen() 收集后操作，如果你要在收集数据后再做一些操作，那么这个就非常有用了。</p>
 <p>示例：这里在收集后转成了 listIterator，只是个简单的示例，具体的实现逻辑非常有待想象。</p>
@@ -594,7 +594,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">162</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -674,12 +674,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-    <span title="站点总字数">927k</span>
+    <span title="站点总字数">930k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">14:03</span>
+    <span title="站点阅读时长">14:05</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
   <span class="post-meta-divider">|</span>
