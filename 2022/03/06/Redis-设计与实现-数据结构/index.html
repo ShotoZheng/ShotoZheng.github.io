@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css?v=1.0.2">
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: true,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="1. 前言Redis 数据库里面的每个键值对 (key-valuepair) 都是由对象 (object) 组成的, 其中:  数据库键总是一个字符串对象 (stringobject); 而数据库键的值则可以是字符串对象、列表对象 (listobject)、哈希对象 (hash object)、集合对象 (setobject)、有序集合对象 (sortedsetobject) 这五种对象中的其中一">
+<meta name="keywords" content="缓存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Redis 设计与实现-数据结构">
+<meta property="og:url" content="https://ShotoZheng.github.io/2022/03/06/Redis-设计与实现-数据结构/index.html">
+<meta property="og:site_name" content="鱼肚白不是鱼">
+<meta property="og:description" content="1. 前言Redis 数据库里面的每个键值对 (key-valuepair) 都是由对象 (object) 组成的, 其中:  数据库键总是一个字符串对象 (stringobject); 而数据库键的值则可以是字符串对象、列表对象 (listobject)、哈希对象 (hash object)、集合对象 (setobject)、有序集合对象 (sortedsetobject) 这五种对象中的其中一">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://shotozheng.github.io/2022/03/06/Redis-设计与实现-数据结构/image-20220306141406617.png">
+<meta property="og:image" content="https://shotozheng.github.io/2022/03/06/Redis-设计与实现-数据结构/image-20220306143618264.png">
+<meta property="og:updated_time" content="2022-03-06T06:46:46.199Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Redis 设计与实现-数据结构">
+<meta name="twitter:description" content="1. 前言Redis 数据库里面的每个键值对 (key-valuepair) 都是由对象 (object) 组成的, 其中:  数据库键总是一个字符串对象 (stringobject); 而数据库键的值则可以是字符串对象、列表对象 (listobject)、哈希对象 (hash object)、集合对象 (setobject)、有序集合对象 (sortedsetobject) 这五种对象中的其中一">
+<meta name="twitter:image" content="https://shotozheng.github.io/2022/03/06/Redis-设计与实现-数据结构/image-20220306141406617.png">
+  <link rel="canonical" href="https://ShotoZheng.github.io/2022/03/06/Redis-设计与实现-数据结构/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Redis 设计与实现-数据结构 | 鱼肚白不是鱼</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  <!--音乐播放器-->
+  <link rel="stylesheet" href="/dist/APlayer.min.css">
+  <div id="aplayer"></div>
+  <script type="text/javascript" src="/dist/APlayer.min.js"></script>
+  <script type="text/javascript" src="/dist/music.js"></script>
+
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">鱼肚白不是鱼</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">笨鸟先飞</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-网站">
+      
+    
+
+    <a href="/网站/" rel="section"><i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>网站</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="https://ShotoZheng.github.io/2022/03/06/Redis-设计与实现-数据结构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="郑松涛">
+      <meta itemprop="description" content="积跬步，至千里">
+      <meta itemprop="image" content="/images/kanieki.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="鱼肚白不是鱼">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Redis 设计与实现-数据结构
+
+          
+        </h1>
+
+        <div class="post-meta">
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2022-03-06 13:56:54 / 修改时间：14:46:46" itemprop="dateCreated datePublished" datetime="2022-03-06T13:56:54+08:00">2022-03-06</time>
+            </span>
+          
+            
+
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/缓存/" itemprop="url" rel="index"><span itemprop="name">缓存</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/缓存/Redis/" itemprop="url" rel="index"><span itemprop="name">Redis</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2022/03/06/Redis-设计与实现-数据结构/#comments" itemprop="discussionUrl"><span class="post-comments-count valine-comment-count" data-xid="/2022/03/06/Redis-设计与实现-数据结构/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">本文字数：</span>
+              
+              <span>2.1k</span>
+            </span>
+          
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span>2 分钟</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-前言"><a href="#1-前言" class="headerlink" title="1. 前言"></a>1. 前言</h2><p>Redis 数据库里面的每个键值对 (key-valuepair) 都是由对象 (object) 组成的, 其中:</p>
+<ul>
+<li>数据库键总是一个字符串对象 (stringobject);</li>
+<li>而数据库键的值则可以是字符串对象、列表对象 (listobject)、哈希对象 (hash object)、集合对象 (setobject)、有序集合对象 (sortedsetobject) 这五种对象中的其中一种。</li>
+</ul>
+<p>比如说, 执行以下命令将在数据库中创建一个键为字符串对象, 值也为字符串对象的键值对:</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">redis&gt; SET msg <span class="string">"hellowoF1d"</span></span><br><span class="line">OK</span><br></pre></td></tr></table></figure>
+
+<p>Redis 的五种不同类型的对象底层至少采用两种以上不同的数据结构实现。本文将削析这些对象所使用的底层数据结构。</p>
+<a id="more"></a>
+
+<h2 id="2-简单动态字符串"><a href="#2-简单动态字符串" class="headerlink" title="2. 简单动态字符串"></a>2. 简单动态字符串</h2><p>Redis 没有直接使用 C 语言传统的字符串表示 (以空字符结尾的字符数组, 以下简称 C 字符串),  而是自己构建了一种名为简单动态字符串 (simple dynamic string, SDS) 的抽象类型, 并将SDS 用作 Redis 的默认字符串表示。</p>
+<h3 id="2-1-SDS-的定义"><a href="#2-1-SDS-的定义" class="headerlink" title="2.1 SDS 的定义"></a>2.1 SDS 的定义</h3><img src="/2022/03/06/Redis-设计与实现-数据结构/image-20220306141406617.png" style="margin:0">
+
+<h3 id="2-2-SDS-与-C-字符串的区别"><a href="#2-2-SDS-与-C-字符串的区别" class="headerlink" title="2.2 SDS 与 C 字符串的区别"></a>2.2 SDS 与 C 字符串的区别</h3><h4 id="2-2-1-常数复杂度获取字符串长度"><a href="#2-2-1-常数复杂度获取字符串长度" class="headerlink" title="2.2.1 常数复杂度获取字符串长度"></a>2.2.1 常数复杂度获取字符串长度</h4><p>因为 C 字符串并不记录自身的长度信息, 所以为了获取一个 C 字符串的长度, 程序必须遍历整个字符串, 对遇到的每个字符进行计数, 直到遇到代表字符串结尾的空字符为止, 这个操作的复杂度为O(N)。</p>
+<p>对于的 SDS 来说, 程序只要访问 SDS 的 len 属性就可以立即知道 SDS 的长度。</p>
+<h4 id="2-2-2-杜绝缓冲区溢出"><a href="#2-2-2-杜绝缓冲区溢出" class="headerlink" title="2.2.2 杜绝缓冲区溢出"></a>2.2.2 杜绝缓冲区溢出</h4><p>除了获取字符串长度的复杂度高之外, C 字符串不记录自身长度带来的另一个问题是容易造成缓冲区溢出 (bufferoverflow)；与 C 字符串不同, SDS 的空间分配策略完全杜绝了发生缓冲区滥出的可能性: 当 SDS API 需要对 SDS 进行修改时, API 会先检查 SDS 的空间是否满足修改所需的要求, 如果不满足的话, API 会自动将 SDS 的空间扩展至执行修改所需的大小, 然后才执行实际的修改操作, 所以使用 SDS 既不需要手动修改 SDS 的空间大小, 也不会出现前面所说的缓冲区溢出问题。</p>
+<h4 id="2-2-3-减少修改字符串时带来的内存重分配次数"><a href="#2-2-3-减少修改字符串时带来的内存重分配次数" class="headerlink" title="2.2.3 减少修改字符串时带来的内存重分配次数"></a>2.2.3 减少修改字符串时带来的内存重分配次数</h4><p>正如前面所说, 因为 C 字符串并不记录自身的长度, 所以对于一个包含了 N 个字符的 C 字符串来说, 这个 C 字符串的底层实现总是一个 N+1 个字符长的数组 (额外的一个字符空间用于保存空字符)。因为 C 字符串的长度和底层数组的长度之间存在着这种关联性, 所以每次增长或者缩短一个 C 字符串, 程序都总要对保存这个 C 字符串的数组进行一次内存重分配操作。</p>
+<p>为了避免 C 字符串的这种缺陷, SDS 通过未使用空间解除了字符串长度和底层数组长度之间的关联: 在 SDS 中, buf 数组的长度不一定就是字符数量加一, 数组里面可以包含未使用的字节,而这些字节的数量就由 SDS 的 free 属性记录。</p>
+<p>通过未使用空间, SDS 实现了空间预分配和惰性空间释放两种优化策略。</p>
+<h5 id="2-2-3-1-空间预分配"><a href="#2-2-3-1-空间预分配" class="headerlink" title="2.2.3.1 空间预分配"></a>2.2.3.1 空间预分配</h5><p>空间预分配用于优化 SDS 的字符串增长操作: 当 SDS 的 API 对一个 SDS 进行修改, 并且需要对 SDS 进行空间扩展的时候, 程序不仅会为 SDS 分配修改所必须要的空间, 还会<br>为 SDS 分配额外的未使用空间。</p>
+<h5 id="2-2-3-2-惰性空间释放"><a href="#2-2-3-2-惰性空间释放" class="headerlink" title="2.2.3.2 惰性空间释放"></a>2.2.3.2 惰性空间释放</h5><p>惰性空间释放用于优化 SDS 的字符串缩短操作: 当 SDS 的 API 需要缩短 SDS 保存的字符串时, 程序并不立即使用内存重分配来回收缩短后多出来的字节, 而是使用 free 属性将这些字节的数量记录起来, 并等待将来使用。</p>
+<img src="/2022/03/06/Redis-设计与实现-数据结构/image-20220306143618264.png" style="margin:0">
+
+<p>注意执行 sdstrim 之后的 SDS 并设有释放多出来的 8 字节空间, 而是将这 8 字节作为未使用空间保留在了 SDS 里面。</p>
+<h4 id="2-2-4-二进制安全"><a href="#2-2-4-二进制安全" class="headerlink" title="2.2.4 二进制安全"></a>2.2.4 二进制安全</h4><p>C 字符串中的字符必须符合某种编码 (比如 ASCII), 并且除了字符串的末尾之外, 字符串里面不能包含空字符, 否则最先被程序读人的空字符将被误认为是字符串结尾, 这些限制使得 C 字符串只能保存文本数据, 而不能保存像图片、音频、视频、压缩文件这样的二进制数据。</p>
+<p>为了确保 Redis 可以适用于各种不同的使用场景, SDS 的 API 都是二进制安全的 (binary-safe), 所有 SDS API 都会以处理二进制的方式来处理 SDS 存放在 buf 数组里的数据,程序不会对其中的数据做任何限制、过滤、或者假设, 数据在写人时是什么样的, 它被读取时就是什么样。</p>
+<h4 id="2-2-5-兼容部分-C-字符串函数"><a href="#2-2-5-兼容部分-C-字符串函数" class="headerlink" title="2.2.5 兼容部分 C 字符串函数"></a>2.2.5 兼容部分 C 字符串函数</h4><p>SDS 遵循 C 字符串以空字符结尾的惯例, SDS 可以在有需要时重用 &lt;string.h&gt; 函数库, 从而避免了不必要的代码重复。</p>
+<h2 id="3-链表"><a href="#3-链表" class="headerlink" title="3. 链表"></a>3. 链表</h2><h2 id="4-字典"><a href="#4-字典" class="headerlink" title="4. 字典"></a>4. 字典</h2><h2 id="5-跳跃表"><a href="#5-跳跃表" class="headerlink" title="5. 跳跃表"></a>5. 跳跃表</h2><h2 id="6-整数集合"><a href="#6-整数集合" class="headerlink" title="6. 整数集合"></a>6. 整数集合</h2><h2 id="7-压缩列表"><a href="#7-压缩列表" class="headerlink" title="7. 压缩列表"></a>7. 压缩列表</h2>
+    </div>
+
+    
+    
+    
+
+    <div>
+    
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">------ 本文结束------</div>
+    
+</div>
+
+    
+    </div>
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/缓存/" rel="tag"><i class="fa fa-tag"></i> 缓存</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2021/10/24/神奇的-SQL-之别样的写法-→-行行比较/" rel="next" title="神奇的 SQL 之别样的写法 → 行行比较">
+                  <i class="fa fa-chevron-left"></i> 神奇的 SQL 之别样的写法 → 行行比较
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2022/03/11/idea-中-git-回退远程仓库版本/" rel="prev" title="idea 中 git 回退远程仓库版本">
+                  idea 中 git 回退远程仓库版本 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+    
+    <div class="comments" id="comments"></div>
+  
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-前言"><span class="nav-text">1. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-简单动态字符串"><span class="nav-text">2. 简单动态字符串</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-SDS-的定义"><span class="nav-text">2.1 SDS 的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-SDS-与-C-字符串的区别"><span class="nav-text">2.2 SDS 与 C 字符串的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-常数复杂度获取字符串长度"><span class="nav-text">2.2.1 常数复杂度获取字符串长度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-杜绝缓冲区溢出"><span class="nav-text">2.2.2 杜绝缓冲区溢出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-减少修改字符串时带来的内存重分配次数"><span class="nav-text">2.2.3 减少修改字符串时带来的内存重分配次数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-1-空间预分配"><span class="nav-text">2.2.3.1 空间预分配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-3-2-惰性空间释放"><span class="nav-text">2.2.3.2 惰性空间释放</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-4-二进制安全"><span class="nav-text">2.2.4 二进制安全</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-5-兼容部分-C-字符串函数"><span class="nav-text">2.2.5 兼容部分 C 字符串函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-链表"><span class="nav-text">3. 链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-字典"><span class="nav-text">4. 字典</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-跳跃表"><span class="nav-text">5. 跳跃表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-整数集合"><span class="nav-text">6. 整数集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-压缩列表"><span class="nav-text">7. 压缩列表</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/kanieki.png"
+      alt="郑松涛">
+  <p class="site-author-name" itemprop="name">郑松涛</p>
+  <div class="site-description" itemprop="description">积跬步，至千里</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">165</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        <span class="site-state-item-count">54</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/ShotoZheng" title="GitHub &rarr; https://github.com/ShotoZheng" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:shotozheng@163.com" title="E-Mail &rarr; mailto:shotozheng@163.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">郑松涛</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">933k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">14:08</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.4.0</div>
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+
+
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+<script src="/js/utils.js?v=7.4.0"></script><script src="/js/motion.js?v=7.4.0"></script>
+<script src="/js/schemes/pisces.js?v=7.4.0"></script>
+<script src="/js/next-boot.js?v=7.4.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.0"></script>
+
+
+
+
+
+
+
+
+
+
+<script>
+if (document.querySelectorAll('pre.mermaid').length) {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js', () => {
+    mermaid.initialize({
+      theme: 'forest',
+      logLevel: 3,
+      flowchart: { curve: 'linear' },
+      gantt: { axisFormat: '%m/%d/%Y' },
+      sequence: { actorMargin: 50 }
+    });
+  }, window.mermaid);
+}
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.getScript('//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js', () => {
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(item => {
+    return GUEST.includes(item);
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'd6TU9yIpopEhNQKUras2D3Nr-gzGzoHsz',
+    appKey: 'CJpUierMSXBHmTo6mJ8G1KO1',
+    placeholder: 'Just go go',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: '' || 'zh-cn',
+    path: location.pathname
+  });
+}, window.Valine);
+</script>
+
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/clicklove.js"></script>
+<!--看板娘-->
+<script src="/live2d-widget/autoload.js"></script>
